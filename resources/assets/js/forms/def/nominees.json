@@ -2,7 +2,7 @@
 	"name": "nominees",
 	"fields": [
 	    {
-	        "name": "title",
+	        "name": "submissionTitle",
 	        "heading": "Please enter a title for your submission:",
 	        "label": "Title",
 	        "value": "",
