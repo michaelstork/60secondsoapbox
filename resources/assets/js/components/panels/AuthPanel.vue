@@ -52,19 +52,18 @@
 						password: codeField.value
 					}
 				).then(
-					() => { this.handleValidCode(codeField); },
-					() => { this.handleInvalidCode(codeField); }
+					(response) => { this.handleValidCode(response.data.token); },
+					() => { this.handleInvalidCode(); }
 				);
 			}, 200),
-			handleValidCode: function () {
+			handleValidCode: function (token) {
 				this.getFieldByName('password').asyncValid = true;
 				this.getFieldByName('email').asyncValid = true;
-				// if (this.isValidPanel) this.setPanelValid();
+				localStorage.setItem('soapboxToken', token);
 			},
 			handleInvalidCode: function () {
 				this.getFieldByName('password').asyncValid = false;
 				this.getFieldByName('email').asyncValid = false;
-				// if (this.panel.valid) this.setPanelInvalid();
 			},
 			fillForm: function () {
 				this.getFieldByName('password').value = '12345678';

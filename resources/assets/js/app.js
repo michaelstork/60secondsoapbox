@@ -44,11 +44,19 @@ if (window.cordova) {
         request.headers.set('X-CSRF-TOKEN', window.Laravel.csrfToken);
         next();
     });
+
+    Vue.http.interceptors.push((request, next) => {
+        const token = localStorage.getItem('soapboxToken');
+        if (token) request.headers.set('Authorization', 'Bearer ' + token);
+        next();
+    });
+
     init();
 }
 
 function init () {
     localStorage.removeItem('soapboxSubmission');
+    localStorage.removeItem('soapboxToken');
 
     new Vue({
         el: '.vue-mount',
