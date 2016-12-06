@@ -79,7 +79,7 @@ function init () {
         },
         created: function () {
             this.layout.panels.forEach((panel, p) => {
-                this.$set(this.layout.panels[p], 'valid', true);
+                this.$set(this.layout.panels[p], 'valid', false);
             });
 
             this.eventHub.$on('panelValidityChange', this.onPanelValidityChange);

@@ -57,14 +57,12 @@
 			}, 200),
 			handleValidNominee: function (field) {
 				field.asyncValid = true;
-				// if (this.isValidPanel) this.setPanelValid();
 			},
 			handleInvalidNominee: function (field) {
 				field.asyncValid = false;
-				// if (this.panel.valid) this.setPanelInvalid();
 			},
 			fillForm: function () {
-				this.getFieldByName('title').value = 'TITLE';
+				this.getFieldByName('submissionTitle').value = 'TITLE';
 				let n1 = this.getFieldByName('nominee1');
 				n1.value = 'michael@mstork.com1';
 				this.handleValidNominee(n1);

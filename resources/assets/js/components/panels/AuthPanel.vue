@@ -66,8 +66,8 @@
 				this.getFieldByName('email').asyncValid = false;
 			},
 			fillForm: function () {
-				this.getFieldByName('password').value = '12345678';
-				this.getFieldByName('email').value = 'michael@mstork.com';
+				this.getFieldByName('password').value = 'hockey11';
+				this.getFieldByName('email').value = 'michael@mstork.info';
 				this.onFormValidityChange(true);
 				this.validateCode();
 			}
