@@ -11,4 +11,14 @@
 |
 */
 
-Route::get('/', 'SoapboxController@index');
+
+Route::get('/', 'SoapboxController@index')
+	->name('home');
+
+Route::get('/{admin}', 'AdminController@index')
+	->where('admin', '(dashboard|admin)');
+
+Auth::routes();
+
+// allow logout on get request
+Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
