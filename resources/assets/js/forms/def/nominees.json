@@ -1,0 +1,40 @@
+{
+	"name": "nominees",
+	"fields": [
+	    {
+	        "name": "title",
+	        "heading": "Please enter a title for your submission:",
+	        "label": "Title",
+	        "value": "",
+	        "required": true
+	    },
+	    {
+	        "name": "nominee1",
+	        "heading": "Finally, challenge three of your peers to stand on the soapbox!",
+	        "label": "Email #1",
+	        "value": "",
+	        "type": "email",
+	        "pattern": ".*@.*\\..*",
+	        "required": true,
+	        "async": true
+	    },
+	    {
+	        "name": "nominee2",
+	        "label": "Email #2",
+	        "value": "",
+	        "type": "email",
+	        "pattern": ".*@.*\\..*",
+	        "required": true,
+	        "async": true
+	    },
+	    {
+	        "name": "nominee3",
+	        "label": "Email #3",
+	        "value": "",
+	        "type": "email",
+	        "pattern": ".*@.*\\..*",
+	        "required": true,
+	        "async": true
+	    }
+	]
+}

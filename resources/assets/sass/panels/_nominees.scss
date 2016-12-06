@@ -1,0 +1,28 @@
+.nominees-panel {
+	button {
+		margin:48px auto 0 auto;
+	}
+}
+
+@include queryWidth(min, 649px) {
+	.nominees-panel .form-input-container {
+		display:flex;
+		flex-wrap:wrap;
+		justify-content:space-between;
+	}
+	.nominees-panel {
+		p,
+		.input-container:first-of-type {
+			flex:1 0 100%;
+		}
+	}
+	.nominees-panel .input-container:not(:first-of-type) {
+		margin-top:32px;
+		flex:0 0 32%;
+		max-width:32%;
+	}
+	.nominees-panel .input-container:not(:first-of-type) input {
+		font-size:0.75rem;
+		padding-right:32px;
+	}
+}

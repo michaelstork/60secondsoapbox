@@ -1,9 +1,137 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,600);
 
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import 'partials/variables';
+@import 'partials/mixins';
+@import 'partials/normalize';
+@import 'partials/inputs';
+@import 'partials/mdi';
 
-// Variables
-@import "variables";
+@import 'panels/base-panel';
+@import 'panels/auth';
+@import 'panels/info';
+@import 'panels/nominees';
+@import 'soapbox-recorder';
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+body {
+	font-family:'Roboto','Helvetica','Arial',sans-serif;
+	position:relative;
+	z-index:1;
+	background-color:$light;
+}
+
+body:before {
+	content:'';
+	position:absolute;
+	display:block;
+	top:0;
+	left:0;
+	right:0;
+	height:260px;
+	background-color:$dark;
+}
+
+button {
+	cursor:pointer;
+	border-radius:2px;
+	background-color:#FFF;
+	display:flex;
+	box-sizing:border-box;
+	padding:0 12px;
+	box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+	align-items:center;
+	justify-content:center;
+	min-width:140px;
+	height:36px;
+	color:$accent;
+
+	&:hover {
+		box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+	}
+
+	span, &:before {
+		font-size:0.8rem;
+		line-height:normal;
+		white-space:nowrap;
+		margin:0 auto;
+		color:inherit;
+		text-transform:uppercase;
+	}
+
+}
+
+button[disabled],
+a[disabled] {
+	cursor:default;
+	pointer-events:none;
+	opacity:0.3;
+}
+
+
+.container {
+	position:relative;
+	z-index:1;
+	box-sizing:border-box;
+	overflow:visible;
+	width:100%;
+
+	@include queryWidth(min, 649px) {
+		&:after {
+			content:'';
+			position:absolute;
+			top:72px;
+			z-index:0;
+			bottom:0;
+			left:0;
+			right:0;
+			margin:auto;
+			width:600px;
+			box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+		}
+	}
+}
+
+.break-below-400 {
+	display:none;
+	@include queryWidth(max, 400px) {
+		display:inline;
+	}
+}
+.break-above-400 {
+	display:none;
+	@include queryWidth(min, 400px) {
+		display:inline;
+	}
+}
+
+	
+
+
+
+
+.thank-you-text {
+	text-align:center;
+}
+
+.help-text {
+	font-size:0.95rem;
+	font-weight:600;
+	margin-bottom:0;
+
+	.input-container + & {
+		margin-top:32px;
+	}
+
+	& + .input-container {
+		margin-top:32px;
+	}
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition:opacity 0.2s ease-out;
+}
+.fade-enter,
+.fade-leave-active {
+	opacity:0;
+}

@@ -1,0 +1,36 @@
+.auth-panel .input-container {
+	width:200px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:14px;
+}
+
+.auth-panel p {
+	color:$text1;
+}
+
+.auth-panel .intro {
+	text-align:justify;
+	margin-bottom:1.2em;
+}
+
+.auth-panel .help-text {
+	text-align:center;
+}
+
+.auth-panel h3 {
+	text-align:center;
+	@include queryWidth(min, 501px) {
+		font-size:1.3em;
+	}
+	@include queryWidth(max, 500px) {
+		font-size:1.1em;
+	}
+}
+
+.auth-panel small {
+	font-size:0.7rem;
+	font-style:italic;
+	color:$text1;
+	line-height:1.05em;
+}

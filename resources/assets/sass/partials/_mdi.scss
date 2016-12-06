@@ -1,0 +1,17 @@
+
+@import '../../../../node_modules/mdi/scss/variables';
+
+$mdi-icons: (
+	"arrow-left-bold-circle-outline": F050,
+	"arrow-right-bold-circle-outline": F057,
+	"refresh": F450,
+	"microphone": F36C,
+	"check": F12C,
+	"alert": F026
+);
+
+@import '../../../../node_modules/mdi/scss/functions';
+@import '../../../../node_modules/mdi/scss/path';
+@import '../../../../node_modules/mdi/scss/core';
+@import '../../../../node_modules/mdi/scss/icons';
+@import '../../../../node_modules/mdi/scss/extras';

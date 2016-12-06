@@ -1,0 +1,175 @@
+.audio-panel {
+	padding:0;
+}
+
+.audio-not-supported {
+	text-align:center;
+	color:$text2;
+	padding:0 12px;
+}
+
+.soapbox-recorder {
+	padding:80px 24px 24px 24px;
+	position:relative;
+	box-sizing:border-box;
+}
+
+.audio-status {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	color:#FFF;
+	position:relative;
+	overflow:hidden;
+	background-color:#EAEAEA;
+}
+
+.audio-status {
+	position:absolute;
+	left:0;
+	right:0;
+	top:-50px;
+	margin:auto;
+	width:100px;
+	height:100px;
+	border-radius:100px;
+	border:3px solid #FFF;
+	z-index:2;
+	box-sizing:border-box;
+	background-repeat:no-repeat;
+	background-position:center center;
+	background-size:cover;
+	box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+}
+
+.status-indicator {
+	padding:8px 0;
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	border-radius:50px;
+	
+	i {
+		font-size:4em;
+	}
+
+	span {
+		font-size:1.6em;
+	}
+}
+
+.status-indicator-recording-status {
+	transition:background-color 0.2s $standardCurve;
+	.status-recording & {
+		background-color:$red;
+	}	
+}
+
+.status-indicator-unsupported {
+	color:$red;
+	font-size:1.2em;
+	background-color:#EAEAEA;
+
+	i {
+		position:relative;
+		top:-4px;
+	}
+}
+
+.status-indicator-pending {
+	background-color:#F0F;
+}
+.status-indicator-complete {
+	background-color:$green;
+}
+
+.soapbox-recorder .request-audio,
+.soapbox-recorder .audio-controls {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-direction:column;
+	max-width:500px;
+	position:relative;
+	margin:0 auto;
+
+	button {
+		margin-bottom:32px;
+	}
+
+	small {
+		font-style:italic;
+		font-size:0.65rem;
+		text-align:center;
+		line-height:1.4em;
+	}
+
+	a {
+		color:$text2;
+		display:block;
+		cursor:pointer;
+	}
+	
+	i {
+		margin-right:4px;
+	}
+
+	p {
+		color:$text2;
+		margin-bottom:36px;
+		text-align:center;
+	}
+
+	@include queryWidth(min, 649px) {
+		min-height:250px;
+	}
+}
+
+.request-audio .audio-upload {
+	text-align:center;
+	margin-top:64px;
+	color:$text2;
+	line-height:1.6em;
+	height:40px;
+
+	a {
+		color:$accent;
+	}
+}
+
+.record-button span {
+	color:$red;
+}
+.record-button.active span {
+	color:$accent;
+}
+.soapbox-recorder .stop-button span {
+	color:$text2;
+}
+
+.audio-content-enter-active,
+.audio-content-leave-active {
+	transition:opacity 0.25s $standardCurve;
+}
+.audio-content-enter,
+.audio-content-leave-active {
+	opacity:0;
+}
+
+.audio-indicator-enter-active,
+.audio-indicator-leave-active {
+	transition:transform 0.25s $standardCurve;
+}
+.audio-indicator-enter {
+	transform:translateX(100%);
+}
+.audio-indicator-leave {
+	opacity:0;
+	transition:opacity 0.25s $standardCurve;
+}
