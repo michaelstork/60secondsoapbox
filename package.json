@@ -5,14 +5,18 @@
     "dev": "gulp watch"
   },
   "devDependencies": {
-    "bootstrap-sass": "^3.3.7",
     "gulp": "^3.9.1",
-    "jquery": "^3.1.0",
-    "laravel-elixir": "^6.0.0-14",
-    "laravel-elixir-vue-2": "^0.2.0",
-    "laravel-elixir-webpack-official": "^1.0.2",
-    "lodash": "^4.16.2",
-    "vue": "^2.0.1",
+    "gulp-livereload": "^3.8.1",
+    "json-loader": "^0.5.4",
+    "laravel-elixir": "^6.0.0-15",
+    "laravel-elixir-vue-2": "^0.3.0",
+    "laravel-elixir-webpack-official": "^1.0.10",
+    "lodash": "^4.17.2",
+    "mdi": "^1.7.22",
+    "moment": "^2.17.1",
+    "normalize.css": "^5.0.0",
+    "recordrtc": "^5.4.0",
+    "vue": "^2.1.4",
     "vue-resource": "^1.0.3"
   }
 }

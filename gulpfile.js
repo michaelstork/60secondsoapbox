@@ -1,19 +1,43 @@
-const elixir = require('laravel-elixir');
+const webpack      = require('webpack');
+const elixir       = require('laravel-elixir');
+const livereload   = require('gulp-livereload');
+const gulp         = require('gulp');
+const inProduction = elixir.config.production;
 
 require('laravel-elixir-vue-2');
 
-/*
- |--------------------------------------------------------------------------
- | Elixir Asset Management
- |--------------------------------------------------------------------------
- |
- | Elixir provides a clean, fluent API for defining some basic Gulp tasks
- | for your Laravel application. By default, we are compiling the Sass
- | file for your application as well as publishing vendor resources.
- |
- */
+gulp.on('task_start', function (e) {
+    if (e.task === 'watch') {
+        livereload.listen();
+    }
+});
 
-elixir((mix) => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+gulp.task('watch-lr-css', function () {
+    livereload.changed('app.css');
+});
+
+elixir(mix => {
+    mix.sass('app.scss', 'public/css')
+    .webpack(
+        'app.js',					// entry point
+        './public/js',				// output directory
+        './resources/assets/js/', 	// base directory
+        {							// custom config
+            plugins: [
+                // fix moment.js locale import
+                new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+            ],
+            module: {
+                loaders: [{
+                    test: /\.json$/,
+                    loader: 'json'
+                }]
+            }
+        }
+    );
+
+    if (inProduction) {
+        mix.copy('node_modules/mdi/fonts', 'public/fonts')
+        .copy('resources/assets/images', 'public/images');
+    }
 });
