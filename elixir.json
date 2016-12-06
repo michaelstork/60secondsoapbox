@@ -1,9 +1,0 @@
-{
-    "watchers": {
-        "default": {
-            "watch-lr-css": [
-                "public/**/*.css"
-            ]
-        }
-    }
-}
