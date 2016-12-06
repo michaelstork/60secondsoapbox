@@ -49,7 +49,7 @@ class UsersSeeder extends Seeder
     	$user = new User();
     	$user->name = 'Michael Stork';
     	$user->email = 'michael@mstork.info';
-    	$user->password = bcrypt('hockey');
+    	$user->password = bcrypt('hockey11');
     	$user->save();
     	$user->attachRole($admin);
     }
