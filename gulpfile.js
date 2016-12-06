@@ -1,20 +1,8 @@
 const webpack      = require('webpack');
 const elixir       = require('laravel-elixir');
-const livereload   = require('gulp-livereload');
-const gulp         = require('gulp');
 const inProduction = elixir.config.production;
 
 require('laravel-elixir-vue-2');
-
-gulp.on('task_start', function (e) {
-    if (e.task === 'watch') {
-        livereload.listen();
-    }
-});
-
-gulp.task('watch-lr-css', function () {
-    livereload.changed('app.css');
-});
 
 elixir(mix => {
     mix.sass('app.scss', 'public/css')
