@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+Route::post('/authenticate', 'SoapboxApiController@authenticate');
+Route::post('/audio-upload', 'SoapboxApiController@audioUpload');
+Route::post('/validate-nominee', 'SoapboxApiController@validateNominee');
+Route::post('/submission', 'SoapboxApiController@submission');
