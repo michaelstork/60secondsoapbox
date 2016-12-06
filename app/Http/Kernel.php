@@ -35,6 +35,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
+            \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
         ],
     ];
 
@@ -59,5 +60,8 @@ class Kernel extends HttpKernel
 
         // extends Entrust 'role' permission
         'adminRole' => \App\Http\Middleware\AdminRole::class,
+
+        'jwt.auth' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
+
     ];
 }
