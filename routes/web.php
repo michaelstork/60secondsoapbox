@@ -15,6 +15,8 @@
 Route::get('/', 'SoapboxController@index')
 	->name('home');
 
+Route::post('/authenticate', 'SoapboxController@authenticate');
+
 Route::get('/{admin}', 'AdminController@index')
 	->where('admin', '(dashboard|admin)');
 
