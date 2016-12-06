@@ -49,7 +49,7 @@
 					URLS[this.env].authenticate,
 					{
 						email: emailField.value,
-						code: codeField.value
+						password: codeField.value
 					}
 				).then(
 					() => { this.handleValidCode(codeField); },
@@ -57,17 +57,17 @@
 				);
 			}, 200),
 			handleValidCode: function () {
-				this.getFieldByName('code').asyncValid = true;
+				this.getFieldByName('password').asyncValid = true;
 				this.getFieldByName('email').asyncValid = true;
 				// if (this.isValidPanel) this.setPanelValid();
 			},
 			handleInvalidCode: function () {
-				this.getFieldByName('code').asyncValid = false;
+				this.getFieldByName('password').asyncValid = false;
 				this.getFieldByName('email').asyncValid = false;
 				// if (this.panel.valid) this.setPanelInvalid();
 			},
 			fillForm: function () {
-				this.getFieldByName('code').value = '12345678';
+				this.getFieldByName('password').value = '12345678';
 				this.getFieldByName('email').value = 'michael@mstork.com';
 				this.onFormValidityChange(true);
 				this.validateCode();
