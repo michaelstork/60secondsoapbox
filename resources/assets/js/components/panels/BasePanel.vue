@@ -41,7 +41,7 @@
 			},
 			composePanelData: function () {
 				return this.form.fields.reduce((data, field) => {
-					data[field.name] = field.value;
+					if (!field.hidden) data[field.name] = field.value;
 					return data;
 				}, {});
 			}
