@@ -8,7 +8,7 @@
 			}
 			table {
 				margin:0 auto;
-				width:80%;
+				width:90%;
 				background-color:#EFEFEF;
 				max-width:600px;
 				border-radius:6px;
@@ -99,7 +99,7 @@
 				border-collapse:collapse;
 			}
 			td {
-				padding:0 32px;
+				padding:0 18px;
 			}
 		</style>
 	</head>
