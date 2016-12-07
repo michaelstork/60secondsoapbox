@@ -15,7 +15,7 @@ use App\Mail\Invitation;
 class SoapboxApiController extends Controller
 {
 
-    public function audioUpload(Request $request)
+    public function handleAudioUpload(Request $request)
     {
         $date = date('Y-m-d H:i:s', strtotime('now'));
 
@@ -60,7 +60,7 @@ class SoapboxApiController extends Controller
         }
     }
 
-    public function submission(Request $request)
+    public function handleSubmission(Request $request)
     {
         $validator = $this->getSubmissionValidator($request);
 
@@ -73,21 +73,6 @@ class SoapboxApiController extends Controller
         return response()->json([
             'message' => 'Thanks for participating!'
         ], 200);
-    }
-
-    public function getSubmissionValidator(Request $request)
-    {
-        return Validator::make($request->input(), [
-           'auth.email' => 'bail|required|email',
-           'info.name' => 'required',
-           'info.title' => 'required',
-           'info.institution' => 'required',
-           'audio.filename' => 'required',
-           'nominees.submissionTitle' => 'required',
-           'nominees.nominee1' => 'bail|required|email',
-           'nominees.nominee2' => 'bail|required|email',
-           'nominees.nominee3' => 'bail|required|email'
-        ]);
     }
 
     public function saveSubmission($data)
@@ -110,7 +95,22 @@ class SoapboxApiController extends Controller
         }
     }
 
-    public function createUser($email)
+    protected function getSubmissionValidator(Request $request)
+    {
+        return Validator::make($request->input(), [
+           'auth.email' => 'bail|required|email',
+           'info.name' => 'required',
+           'info.title' => 'required',
+           'info.institution' => 'required',
+           'audio.filename' => 'required',
+           'nominees.submissionTitle' => 'required',
+           'nominees.nominee1' => 'bail|required|email',
+           'nominees.nominee2' => 'bail|required|email',
+           'nominees.nominee3' => 'bail|required|email'
+        ]);
+    }
+
+    protected function createUser($email)
     {
         $user = new User();
         $user->email = $email;

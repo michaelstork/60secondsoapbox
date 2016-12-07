@@ -99,6 +99,7 @@
 			p span,
 			p span.im {
 				color:#333333 !important;
+				font-size:13px !important;
 			}
 		</style>
 	</head>
