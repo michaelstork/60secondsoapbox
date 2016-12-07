@@ -30,6 +30,13 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
+    /**
+     * Get the user's submission.
+     */
+    public function submission()
+    {
+        return $this->hasOne('App\Submission');
+    }
 
     public function getJWTIdentifier()
     {

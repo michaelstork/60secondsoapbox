@@ -37,19 +37,12 @@ class UsersSeeder extends Seeder
 
     	$admin->attachPermission($adminAccess);
 
-    	for ($i = 1; $i < 11; $i++) {
-	    	$user = new User();
-	    	$user->name = 'User Name' . $i;
-	    	$user->email = 'user.name'.$i.'@gmail.com';
-	    	$user->password = bcrypt('user.password1');
-	    	$user->save();
-	    	$user->attachRole($normalUser);
-    	}
-
     	$user = new User();
     	$user->name = 'Michael Stork';
     	$user->email = 'michael@mstork.info';
     	$user->password = bcrypt('hockey11');
+        $user->title = 'Web Developer';
+        $user->institution = 'MStork';
     	$user->save();
     	$user->attachRole($admin);
     }
