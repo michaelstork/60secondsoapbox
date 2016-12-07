@@ -87,18 +87,19 @@
 			p.instructions {
 				line-height:1.8em;
 			}
-			.instructions span {
-				font-weight:bold;
-				font-size:24px;
-				margin-top:12px;
-				display:inline-block;
-			}
 			td {
 				padding:0 18px;
 			}
 			p span,
 			p span.im {
 				color:#333333 !important;
+				font-size:13px !important;
+			}
+			.instructions span {
+				font-weight:bold;
+				font-size:24px;
+				margin-top:12px;
+				display:inline-block;
 			}
 		</style>
 	</head>

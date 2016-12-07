@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/audio-upload', 'Api\SoapboxApiController@audioUpload');
+Route::post('/audio-upload', 'Api\SoapboxApiController@handleAudioUpload');
 Route::post('/validate-nominee', 'Api\SoapboxApiController@validateNominee');
-Route::post('/submission', 'Api\SoapboxApiController@submission');
+Route::post('/submission', 'Api\SoapboxApiController@handleSubmission');
