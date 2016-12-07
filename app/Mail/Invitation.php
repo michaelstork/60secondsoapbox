@@ -14,16 +14,18 @@ class Invitation extends Mailable
 
     protected $nominator;
     protected $nominee;
+    protected $code;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $nominator, User $nominee)
+    public function __construct(User $nominator, User $nominee, $code)
     {
         $this->nominator = $nominator;
         $this->nominee = $nominee;
+        $this->code = $code;
     }
 
     /**
@@ -35,9 +37,11 @@ class Invitation extends Mailable
     {
         return $this->subject("You've been nominated to record an episode of 60 Second Soapbox!")
             ->view('mail.invitation')
+            ->text('mail.invitation-plain')
             ->with([
-                'nominee' => $this->nominee->email,
-                'nominator' => $this->nominator->name
+                'nominee' => $this->nominee,
+                'nominator' => $this->nominator,
+                'code' => $this->code
             ]);
     }
 }
