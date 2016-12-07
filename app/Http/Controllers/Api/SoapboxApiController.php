@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 use App\User;
 use App\Submission;
-use Illuminate\Support\Facades\Auth;
+use App\Mail\Invitation;
 
 class SoapboxApiController extends Controller
 {
@@ -103,13 +105,39 @@ class SoapboxApiController extends Controller
 
         unset($data['nominees']['submissionTitle']);
 
-        foreach ($data['nominees'] as $key => $value) {
-            $nominee = new User();
-            $nominee->email = $value;
-            $nominee->password = bcrypt('hockey11');
-            $nominee->save();
-            $nominee->attachRole(1);
+        foreach ($data['nominees'] as $email) {
+            $this->createUser($email);
         }
     }
 
+    public function createUser($email)
+    {
+        $user = new User();
+        $user->email = $email;
+
+        $code = $this->generateCode(8);
+        $user->password = bcrypt($code);
+
+        $user->save();
+        $user->attachRole(env('ROLE_ID_NORMALUSER'));
+
+        $this->sendInvitationEmail($user, $code);
+    }
+
+    protected function sendInvitationEmail($nominee, $code)
+    {
+        $invitation = new Invitation(Auth::user(), $nominee, $code);
+        Mail::to($nominee)->send($invitation);
+    }
+
+    protected function generateCode($length)
+    {
+        $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $str = '';
+        $max = mb_strlen($keyspace, '8bit') - 1;
+        for ($i = 0; $i < $length; ++$i) {
+            $str .= $keyspace[random_int(0, $max)];
+        }
+        return $str;
+    }
 }

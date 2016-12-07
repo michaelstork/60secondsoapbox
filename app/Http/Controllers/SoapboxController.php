@@ -18,11 +18,10 @@ class SoapboxController extends Controller
 
     public function authenticate(Request $request)
     {
-		$credentials = $request->only('email', 'password');
+		$credentials = $request->input();
 
 		try {
-			$token = JWTAuth::attempt($credentials);
-			if (!$token) {
+			if (! $token = JWTAuth::attempt($credentials)) {
 				return $this->authFailed();
 			}
 		} catch (JWTException $e) {
@@ -39,5 +38,4 @@ class SoapboxController extends Controller
             'message' => $message
         ], 401);
     }
-
 }
