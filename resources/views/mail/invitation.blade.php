@@ -11,8 +11,8 @@
 				width:90%;
 				background-color:#EFEFEF;
 				max-width:600px;
-				border-radius:6px;
 				overflow:hidden;
+				border-collapse:collapse;
 			}
 			h1 {
 				text-align:center;
@@ -32,16 +32,15 @@
 				color:#333333;
 				margin-bottom:32px;
 				line-height:1.6em;
+				text-align:center;
 			}
 			p.intro {
 				font-size:16px;
 				line-height:1.4em;
 				font-weight:bold;
-				text-align:center;
 				margin:32px auto 0 auto;
 			}
 			p.sub-intro {
-				text-align:center;
 				font-size:12px;
 				margin-top:0;
 			}
@@ -86,7 +85,6 @@
 				color:#EFEFEF;
 			}
 			p.instructions {
-				text-align:center;
 				line-height:1.8em;
 			}
 			.instructions span {
@@ -95,11 +93,12 @@
 				margin-top:12px;
 				display:inline-block;
 			}
-			table {
-				border-collapse:collapse;
-			}
 			td {
 				padding:0 18px;
+			}
+			p span,
+			p span.im {
+				color:#333333 !important;
 			}
 		</style>
 	</head>
@@ -121,7 +120,7 @@
 
 					<p>Any topic is on the table – clinical, academic, economic, or whatever else may interest an EM-centric audience. We carefully remix your audio to add an extra splash of drama and excitement. Even more exciting, you'll get to challenge 3 of your peers to stand on a soapbox of their own!</p>
 
-					<p class="instructions">If you'd like to particiapte, click the button below and enter the following invitation code:<br><span>{{ $code }}</span></p>
+					<p class="instructions">If you'd like to participate, click the button below and enter the following invitation code:<br><span>{{ $code }}</span></p>
 				</td>
 			</tr>
 			<tr>
