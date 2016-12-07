@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Validator;
 use App\User;
+use App\Submission;
+use Illuminate\Support\Facades\Auth;
 
 class SoapboxApiController extends Controller
 {
@@ -80,15 +82,34 @@ class SoapboxApiController extends Controller
            'info.institution' => 'required',
            'audio.filename' => 'required',
            'nominees.submissionTitle' => 'required',
-           'nominees.nominee1' => 'bail|required|email|unique:users,email',
-           'nominees.nominee2' => 'bail|required|email|unique:users,email',
-           'nominees.nominee3' => 'bail|required|email|unique:users,email'
+           'nominees.nominee1' => 'bail|required|email',
+           'nominees.nominee2' => 'bail|required|email',
+           'nominees.nominee3' => 'bail|required|email'
         ]);
     }
 
-    public function saveSubmission($input)
+    public function saveSubmission($data)
     {
-            
+        $user = Auth::user();
+        $user->name = $data['info']['name'];
+        $user->title = $data['info']['title'];
+        $user->institution = $data['info']['institution'];
+        $user->save();
+
+        $submission = new Submission();
+        $submission->title = $data['nominees']['submissionTitle'];
+        $submission->filename = $data['audio']['filename'];
+        $user->submission()->save($submission);
+
+        unset($data['nominees']['submissionTitle']);
+
+        foreach ($data['nominees'] as $key => $value) {
+            $nominee = new User();
+            $nominee->email = $value;
+            $nominee->password = bcrypt('hockey11');
+            $nominee->save();
+            $nominee->attachRole(1);
+        }
     }
 
 }
