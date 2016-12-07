@@ -107,7 +107,7 @@
 				this.setPanelInvalid();
 			},
 			fillForm: function () {
-				this.handleUploadSuccess({data:{filename: 'filename.wav'}});
+				this.handleUploadSuccess({data:{filename: 'filename'+Math.floor(Math.random(5) * 1000)+'.wav'}});
 			}
 		},
 		directives: {
