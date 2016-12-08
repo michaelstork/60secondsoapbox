@@ -28,14 +28,12 @@
 			}
 		},
 		methods: {
-			onFormInput: function (target) {
-				const field = this.getFieldByName(target.name);
-
+			onFormInput: function () {
 				if (this.form.valid) {
 					this.getFieldByName('password').asyncPending = true;
-					this.validateCode(field);
+					this.validateCode();
 				} else {
-					this.handleInvalidCode(field);
+					this.handleInvalidCode();
 				}
 			},
 			validateCode: debounce(function () {
