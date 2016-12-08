@@ -24,15 +24,12 @@
 		computed: {
 			isValidPanel: function () {
 				return this.form.valid
-					&& this.form.fields.filter(field => field.async)
-						.every(field => field.asyncValid);
+					&& this.getFieldByName('password').asyncValid;
 			}
 		},
 		methods: {
 			onFormInput: function (target) {
 				const field = this.getFieldByName(target.name);
-
-				if (!field.async) return;
 
 				if (target.checkValidity()) {
 					this.validateCode(field);
@@ -58,12 +55,11 @@
 			}, 200),
 			handleValidCode: function (token) {
 				this.getFieldByName('password').asyncValid = true;
-				this.getFieldByName('email').asyncValid = true;
 				localStorage.setItem('soapboxToken', token);
 			},
 			handleInvalidCode: function () {
 				this.getFieldByName('password').asyncValid = false;
-				this.getFieldByName('email').asyncValid = false;
+				localStorage.removeItem('soapboxToken');
 			},
 			fillForm: function () {
 				this.getFieldByName('password').value = 'hockey11';
