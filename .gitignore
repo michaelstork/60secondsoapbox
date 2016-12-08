@@ -10,3 +10,4 @@ Homestead.yaml
 /public/fonts/*
 /public/images/*
 /public/js/*
+npm-debug.log
