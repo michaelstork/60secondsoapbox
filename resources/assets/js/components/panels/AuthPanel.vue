@@ -59,6 +59,7 @@
 			},
 			handleInvalidCode: function () {
 				this.getFieldByName('password').asyncValid = false;
+				localStorage.removeItem('soapboxToken');
 			},
 			fillForm: function () {
 				this.getFieldByName('password').value = 'hockey11';
