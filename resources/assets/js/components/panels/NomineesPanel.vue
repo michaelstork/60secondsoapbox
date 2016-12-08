@@ -41,6 +41,7 @@
 				if (!field.async) return;
 
 				if (target.checkValidity()) {
+					field.asyncPending = true;
 					this.validateNominee(field);
 				} else {
 					this.handleInvalidNominee(field);
@@ -57,7 +58,9 @@
 					response => {
 						this.handleInvalidNominee(field, response.data.message);
 					}
-				);
+				).finally(() => {
+					field.asyncPending = false;
+				});
 			}, 200),
 			handleValidNominee: function (field) {
 				field.asyncValid = true;

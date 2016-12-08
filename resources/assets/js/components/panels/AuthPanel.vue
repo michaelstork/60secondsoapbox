@@ -31,7 +31,8 @@
 			onFormInput: function (target) {
 				const field = this.getFieldByName(target.name);
 
-				if (target.checkValidity()) {
+				if (this.form.valid) {
+					this.getFieldByName('password').asyncPending = true;
 					this.validateCode(field);
 				} else {
 					this.handleInvalidCode(field);
@@ -40,8 +41,6 @@
 			validateCode: debounce(function () {
 				const [emailField, codeField] = this.form.fields;
 
-				if (!emailField.value || !codeField.value) return;
-
 				return this.$http.post(
 					URLS[this.env].authenticate,
 					{
@@ -49,9 +48,12 @@
 						password: codeField.value
 					}
 				).then(
-					(response) => { this.handleValidCode(response.data.token); },
-					() => { this.handleInvalidCode(); }
-				);
+					response => { this.handleValidCode(response.data.token); },
+					response => { this.handleInvalidCode(response.data.message || null); }
+				).finally(() => {
+					codeField.asyncPending = false;
+				});
+
 			}, 200),
 			handleValidCode: function (token) {
 				this.getFieldByName('password').asyncValid = true;

@@ -16,6 +16,7 @@
 						:valid="fieldValidityStatuses[field.name]"
 						:async="field.async"
 						:async-valid="field.asyncValid"
+						:async-pending="field.asyncPending"
 						:async-error="field.asyncError"
 						v-on:fieldValidityChange="onFieldValidityChange">
 					</soapbox-form-field>

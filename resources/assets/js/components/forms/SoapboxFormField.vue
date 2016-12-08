@@ -4,6 +4,7 @@
 		:class="{
 			'empty': !value,
 			'async-valid': asyncValid,
+			'async-pending': asyncPending,
 			'async-error': asyncError
 		}">
 		<input
@@ -44,6 +45,7 @@
 			},
 			async: Boolean,
 			asyncValid: Boolean,
+			asyncPending: Boolean,
 			asyncError: String
 		},
 		methods: {

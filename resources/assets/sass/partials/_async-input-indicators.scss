@@ -1,12 +1,12 @@
 .async-error-message {
-	opacity:0;
 	color:$red;
 	font-size:0.7rem;
 	line-height:normal;
 	position:absolute;
 	left:0;
 	top:54px;
-	transition:opacity 0.2s ease-out;
+	// opacity:0;
+	// transition:opacity 0.2s ease-out;
 }
 
 .async-valid-indicator,
@@ -29,7 +29,8 @@
 }
 
 .async-valid-indicator,
-.async-invalid-indicator {
+.async-invalid-indicator,
+.async-error-message {
 	transition:transform 0.2s $sharpCurve;
 	transform:scale(0);
 }
@@ -40,18 +41,21 @@
 	height:16px;
 	bottom:8px;
 	right:4px;
-	opacity:0;
 	transform:none;
 	transition:opacity 0.2s ease-out;
+	opacity:0;
 }
 
-.async-valid .async-valid-indicator,
-.async-error .async-invalid-indicator {
+.async-valid:not(.async-pending) .async-valid-indicator,
+.async-error:not(.async-pending) .async-invalid-indicator,
+.async-error:not(.async-pending) .async-error-message {
 	transform:scale(1);
+	transition-delay:0.2s;
 }
 
-.async-error .async-error-message {
+.async-pending .async-pending-indicator {
 	opacity:1;
+	transition-delay:0.2s;
 }
 
 .async-valid input ~ .underline,
@@ -67,7 +71,6 @@ input ~ .underline,
 input:focus ~ .underline {
 	.async-valid &,
 	.async-error & {
-		transition:transform 0.2s $sharpCurve;
 		transform:scale(1, 1);
 	}
 	.async-valid & {
