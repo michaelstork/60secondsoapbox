@@ -1,0 +1,66 @@
+.async-error-message {
+	opacity:0;
+	color:$red;
+	font-size:0.7rem;
+	line-height:normal;
+	position:absolute;
+	left:0;
+	top:54px;
+	transition:opacity 0.2s ease-out;
+}
+
+.async-valid-indicator,
+.async-invalid-indicator,
+.async-pending-indicator {
+	position:absolute;
+	bottom:0;
+	right:0;
+	margin:auto;
+	font-size:1.4rem;
+	height:28px;
+}
+
+.async-pending-indicator {
+	height:16px;
+	bottom:8px;
+	right:4px;
+	opacity:0;
+	transform:none;
+	transition:opacity 0.2s ease-out;
+}
+
+.async-valid-indicator {
+	color:$green;
+}
+
+.async-invalid-indicator {
+	color:$red;
+}
+
+.async-valid-indicator,
+.async-invalid-indicator {
+	transition:transform 0.2s $sharpCurve;
+	transform:scale(0);
+}
+
+.async-valid .async-valid-indicator,
+.async-error .async-invalid-indicator {
+	transform:scale(1);
+}
+
+.async-error .async-error-message {
+	opacity:1;
+}
+
+.async-valid input ~ .underline,
+.async-valid input:focus ~ .underline {
+	transition:transform 0.2s $sharpCurve;
+	background-color:$green;
+	transform:scale(1, 1);
+}
+.async-error input ~ .underline,
+.async-error input:focus ~ .underline {
+	transition:transform 0.2s $sharpCurve;
+	transform:scale(1, 1);
+	background-color:$red;
+}

@@ -4,7 +4,7 @@
 		:class="{
 			'empty': !value,
 			'async-valid': asyncValid,
-			'has-error': error
+			'async-error': asyncError
 		}">
 		<input
 			ref="input"
@@ -21,7 +21,7 @@
 		<template v-if="async">
 			<i class="mdi mdi-check async-valid-indicator"></i>
 			<i class="mdi mdi-exclamation async-invalid-indicator"></i>
-			<span class="error-message">{{ error }}</span>
+			<span class="async-error-message">{{ asyncError }}</span>
 		</template>
 	</div>
 </template>
@@ -41,7 +41,7 @@
 			},
 			async: Boolean,
 			asyncValid: Boolean,
-			error: String
+			asyncError: String
 		},
 		methods: {
 			updateValue: function (val) {

@@ -26,7 +26,7 @@ $spinnerDuration:1.4s;
 	}
 }
 
-.async-loading-indicator {
+.async-pending-indicator {
 	animation: rotator $spinnerDuration linear infinite;
 
 	circle {

@@ -61,11 +61,11 @@
 			}, 200),
 			handleValidNominee: function (field) {
 				field.asyncValid = true;
-				field.error = null;
+				field.asyncError = null;
 			},
 			handleInvalidNominee: function (field, message) {
 				field.asyncValid = false;
-				if (message) field.error = message;
+				if (message) field.asyncError = message;
 			},
 			fillForm: function () {
 				this.getFieldByName('submissionTitle').value = 'TITLE';
