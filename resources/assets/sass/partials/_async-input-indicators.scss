@@ -20,15 +20,6 @@
 	height:28px;
 }
 
-.async-pending-indicator {
-	height:16px;
-	bottom:8px;
-	right:4px;
-	opacity:0;
-	transform:none;
-	transition:opacity 0.2s ease-out;
-}
-
 .async-valid-indicator {
 	color:$green;
 }
@@ -43,6 +34,17 @@
 	transform:scale(0);
 }
 
+@import 'async-pending-indicator';
+
+.async-pending-indicator {
+	height:16px;
+	bottom:8px;
+	right:4px;
+	opacity:0;
+	transform:none;
+	transition:opacity 0.2s ease-out;
+}
+
 .async-valid .async-valid-indicator,
 .async-error .async-invalid-indicator {
 	transform:scale(1);
@@ -54,13 +56,24 @@
 
 .async-valid input ~ .underline,
 .async-valid input:focus ~ .underline {
-	transition:transform 0.2s $sharpCurve;
 	background-color:$green;
-	transform:scale(1, 1);
 }
 .async-error input ~ .underline,
 .async-error input:focus ~ .underline {
-	transition:transform 0.2s $sharpCurve;
-	transform:scale(1, 1);
 	background-color:$red;
+}
+
+input ~ .underline,
+input:focus ~ .underline {
+	.async-valid &,
+	.async-error & {
+		transition:transform 0.2s $sharpCurve;
+		transform:scale(1, 1);
+	}
+	.async-valid & {
+		background-color:$green;
+	}
+	.async-error & {
+		background-color:$red;
+	}
 }

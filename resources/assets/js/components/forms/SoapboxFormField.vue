@@ -21,6 +21,9 @@
 		<template v-if="async">
 			<i class="mdi mdi-check async-valid-indicator"></i>
 			<i class="mdi mdi-exclamation async-invalid-indicator"></i>
+			<svg class="async-pending-indicator" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+				<circle fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+			</svg>
 			<span class="async-error-message">{{ asyncError }}</span>
 		</template>
 	</div>
