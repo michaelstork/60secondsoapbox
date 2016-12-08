@@ -95,9 +95,9 @@
 				color:#333333 !important;
 				font-size:13px !important;
 			}
-			.instructions span {
+			.instructions span.code {
 				font-weight:bold;
-				font-size:24px;
+				font-size:24px !important;
 				margin-top:12px;
 				display:inline-block;
 			}
@@ -121,7 +121,7 @@
 
 					<p>Any topic is on the table – clinical, academic, economic, or whatever else may interest an EM-centric audience. We carefully remix your audio to add an extra splash of drama and excitement. Even more exciting, you'll get to challenge 3 of your peers to stand on a soapbox of their own!</p>
 
-					<p class="instructions">If you'd like to participate, click the button below and enter the following invitation code:<br><span>{{ $code }}</span></p>
+					<p class="instructions">If you'd like to participate, click the button below and enter the following invitation code:<br><span class="code">{{ $code }}</span></p>
 				</td>
 			</tr>
 			<tr>
