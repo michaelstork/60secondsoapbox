@@ -1,6 +1,11 @@
 
 <template>
-	<div class="input-container" :class="{'empty': !value, 'async-valid': asyncValid}">
+	<div class="input-container"
+		:class="{
+			'empty': !value,
+			'async-valid': asyncValid,
+			'has-error': error
+		}">
 		<input
 			ref="input"
 			:type="type"
@@ -13,7 +18,11 @@
 			autocomplete="off" />
 		<label>{{ label }}</label>
 		<i class="underline"></i>
-		<i v-if="async" class="mdi mdi-check async-valid-indicator"></i>
+		<template v-if="async">
+			<i class="mdi mdi-check async-valid-indicator"></i>
+			<i class="mdi mdi-exclamation async-invalid-indicator"></i>
+			<span class="error-message">{{ error }}</span>
+		</template>
 	</div>
 </template>
 
@@ -31,7 +40,8 @@
 				default: 'text'
 			},
 			async: Boolean,
-			asyncValid: Boolean
+			asyncValid: Boolean,
+			error: String
 		},
 		methods: {
 			updateValue: function (val) {

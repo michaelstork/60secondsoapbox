@@ -51,15 +51,21 @@
 					URLS[this.env].validateNominee,
 					{email: field.value}
 				).then(
-					() => { this.handleValidNominee(field); },
-					() => { this.handleInvalidNominee(field); }
+					response => {
+						this.handleValidNominee(field, response.data.message);
+					},
+					response => {
+						this.handleInvalidNominee(field, response.data.message);
+					}
 				);
 			}, 200),
 			handleValidNominee: function (field) {
 				field.asyncValid = true;
+				field.error = null;
 			},
-			handleInvalidNominee: function (field) {
+			handleInvalidNominee: function (field, message) {
 				field.asyncValid = false;
+				if (message) field.error = message;
 			},
 			fillForm: function () {
 				this.getFieldByName('submissionTitle').value = 'TITLE';

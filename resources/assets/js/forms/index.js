@@ -8,7 +8,10 @@ class SoapboxForm {
 			name: def.name,
 			valid: false,
 			fields: def.fields.map(field => {
-				if (field.async) field.asyncValid = false;
+				if (field.async) {
+					field.asyncValid = false;
+					field.error = null;
+				}
 				return field;
 			})
 		};

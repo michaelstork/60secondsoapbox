@@ -61,22 +61,34 @@
 	margin-top:24px;
 }
 
-.async-valid-indicator {
+.async-valid-indicator,
+.async-invalid-indicator {
 	position:absolute;
 	bottom:0;
 	right:0;
 	margin:auto;
 	font-size:1.4rem;
-	color:$green;
 	height:28px;
 	transition:transform 0.2s $sharpCurve;
 	transform:scale(0);
 }
 
-.async-validate-error {
+.async-valid-indicator {
+	color:$green;
+}
+.async-invalid-indicator {
+	color:$red;
+}
+
+.input-container .error-message {
 	opacity:0;
 	color:$red;
 	font-size:0.7rem;
+	line-height:normal;
+	position:absolute;
+	left:0;
+	top:54px;
+	transition:opacity 0.2s ease-out;
 }
 
 .input-container input:focus,
@@ -122,4 +134,18 @@
 			transform:scale(1);
 		}
 	}
+	&.has-error input {
+		& ~ .underline {
+			transition:transform 0.2s $sharpCurve;
+			background-color:$red;
+			transform:scale(1, 1);			
+		}
+		& ~ .async-invalid-indicator {
+			transform:scale(1);
+		}
+		& ~ .error-message {
+			opacity:1;
+		}
+	}
 }
+
