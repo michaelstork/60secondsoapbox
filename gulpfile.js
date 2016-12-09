@@ -1,3 +1,5 @@
+process.env.DISABLE_NOTIFIER = true;
+
 const webpack      = require('webpack');
 const elixir       = require('laravel-elixir');
 const inProduction = elixir.config.production;
@@ -22,7 +24,11 @@ elixir(mix => {
                 }]
             }
         }
-    );
+    ).browserSync({
+        proxy: {
+            target: 'https://soapbox.localhost'
+        }
+    });
 
     if (inProduction) {
         mix.copy('node_modules/mdi/fonts', 'public/fonts')
