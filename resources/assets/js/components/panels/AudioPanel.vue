@@ -18,7 +18,7 @@
 					</div>
 				</div>
 				<div v-else class="audio-controls" key="audioControls">
-					<p>Use the button below to record your 60 seconds of audio. <br class="break-above-400">When you're done, {{ env == 'cordova' ? 'press' : 'click' }} 'Stop' to upload your submission.</p>
+					<p v-html="instructions"></p>
 					<button v-on:click="toggle" :disabled="audioAdapter.status.complete" :class="{'active': audioAdapter.status.recording}" class="record-button">
 						<span>{{ audioAdapter.status.recording ? 'Pause' : 'Record' }}</span>
 					</button>
@@ -54,6 +54,20 @@
 			isValidPanel: function () {
 				return this.audioAdapter.status.complete
 					&& this.filename.length;
+			},
+			instructions: function () {
+				if (this.audioAdapter.status.complete) {
+					return 'Upload Complete!';
+				} else if (this.audioAdapter.status.pending) {
+					return 'Uploading your submission...';
+				} else {
+					let action = this.env === 'cordova' ? 'press' : 'click';
+					return `
+						Use the button below to record your 60 seconds of audio.
+						<br class="break-above-400">
+						When you're done, ${action} 'Stop' to upload your submission.
+					`;
+				}
 			}
 		},
 		methods: {
@@ -61,10 +75,10 @@
 				this.audioAdapter.initialize();
 			},
 			uploadAudioFile: function (data) {
+				this.audioAdapter.status.pending = true;
+
 				let formData = new FormData();
 				formData.append('audioUpload', data);
-
-				this.audioAdapter.status.pending = true;
 
 				return this.$http.post(
 					URLS[this.env].audioUpload,
@@ -73,18 +87,18 @@
 				).then(
 					this.handleUploadSuccess,
 					this.handleUploadFailure
-				);
+				).finally(() => {
+					this.audioAdapter.status.pending = false;
+				});
 			},
 			handleUploadSuccess: function (response) {
 				console.log(response);
 				this.audioAdapter.status.complete = true;
-				this.audioAdapter.status.pending = false;
 				this.filename = response.data.filename;
 			},
 			handleUploadFailure: function (response) {
 				console.log(response);
 				this.audioAdapter.status.complete = false;
-				this.audioAdapter.status.pending = false;
 			},
 			composePanelData: function () {
 				return {filename: this.filename};

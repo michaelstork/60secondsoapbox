@@ -15,7 +15,10 @@ $spinnerDuration:1.4s;
 }
 
 @keyframes dash {
-	0% { stroke-dashoffset: $spinnerOffset; }
+	0% {
+		stroke-dashoffset: $spinnerOffset;
+		transform:rotate(0deg);
+	}
 	50% {
 		stroke-dashoffset: $spinnerOffset/4;
 		transform:rotate(135deg);

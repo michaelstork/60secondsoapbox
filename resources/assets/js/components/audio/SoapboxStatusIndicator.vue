@@ -5,11 +5,11 @@
 			<i class="mdi mdi-microphone"></i>
 			<soapbox-audio-timer :status="adapter.status"></soapbox-audio-timer>
 		</div>
-		<transition name="audio-indicator">
+		<transition name="audio-indicator" mode="in-out">
 			<div v-if="adapter.status.pending" class="status-indicator status-indicator-pending" key="pending">
-				<i class="mdi mdi-poop"></i>
+				<i class="mdi mdi-cloud-upload"></i>
 			</div>
-			<div v-if="adapter.status.complete" class="status-indicator status-indicator-complete" key="complete">
+			<div v-else-if="adapter.status.complete" class="status-indicator status-indicator-complete" key="complete">
 				<i class="mdi mdi-check"></i>
 			</div>
 		</transition>
