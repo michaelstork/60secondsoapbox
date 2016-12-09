@@ -5,6 +5,9 @@
 			<i class="mdi mdi-microphone"></i>
 			<soapbox-audio-timer :status="adapter.status"></soapbox-audio-timer>
 		</div>
+		<div v-if="!adapter.status.supported" class="status-indicator status-indicator-unsupported">
+			<i class="mdi mdi-alert"></i>
+		</div>
 		<transition name="audio-indicator" mode="in-out">
 			<div v-if="adapter.status.pending" class="status-indicator status-indicator-pending" key="pending">
 				<i class="mdi mdi-cloud-upload"></i>
@@ -13,9 +16,6 @@
 				<i class="mdi mdi-check"></i>
 			</div>
 		</transition>
-		<div v-if="!adapter.status.supported" class="status-indicator status-indicator-unsupported">
-			<i class="mdi mdi-alert"></i>
-		</div>
 	</div>
 </template>
 

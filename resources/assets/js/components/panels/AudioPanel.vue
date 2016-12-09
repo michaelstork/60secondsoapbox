@@ -3,7 +3,6 @@
 	<section class="audio-panel content-panel" v-on:dblclick="fillForm">
 		<div class="soapbox-recorder">
 			<soapbox-status-indicator :adapter="audioAdapter"></soapbox-status-indicator>
-			<h3 v-if="!audioAdapter.status.supported" class="audio-not-supported">Your {{ env == 'cordova' ? 'device' : 'browser' }} does not support recording audio.</h3>
 			<transition name="audio-content" mode="out-in">
 				<div v-if="!audioAdapter.initialized" class="request-audio" key="requestAudio">
 					<template v-if="audioAdapter.status.supported">
@@ -12,6 +11,7 @@
 						</button>
 						<small>Your device may request permission<br class="break-below-400"> to access the microphone.</small>
 					</template>
+					<p v-else v-html="instructions"></p>
 					<div class="audio-upload">
 						<span>Already have an audio file?</span>
 						<a tabIndex="-1" v-file-upload-link:audioUpload="uploadAudioFile" href="#">Click here to upload it.</a>
@@ -60,6 +60,9 @@
 					return 'Upload Complete!';
 				} else if (this.audioAdapter.status.pending) {
 					return 'Uploading your submission...';
+				} else if (!this.audioAdapter.status.supported) {
+					let device = this.env === 'cordova' ? 'device' : 'browser';
+					return `Your ${device} does not support recording audio.`;
 				} else {
 					let action = this.env === 'cordova' ? 'press' : 'click';
 					return `
