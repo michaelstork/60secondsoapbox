@@ -1,10 +1,13 @@
 
 <template>
-	<section class="nominees-panel content-panel" v-on:dblclick="fillForm">
-		<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
-		<button type="submit" :disabled="!panel.valid" v-on:click="doSubmission">
-			<span>Submit</span>
-		</button> 
+	<section class="nominees-panel content-panel">
+		<h3 v-if="submissionComplete">Thanks for participating!</h3>
+		<div v-else>
+			<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
+			<button type="submit" :disabled="!panel.valid" v-on:click="doSubmission">
+				<span>Submit</span>
+			</button>
+		</div>
 	</section>
 </template>
 
@@ -18,7 +21,8 @@
 		extends: SoapboxBasePanel,
 		data: function () {
 			return {
-				form: nomineesForm
+				form: nomineesForm,
+				submissionComplete: false
 			};
 		},
 		computed: {
@@ -27,6 +31,11 @@
 					&& this.form.fields.filter(field => field.async)
 						.every(field => field.asyncValid);
 			}
+		},
+		mounted: function () {
+			this.eventHub.$on('submissionComplete', () => {
+				this.submissionComplete = true;
+			});
 		},
 		methods: {
 			doSubmission: function () {
@@ -69,19 +78,6 @@
 			handleInvalidNominee: function (field, message) {
 				field.asyncValid = false;
 				if (message) field.asyncError = message;
-			},
-			fillForm: function () {
-				this.getFieldByName('submissionTitle').value = 'TITLE';
-				let n1 = this.getFieldByName('nominee1');
-				n1.value = 'michael@mstork.com1';
-				this.handleValidNominee(n1);
-				let n2 = this.getFieldByName('nominee2');
-				n2.value = 'michael@mstork.com2';
-				this.handleValidNominee(n2);
-				let n3 = this.getFieldByName('nominee3');
-				n3.value = 'michael@mstork.com3';
-				this.handleValidNominee(n3);
-				this.onFormValidityChange(true);
 			}
 		}
 	}

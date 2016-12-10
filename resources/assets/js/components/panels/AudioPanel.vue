@@ -1,6 +1,6 @@
 
 <template>
-	<section class="audio-panel content-panel" v-on:dblclick="fillForm">
+	<section class="audio-panel content-panel">
 		<soapbox-status-indicator :adapter="audioAdapter"></soapbox-status-indicator>
 		<transition name="audio-content" mode="out-in">
 			<div v-if="!audioAdapter.initialized" class="request-audio" key="requestAudio">
@@ -122,9 +122,6 @@
 				if (!window.confirm('Are you sure you want to start over?')) return;
 				this.audioAdapter.restart();
 				this.setPanelInvalid();
-			},
-			fillForm: function () {
-				this.handleUploadSuccess({data:{filename: 'filename'+Math.floor(Math.random(5) * 1000)+'.wav'}});
 			}
 		},
 		directives: {

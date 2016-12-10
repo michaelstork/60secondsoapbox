@@ -110,6 +110,7 @@ function init () {
                 ).then(
                     response => {
                         console.log(response);
+                        this.eventHub.$emit('submissionComplete');
                     },
                     errorResponse => {
                         console.log(errorResponse);
