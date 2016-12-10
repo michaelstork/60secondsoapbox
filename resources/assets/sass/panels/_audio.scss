@@ -1,3 +1,17 @@
+
 .audio-panel {
-	padding:0;
+	padding-top:80px;
+}
+
+.audio-status {
+	top:-50px;
+}
+
+@include queryWidth(max, 648px) {
+	.audio-panel {
+		padding-top:160px;
+	}
+	.audio-panel .audio-status {
+		top:20px;
+	}
 }

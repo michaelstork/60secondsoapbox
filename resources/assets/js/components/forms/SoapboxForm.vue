@@ -5,7 +5,7 @@
 			<div class="form-input-container">
 				<slot name="form-top"></slot>
 				<template v-for="field in form.fields">
-					<p class="help-text" v-if="field.heading">{{ field.heading }}</p>
+					<p class="form-header" v-if="field.heading">{{ field.heading }}</p>
 					<soapbox-form-field
 						v-model="field.value"
 						:label="field.label"

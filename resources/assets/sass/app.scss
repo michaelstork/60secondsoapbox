@@ -116,7 +116,7 @@ a[disabled] {
 	text-align:center;
 }
 
-.help-text {
+.form-header {
 	font-size:0.95rem;
 	font-weight:600;
 	margin-bottom:0;
@@ -125,8 +125,15 @@ a[disabled] {
 		margin-top:32px;
 	}
 
-	& + .input-container {
-		margin-top:32px;
+	@include queryWidth(min, 649px) {
+		& + .input-container {
+			margin-top:32px;
+		}
+	}
+	@include queryWidth(max, 648px) {
+		& + .input-container {
+			margin-top:18px;
+		}
 	}
 }
 

@@ -1,34 +1,32 @@
 
 <template>
 	<section class="audio-panel content-panel" v-on:dblclick="fillForm">
-		<div class="soapbox-recorder">
-			<soapbox-status-indicator :adapter="audioAdapter"></soapbox-status-indicator>
-			<transition name="audio-content" mode="out-in">
-				<div v-if="!audioAdapter.initialized" class="request-audio" key="requestAudio">
-					<template v-if="audioAdapter.status.supported">
-						<button v-on:click="initializeAudio" :disabled="audioAdapter.status.complete" tabIndex="-1">
-							<span>Get Started</span>
-						</button>
-						<small>Your device may request permission<br class="break-below-400"> to access the microphone.</small>
-					</template>
-					<p v-else v-html="instructions"></p>
-					<div class="audio-upload">
-						<span>Already have an audio file?</span>
-						<a tabIndex="-1" v-file-upload-link:audioUpload="uploadAudioFile" href="#">Click here to upload it.</a>
-					</div>
-				</div>
-				<div v-else class="audio-controls" key="audioControls">
-					<p v-html="instructions"></p>
-					<button v-on:click="toggle" :disabled="audioAdapter.status.complete" :class="{'active': audioAdapter.status.recording}" class="record-button">
-						<span>{{ audioAdapter.status.recording ? 'Pause' : 'Record' }}</span>
+		<soapbox-status-indicator :adapter="audioAdapter"></soapbox-status-indicator>
+		<transition name="audio-content" mode="out-in">
+			<div v-if="!audioAdapter.initialized" class="request-audio" key="requestAudio">
+				<template v-if="audioAdapter.status.supported">
+					<button v-on:click="initializeAudio" :disabled="audioAdapter.status.complete" tabIndex="-1">
+						<span>Get Started</span>
 					</button>
-					<button v-on:click="stop" :disabled="(!audioAdapter.status.started || audioAdapter.status.complete)" class="stop-button">
-						<span>Stop</span>
-					</button>
-					<a v-on:click="restart" :disabled="!audioAdapter.status.started"><i class="mdi mdi-refresh"></i>Start Over</a>
+					<small>Your device may request permission<br class="break-below-400"> to access the microphone.</small>
+				</template>
+				<p v-else v-html="instructions"></p>
+				<div class="audio-upload">
+					<span>Already have an audio file?</span>
+					<a tabIndex="-1" v-file-upload-link:audioUpload="uploadAudioFile" href="#">Click here to upload it.</a>
 				</div>
-			</transition>
-		</div>
+			</div>
+			<div v-else class="audio-controls" key="audioControls">
+				<p v-html="instructions"></p>
+				<button v-on:click="toggle" :disabled="audioAdapter.status.complete" :class="{'active': audioAdapter.status.recording}" class="record-button">
+					<span>{{ audioAdapter.status.recording ? 'Pause' : 'Record' }}</span>
+				</button>
+				<button v-on:click="stop" :disabled="(!audioAdapter.status.started || audioAdapter.status.complete)" class="stop-button">
+					<span>Stop</span>
+				</button>
+				<a v-on:click="restart" :disabled="!audioAdapter.status.started" class="restart"><i class="mdi mdi-refresh"></i>Start Over</a>
+			</div>
+		</transition>
 	</section>
 </template>
 
@@ -83,16 +81,18 @@
 				let formData = new FormData();
 				formData.append('audioUpload', data);
 
-				return this.$http.post(
-					URLS[this.env].audioUpload,
-					formData,
-					{progress: pe => { console.log(pe); }}
-				).then(
-					this.handleUploadSuccess,
-					this.handleUploadFailure
-				).finally(() => {
-					this.audioAdapter.status.pending = false;
-				});
+				return setTimeout(() => {
+					this.$http.post(
+						URLS[this.env].audioUpload,
+						formData,
+						{progress: pe => { console.log(pe); }}
+					).then(
+						this.handleUploadSuccess,
+						this.handleUploadFailure
+					).finally(() => {
+						this.audioAdapter.status.pending = false;
+					});
+				}, 500);
 			},
 			handleUploadSuccess: function (response) {
 				console.log(response);

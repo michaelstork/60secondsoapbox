@@ -20,10 +20,12 @@ $navHeight:36px;
 	display:flex;
 	overflow:visible;
 	transition:transform 0.375s $standardCurve;
-	padding-top:$trackPaddingTop;
 
+	@include queryWidth(min, 649px) {
+		padding-top:$trackPaddingTop;
+	}
 	@include queryWidth(max, 648px) {
-		min-height:calc(100vh - #{$trackPaddingTop + $navHeight});
+		height:calc(100vh - #{$navHeight});
 	}
 }
 
@@ -44,6 +46,7 @@ $navHeight:36px;
 	}
 	@include queryWidth(max, 648px) {
 		padding-bottom:60px;
+		overflow:auto;
 	}
 
 	h3 {
@@ -59,6 +62,25 @@ $navHeight:36px;
 }
 .content-panel a {
 	color:$accent;
+}
+
+.panel-icon {
+	position:absolute;
+	left:0;
+	right:0;
+	// top:-50px;
+	// top:20px;
+	margin:auto;
+	width:100px;
+	height:100px;
+	border-radius:100px;
+	border:3px solid #FFF;
+	z-index:2;
+	box-sizing:border-box;
+	background-repeat:no-repeat;
+	background-position:center center;
+	background-size:cover;
+	box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 }
 
 .panel-nav div {

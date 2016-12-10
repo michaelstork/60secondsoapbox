@@ -30,7 +30,7 @@
 					    <span>Continue</span>
 					    <i class="mdi mdi-arrow-right-bold-circle-outline"></i>
 					</a>
-				</transition>
+				</transition-group>
 			</nav>
 		</div>
 	</div>

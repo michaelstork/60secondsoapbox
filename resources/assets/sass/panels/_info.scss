@@ -2,3 +2,9 @@
 .info-panel .intro {
 	margin-bottom:32px;
 }
+
+@include queryWidth(max, 648px) {
+	.info-panel {
+		padding-top:48px;
+	}
+}

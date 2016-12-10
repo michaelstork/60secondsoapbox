@@ -6,10 +6,6 @@
 	display:flex;
 	flex-direction:column-reverse;
 	margin-bottom:14px;
-
-	.help-text + & {
-		margin-top:14px;
-	}
 }
 
 .input-container input {

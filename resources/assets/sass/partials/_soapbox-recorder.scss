@@ -1,17 +1,8 @@
-.audio-panel {
-	padding:0;
-}
 
 .audio-not-supported {
 	text-align:center;
 	color:$text2;
 	padding:0 12px;
-}
-
-.soapbox-recorder {
-	padding:80px 24px 24px 24px;
-	position:relative;
-	box-sizing:border-box;
 }
 
 .audio-status {
@@ -22,24 +13,6 @@
 	position:relative;
 	overflow:hidden;
 	background-color:#EAEAEA;
-}
-
-.audio-status {
-	position:absolute;
-	left:0;
-	right:0;
-	top:-50px;
-	margin:auto;
-	width:100px;
-	height:100px;
-	border-radius:100px;
-	border:3px solid #FFF;
-	z-index:2;
-	box-sizing:border-box;
-	background-repeat:no-repeat;
-	background-position:center center;
-	background-size:cover;
-	box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 }
 
 .status-indicator {
@@ -109,8 +82,8 @@
 	background-color:$green;
 }
 
-.soapbox-recorder .request-audio,
-.soapbox-recorder .audio-controls {
+.request-audio,
+.audio-controls {
 	display:flex;
 	align-items:center;
 	justify-content:center;
@@ -152,7 +125,13 @@
 }
 
 .audio-controls p {
-	height:46px;
+
+	@include queryWidth(min, 649px) {
+		height:46px;
+	}
+	@include queryWidth(max, 648px) {
+		height:74px;
+	}
 }
 
 .request-audio .audio-upload {
@@ -167,13 +146,17 @@
 	}
 }
 
+.audio-controls .restart {
+	color:$text2;
+}
+
 .record-button span {
 	color:$red;
 }
 .record-button.active span {
 	color:$accent;
 }
-.soapbox-recorder .stop-button span {
+.stop-button span {
 	color:$text2;
 }
 
