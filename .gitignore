@@ -11,3 +11,4 @@ Homestead.yaml
 /public/images/*
 /public/js/*
 npm-debug.log
+.DS_Store
