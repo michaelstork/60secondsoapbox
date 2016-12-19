@@ -8,7 +8,7 @@ class Submission extends Model
 {
 	
     /**
-     * Get the user that owns the phone.
+     * Get the user that owns the submission.
      */
 	public function user()
 	{

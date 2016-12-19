@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubmissionsTable extends Migration
+class CreateAudioTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateSubmissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('submissions', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('audio', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->string('title');
+            $table->string('filename')->unique();
             $table->timestamps();
-            
+
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
@@ -31,6 +31,6 @@ class CreateSubmissionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('submissions');
+        Schema::dropIfExists('audio');
     }
 }

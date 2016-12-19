@@ -38,6 +38,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne('App\Submission');
     }
 
+    public function audio()
+    {
+        return $this->hasMany('App\Audio');
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
