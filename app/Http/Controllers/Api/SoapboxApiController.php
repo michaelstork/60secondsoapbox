@@ -11,6 +11,11 @@ use Validator;
 use App\User;
 use App\Submission;
 use App\Mail\Invitation;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+
 
 class SoapboxApiController extends Controller
 {
@@ -26,11 +31,21 @@ class SoapboxApiController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->all()[0]], 400);
         } else {
-            $filename = $date . '.' . $request->file('audioUpload')->extension();
-            $request->file('audioUpload')->move(base_path() . '/storage/app/public/', $filename);
+            $user = Auth::user();
+            $id = $user->id;
+            $path = base_path('storage/app/audio/'.$id);
+
+            Storage::disk('local')->makeDirectory('audio/'.$id);
+
+            if (!Storage::disk('local')->exists('audio/'.$id.'/audio.wav')) {
+                $request->file('audioUpload')->move($path, 'audio.wav');
+            } else {
+                $request->file('audioUpload')->move($path, 'audio_tmp.wav');
+                Artisan::call('concatAudioFiles', ['id' => $id]);
+            }
 
             return response()->json([
-                'filename' => $filename,
+                'audioUrl' => asset('audio/'.$id.'/audio.wav'),
                 'message' => 'Upload Complete'
             ]);
         }

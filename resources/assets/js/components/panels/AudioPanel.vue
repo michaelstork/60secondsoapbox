@@ -44,14 +44,14 @@
 
 			return {
 				blob: null,
-				filename: null,
+				audioUrl: null,
 				audioAdapter: adapter
 			};
 		},
 		computed: {
 			isValidPanel: function () {
 				return this.audioAdapter.status.complete
-					&& this.filename.length;
+					&& this.audioUrl.length;
 			},
 			instructions: function () {
 				if (this.audioAdapter.status.complete) {
@@ -96,15 +96,16 @@
 			},
 			handleUploadSuccess: function (response) {
 				console.log(response);
-				this.audioAdapter.status.complete = true;
-				this.filename = response.data.filename;
+				this.audioAdapter.status.pending = false;
+				// this.audioAdapter.status.complete = true;
+				this.audioUrl = response.data.audioUrl;
 			},
 			handleUploadFailure: function (response) {
 				console.log(response);
 				this.audioAdapter.status.complete = false;
 			},
 			composePanelData: function () {
-				return {filename: this.filename};
+				return {audioUrl: this.audioUrl};
 			},
 			toggle: function () {
 				let method = this.audioAdapter.status.recording
