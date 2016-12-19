@@ -1,6 +1,6 @@
 
 <template>
-	<section class="info-panel content-panel">
+	<section class="info-panel content-panel" v-on:dblclick="fillForm">
 		<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange"></soapbox-form>
 	</section>
 </template>
@@ -15,6 +15,14 @@
 			return {
 				form: infoForm
 			};
+		},
+		methods: {
+			fillForm: function () {
+				this.getFieldByName('name').value = 'NAME';
+				this.getFieldByName('title').value = 'TITLE';
+				this.getFieldByName('institution').value = 'INSTITUTION';
+				this.onFormValidityChange(true);
+			}
 		}
 	}
 </script>

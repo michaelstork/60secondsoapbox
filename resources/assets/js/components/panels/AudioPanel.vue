@@ -24,6 +24,7 @@
 				<button v-on:click="stop" :disabled="(!audioAdapter.status.started || audioAdapter.status.complete)" class="stop-button">
 					<span>Stop</span>
 				</button>
+				<soapbox-wave-surfer :url="audioUrl"></soapbox-wave-surfer>
 				<a v-on:click="restart" :disabled="!audioAdapter.status.started" class="restart"><i class="mdi mdi-refresh"></i>Start Over</a>
 			</div>
 		</transition>
@@ -34,6 +35,7 @@
 	import SoapboxBasePanel from './BasePanel.vue';
 	import FileUploadLink from '../../directives/fileUploadLink';
 	import SoapboxStatusIndicator from '../audio/SoapboxStatusIndicator.vue';
+	import SoapboxWaveSurfer from '../audio/SoapboxWaveSurfer.vue';
 	import RecordRTCAdapter from '../../adapters/RecordRTC';
 	import {URLS} from '../../config/index';
 
@@ -129,7 +131,8 @@
 			fileUploadLink: FileUploadLink
 		},
 		components: {
-			'soapbox-status-indicator': SoapboxStatusIndicator
+			'soapbox-status-indicator': SoapboxStatusIndicator,
+			'soapbox-wave-surfer': SoapboxWaveSurfer
 		}
 	}
 </script>

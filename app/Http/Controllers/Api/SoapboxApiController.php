@@ -41,8 +41,10 @@ class SoapboxApiController extends Controller
 
             Artisan::call('concatAudioFiles', ['id' => $user->id]);
 
+            $result = $user->audio()->firstOrFail();
+
             return response()->json([
-                'audioUrl' => asset('audio/' . $audio->filename),
+                'audioUrl' => asset('audio/' . $result->filename),
                 'message' => 'Upload Complete'
             ]);
         }
