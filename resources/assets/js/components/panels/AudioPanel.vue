@@ -121,7 +121,7 @@
 			restart: function () {
 				if (!window.confirm('Are you sure you want to start over?')) return;
 				this.audioAdapter.restart();
-				this.setPanelInvalid();
+				this.setPanelValidity(false);
 			}
 		},
 		directives: {

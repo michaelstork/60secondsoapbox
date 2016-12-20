@@ -13,19 +13,16 @@
 			}
 		},
 		watch: {
-			'isValidPanel': function (valid) {
-				this[valid ? 'setPanelValid' : 'setPanelInvalid'].call(this);
+			isValidPanel: function (status) {
+				this.setPanelValidity(status);
 			}
 		},
 		methods: {
 			onPanelNavigation: function () {
-				if (this.isActivePanel && this.isValidPanel) this.savePanelData(); 
+				if (this.isActivePanel && this.isValidPanel) this.savePanelData();
 			},
-			setPanelValid: function () {
-				this.eventHub.$emit('panelValidityChange', this.panel.name, true);
-			},
-			setPanelInvalid: function () {
-				this.eventHub.$emit('panelValidityChange', this.panel.name, false);
+			setPanelValidity: function (status) {
+				this.eventHub.$emit('panelValidityChange', this.panel.name, status);
 			},
 			getFieldByName: function (name) {
 				return this.form.fields.find(field => field.name === name);
