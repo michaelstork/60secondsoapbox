@@ -27,7 +27,7 @@
 			<component v-else :is="subComponentId" :uploadAudioFile="uploadAudioFile" :selectedFile="selectedFile"></component>
 		</transition>
 
-		<soapbox-wave-surfer :url="'https://localhost:3000/' + filename"></soapbox-wave-surfer>
+		<soapbox-wave-surfer :url="filename"></soapbox-wave-surfer>
 
 		<!-- <a ref="fileUploadLink" v-file-upload-link:audioUpload="uploadAudioFile"></a> -->
 
@@ -100,7 +100,8 @@
 				chosenFile: null,
 				adapter: new RecordRTCAdapter,
 				submissionMethod: null,
-				selectedFile: null
+				selectedFile: null,
+				filename: null
 			};
 
 			// const adapter = new RecordRTCAdapter;
@@ -153,7 +154,7 @@
 					formData,
 					{progress: pe => { console.log(pe); }}
 				).then(response => {
-					this.filename = response.filename;
+					this.filename = response.data.filename;
 				});
 				// ).then(
 				// 	// this.handleUploadSuccess,

@@ -20,7 +20,7 @@
 
 <script>
 	import WaveSurfer from '../../vendor/wavesurfer';
-	import SoapboxTimer from './SoapboxTimer.vue';
+	// import SoapboxTimer from './SoapboxTimer.vue';
 
 	export default {
 		props: ['url'],
@@ -36,7 +36,6 @@
 			}
 		},
 		mounted: function () {
-			console.log(this.url);
 			this.wavesurfer = WaveSurfer.create({
 				container: this.$refs.container,
 				progressColor: '#00BCD4',
@@ -59,8 +58,9 @@
 		},
 		watch: {
 			url: function (url) {
+				console.log('url: ' + url);
 				if (!url) return;
-				this.wavesurfer.load(url);
+				this.wavesurfer.load('/audio/' + url);
 			}
 		},
 		methods: {
@@ -83,8 +83,8 @@
 				this.wavesurfer.playPause();
 			}
 		},
-		components: {
-			'soapbox-timer': SoapboxTimer
-		}
+		// components: {
+		// 	'soapbox-timer': SoapboxTimer
+		// }
 	}
 </script>
