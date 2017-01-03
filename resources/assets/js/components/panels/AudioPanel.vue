@@ -27,6 +27,8 @@
 			<component v-else :is="subComponentId" :uploadAudioFile="uploadAudioFile" :selectedFile="selectedFile"></component>
 		</transition>
 
+		<soapbox-wave-surfer :url="'https://localhost:3000/' + filename"></soapbox-wave-surfer>
+
 		<!-- <a ref="fileUploadLink" v-file-upload-link:audioUpload="uploadAudioFile"></a> -->
 
 <!-- 
@@ -84,6 +86,8 @@
 	import RecordRTCAdapter from '../../adapters/RecordRTC';
 	import {URLS} from '../../config/index';
 
+	import SoapboxWaveSurfer from '../audio/SoapboxWaveSurfer.vue';
+
 	import SubmissionMethodDialog from '../audio-submission/SubmissionMethodDialog.vue';
 	import SubmissionMethodUpload from '../audio-submission/SubmissionMethodUpload.vue';
 	import SubmissionMethodRecord from '../audio-submission/SubmissionMethodRecord.vue';
@@ -131,7 +135,6 @@
 				this.adapter.initialize();
 			},
 			setSelectedFile: function (file) {
-				console.log(file);
 				this.selectedFile = file;
 				this.submissionMethod = 'upload';
 			},
@@ -149,7 +152,9 @@
 					URLS[this.env].audioUpload,
 					formData,
 					{progress: pe => { console.log(pe); }}
-				);
+				).then(response => {
+					this.filename = response.filename;
+				});
 				// ).then(
 				// 	// this.handleUploadSuccess,
 				// 	// this.handleUploadFailure
@@ -202,7 +207,8 @@
 			'soapbox-status-indicator': SoapboxStatusIndicator,
 			'submission-method-dialog': SubmissionMethodDialog,
 			'submission-method-upload': SubmissionMethodUpload,
-			'submission-method-record': SubmissionMethodRecord
+			'submission-method-record': SubmissionMethodRecord,
+			'soapbox-wave-surfer': SoapboxWaveSurfer
 		}
 	}
 </script>

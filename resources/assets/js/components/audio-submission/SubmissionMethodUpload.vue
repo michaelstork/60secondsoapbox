@@ -14,11 +14,11 @@
 				</div>
 			</transition>
 		</div>
-		<transition name="fade" mode="out-in">
-			<p v-if="status === 'pending'" class="form-header">Uploading {{ selectedFile.name }}...</p>
-			<p v-else-if="status === 'complete'" class="form-header">Upload Complete!</p>
-			<p v-else-if="status === 'error'" class="form-header">Oops! Something went wrong</p>
-		</transition>
+		<div :class="'status-'+status">
+			<p class="status-message-pending form-header">Uploading {{ selectedFile.name }}...</p>
+			<p class="status-message-complete form-header">Upload Complete!</p>
+			<p class="status-message-error form-header">Oops! Something went wrong</p>
+		</div>
 	</div>
 </template>
 
