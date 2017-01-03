@@ -10,15 +10,19 @@ use Illuminate\Support\Facades\Mail;
 use Validator;
 use App\User;
 use App\Submission;
+use App\Audio;
 use App\Mail\Invitation;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+
 
 class SoapboxApiController extends Controller
 {
 
     public function handleAudioUpload(Request $request)
     {
-        $date = date('Y-m-d H:i:s', strtotime('now'));
-
         $validator = Validator::make($request->file(), [
             'audioUpload' => 'bail|required|mimetypes:audio/mp4,audio/mpeg,audio/ogg,audio/x-aac,audio/x-mpegurl,audio/x-wav'
         ]);
@@ -26,11 +30,20 @@ class SoapboxApiController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->all()[0]], 400);
         } else {
-            $filename = $date . '.' . $request->file('audioUpload')->extension();
-            $request->file('audioUpload')->move(base_path() . '/storage/app/public/', $filename);
+            $disk = Storage::disk('audio');
+            $user = Auth::user();
+
+            $audio = new Audio();
+            $audio->filename = $disk->putFileAs('/', $request->file('audioUpload'), str_random(12) . '.wav');
+            $user->audio()->save($audio);
+
+            Artisan::call('concatAudioFiles', ['id' => $user->id]);
+
+            $result = $user->audio()->firstOrFail();
 
             return response()->json([
-                'filename' => $filename,
+                // 'audioUrl' => asset('audio/' . $result->filename),
+                'audioUrl' => 'https://localhost:3000/audio/' . $result->filename,
                 'message' => 'Upload Complete'
             ]);
         }
@@ -85,7 +98,6 @@ class SoapboxApiController extends Controller
 
         $submission = new Submission();
         $submission->title = $data['nominees']['submissionTitle'];
-        $submission->filename = $data['audio']['filename'];
         $user->submission()->save($submission);
 
         unset($data['nominees']['submissionTitle']);
@@ -115,7 +127,7 @@ class SoapboxApiController extends Controller
         $user = new User();
         $user->email = $email;
 
-        $code = $this->generateCode(8);
+        $code = $this->str_random(8);
         $user->password = bcrypt($code);
 
         $user->save();
@@ -128,16 +140,5 @@ class SoapboxApiController extends Controller
     {
         $invitation = new Invitation(Auth::user(), $nominee, $code);
         Mail::to($nominee)->send($invitation);
-    }
-
-    protected function generateCode($length)
-    {
-        $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $str = '';
-        $max = mb_strlen($keyspace, '8bit') - 1;
-        for ($i = 0; $i < $length; ++$i) {
-            $str .= $keyspace[random_int(0, $max)];
-        }
-        return $str;
     }
 }

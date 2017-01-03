@@ -1,6 +1,6 @@
 <template>
-	<div class="wavesurfer-container">
-		<div ref="container" class="wavesurfer"></div>
+	<div class="wavesurfer-container" :class="{active:url}">
+		<div ref="container" class="wavesurfer" :class="{pending:pending}"></div>
 		<!-- <div class="wavesurfer-zoom-controls">
 			<i v-on:click="setZoom(zoom += 0.15)" class="mdi mdi-magnify-plus"></i>
 			<i v-on:click="setZoom(zoom -= 0.15)" class="mdi mdi-magnify-minus"></i>
@@ -27,7 +27,9 @@
 		data: function () {
 			return {
 				wavesurfer: null,
-				zoom: 1
+				zoom: 1,
+				active: false,
+				pending: false
 			}
 		},
 		computed: {
@@ -52,15 +54,18 @@
 			// this.wavesurfer.on('pause', () => {
 			// 	this.$emit('wavesurferStatusChange', this.isPlaying);
 			// });
-			// this.wavesurfer.on('ready', () => {
-			// 	this.playbackReady = true;
-			// });
+			this.wavesurfer.on('ready', () => {
+				// this.playbackReady = true;
+				// this.active = true;
+				this.pending = false;
+			});
 		},
 		watch: {
 			url: function (url) {
 				console.log('url: ' + url);
 				if (!url) return;
-				this.wavesurfer.load('/audio/' + url);
+				this.pending = true;
+				this.wavesurfer.load(url);
 			}
 		},
 		methods: {

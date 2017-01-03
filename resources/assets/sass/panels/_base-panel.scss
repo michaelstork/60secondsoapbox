@@ -18,6 +18,8 @@ $navHeight:36px;
 
 .panel-track {
 	display:flex;
+	position:relative;
+	z-index:1;
 	overflow:visible;
 	transition:transform 0.375s $standardCurve;
 
@@ -64,6 +66,10 @@ $navHeight:36px;
 	color:$accent;
 }
 
+.panel-nav {
+	position:relative;
+	z-index:2;
+}
 
 .panel-nav div {
 	flex:0 0 100%;

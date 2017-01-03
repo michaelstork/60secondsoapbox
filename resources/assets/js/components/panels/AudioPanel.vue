@@ -27,7 +27,7 @@
 			<component v-else :is="subComponentId" :uploadAudioFile="uploadAudioFile" :selectedFile="selectedFile"></component>
 		</transition>
 
-		<soapbox-wave-surfer :url="filename"></soapbox-wave-surfer>
+		<soapbox-wave-surfer :url="audioUrl"></soapbox-wave-surfer>
 
 		<!-- <a ref="fileUploadLink" v-file-upload-link:audioUpload="uploadAudioFile"></a> -->
 
@@ -73,6 +73,7 @@
 				<button v-on:click="stop" :disabled="(!audioAdapter.status.started || audioAdapter.status.complete)" class="stop-button">
 					<span>Stop</span>
 				</button>
+				<soapbox-wave-surfer :url="audioUrl"></soapbox-wave-surfer>
 				<a v-on:click="restart" :disabled="!audioAdapter.status.started" class="restart"><i class="mdi mdi-refresh"></i>Start Over</a>
 			</div>
 		</transition> -->
@@ -83,10 +84,9 @@
 	import SoapboxBasePanel from './BasePanel.vue';
 	// import FileUploadLink from '../../directives/fileUploadLink';
 	import SoapboxStatusIndicator from '../audio/SoapboxStatusIndicator.vue';
+	import SoapboxWaveSurfer from '../audio/SoapboxWaveSurfer.vue';
 	import RecordRTCAdapter from '../../adapters/RecordRTC';
 	import {URLS} from '../../config/index';
-
-	import SoapboxWaveSurfer from '../audio/SoapboxWaveSurfer.vue';
 
 	import SubmissionMethodDialog from '../audio-submission/SubmissionMethodDialog.vue';
 	import SubmissionMethodUpload from '../audio-submission/SubmissionMethodUpload.vue';
@@ -101,7 +101,7 @@
 				adapter: new RecordRTCAdapter,
 				submissionMethod: null,
 				selectedFile: null,
-				filename: null
+				audioUrl: null
 			};
 
 			// const adapter = new RecordRTCAdapter;
@@ -154,7 +154,8 @@
 					formData,
 					{progress: pe => { console.log(pe); }}
 				).then(response => {
-					this.filename = response.data.filename;
+					this.audioUrl = response.data.audioUrl;
+					return response;
 				});
 				// ).then(
 				// 	// this.handleUploadSuccess,
@@ -181,7 +182,7 @@
 				// this.audioAdapter.status.complete = false;
 			},
 			composePanelData: function () {
-				return {filename: this.filename};
+				return {audioUrl: this.audioUrl};
 			},
 			toggle: function () {
 				let method = this.audioAdapter.status.recording
