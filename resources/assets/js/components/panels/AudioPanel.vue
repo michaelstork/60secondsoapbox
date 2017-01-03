@@ -1,8 +1,55 @@
 
 <template>
 	<section class="audio-panel content-panel">
-		<soapbox-status-indicator :adapter="audioAdapter"></soapbox-status-indicator>
-		<transition name="audio-content" mode="out-in">
+		<!-- <soapbox-status-indicator :adapter="adapter"></soapbox-status-indicator> -->
+
+		<!-- <div v-show="!submissionMethod" class="submission-method">
+			<p class="form-header">Choose how you'd like to submit your recording:</p>
+			<p>If your device has a microphone and supports audio capture, you can record your submission here.<br>Alternatively, you may upload your own audio file in wav or mp3 format.</p>
+			<div class="submission-method-dialog">
+				<button v-on:click="setSubmissionMethod('record')" class="submission-method-record" :class="{disabled:!canRecordAudio}">
+					<i class="mdi mdi-voice"></i>
+					<span>Record my voice</span>
+				</button>
+				<span>Or</span>
+				<button v-on:click="setSubmissionMethod('upload')" class="submission-method-upload">
+					<i class="mdi mdi-cloud-upload"></i>
+					<span>Upload audio file</span>
+				</button>
+			</div>
+		</div> -->
+		<transition name="fade" mode="out-in">
+			<submission-method-dialog
+				v-if="!submissionMethod"
+				v-on:setSubmissionMethod="setSubmissionMethod"
+				v-on:setSelectedFile="setSelectedFile">
+			</submission-method-dialog>
+			<component v-else :is="subComponentId" :uploadAudioFile="uploadAudioFile" :selectedFile="selectedFile"></component>
+		</transition>
+
+		<!-- <a ref="fileUploadLink" v-file-upload-link:audioUpload="uploadAudioFile"></a> -->
+
+<!-- 
+		<div v-else-if="adapter.initialized">
+			<h1>asdf</h1>
+		</div>
+		<div v-else-if="chosenFile">
+			<p>Uploading {{ chosenFile.name }}...</p>
+			
+		</div> -->
+
+
+		<!-- <div v-if="!adapter.supported" key="unsupported">
+			<h1>unsupported</h1>
+		</div>
+		<div v-else-if="!adapter.initialized" key="uninitialized">
+			<h1 v-on:click="initializeAdapter">uninit</h1>
+		</div>
+		<div v-else key="initialized">
+			<h1>init</h1>
+		</div> -->
+
+		<!-- <transition name="audio-content" mode="out-in">
 			<div v-if="!audioAdapter.initialized" class="request-audio" key="requestAudio">
 				<template v-if="audioAdapter.status.supported">
 					<button v-on:click="initializeAudio" :disabled="audioAdapter.status.complete" tabIndex="-1">
@@ -26,82 +73,106 @@
 				</button>
 				<a v-on:click="restart" :disabled="!audioAdapter.status.started" class="restart"><i class="mdi mdi-refresh"></i>Start Over</a>
 			</div>
-		</transition>
+		</transition> -->
 	</section>
 </template>
 
 <script>
 	import SoapboxBasePanel from './BasePanel.vue';
-	import FileUploadLink from '../../directives/fileUploadLink';
+	// import FileUploadLink from '../../directives/fileUploadLink';
 	import SoapboxStatusIndicator from '../audio/SoapboxStatusIndicator.vue';
 	import RecordRTCAdapter from '../../adapters/RecordRTC';
 	import {URLS} from '../../config/index';
 
+	import SubmissionMethodDialog from '../audio-submission/SubmissionMethodDialog.vue';
+	import SubmissionMethodUpload from '../audio-submission/SubmissionMethodUpload.vue';
+	import SubmissionMethodRecord from '../audio-submission/SubmissionMethodRecord.vue';
+
 	export default {
 		extends: SoapboxBasePanel,
 		data: function () {
-			const adapter = new RecordRTCAdapter;
 
 			return {
-				blob: null,
-				filename: null,
-				audioAdapter: adapter
+				chosenFile: null,
+				adapter: new RecordRTCAdapter,
+				submissionMethod: null,
+				selectedFile: null
 			};
+
+			// const adapter = new RecordRTCAdapter;
+
+			// return {
+			// 	adapter: adapter
+			// };
 		},
 		computed: {
 			isValidPanel: function () {
-				return this.audioAdapter.status.complete
-					&& this.filename.length;
+				return true;
 			},
-			instructions: function () {
-				if (this.audioAdapter.status.complete) {
-					return 'Upload Complete!';
-				} else if (this.audioAdapter.status.pending) {
-					return 'Uploading your submission...';
-				} else if (!this.audioAdapter.status.supported) {
-					let device = this.env === 'cordova' ? 'device' : 'browser';
-					return `Your ${device} does not support recording audio.`;
-				} else {
-					let action = this.env === 'cordova' ? 'press' : 'click';
-					return `
-						Use the button below to record your 60 seconds of audio.
-						<br class="break-above-400">
-						When you're done, ${action} 'Stop' to upload your submission.
-					`;
-				}
+			canRecordAudio: function () {
+				return RecordRTCAdapter.isSupported();
+			},
+			subComponentId: function () {
+				return 'submission-method-' +this.submissionMethod;
 			}
 		},
+		// watch: {
+		// 	submissionMethod: function (method) {
+		// 		console.log(method);
+		// 		if (method === 'upload') this.$refs.fileUploadLink.click();
+		// 	}
+		// },
 		methods: {
-			initializeAudio: function () {
-				this.audioAdapter.initialize();
+			setSubmissionMethod: function (method) {
+				console.log(method);
+				this.submissionMethod = method;
 			},
-			uploadAudioFile: function (data) {
-				this.audioAdapter.status.pending = true;
+			initializeAdapter: function () {
+				this.adapter.initialize();
+			},
+			setSelectedFile: function (file) {
+				console.log(file);
+				this.selectedFile = file;
+				this.submissionMethod = 'upload';
+			},
+			chooseFile: function (file) {
+				this.chosenFile = file;
+				// this.uploadAudioFile(file);
+			},
+			uploadAudioFile: function (file) {
+				// this.audioAdapter.status.pending = true;
 
 				let formData = new FormData();
-				formData.append('audioUpload', data);
+				formData.append('audioUpload', file);
 
-				return setTimeout(() => {
-					this.$http.post(
-						URLS[this.env].audioUpload,
-						formData,
-						{progress: pe => { console.log(pe); }}
-					).then(
-						this.handleUploadSuccess,
-						this.handleUploadFailure
-					).finally(() => {
-						this.audioAdapter.status.pending = false;
-					});
-				}, 500);
+				return this.$http.post(
+					URLS[this.env].audioUpload,
+					formData,
+					{progress: pe => { console.log(pe); }}
+				);
+				// ).then(
+				// 	// this.handleUploadSuccess,
+				// 	// this.handleUploadFailure
+				// ).catch(() => {
+				// 	console.log('catch');
+				// })
+				// .finally(() => {
+				// 	// this.audioAdapter.status.pending = false;
+				// });
 			},
 			handleUploadSuccess: function (response) {
-				console.log(response);
-				this.audioAdapter.status.complete = true;
-				this.filename = response.data.filename;
+				// console.log(response);
+				// console.log('success');
+				// return response;
+				// this.audioAdapter.status.complete = true;
+				// this.filename = response.data.filename;
 			},
 			handleUploadFailure: function (response) {
-				console.log(response);
-				this.audioAdapter.status.complete = false;
+				// console.log(response);
+				// console.log('fail');
+				// return response;
+				// this.chosenFile = null;
+				// this.audioAdapter.status.complete = false;
 			},
 			composePanelData: function () {
 				return {filename: this.filename};
@@ -124,11 +195,14 @@
 				this.setPanelValidity(false);
 			}
 		},
-		directives: {
-			fileUploadLink: FileUploadLink
-		},
+		// directives: {
+		// 	fileUploadLink: FileUploadLink
+		// },
 		components: {
-			'soapbox-status-indicator': SoapboxStatusIndicator
+			'soapbox-status-indicator': SoapboxStatusIndicator,
+			'submission-method-dialog': SubmissionMethodDialog,
+			'submission-method-upload': SubmissionMethodUpload,
+			'submission-method-record': SubmissionMethodRecord
 		}
 	}
 </script>

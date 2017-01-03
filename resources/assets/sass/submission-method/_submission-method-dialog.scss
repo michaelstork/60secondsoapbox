@@ -1,0 +1,43 @@
+
+.submission-method {
+	height:100%;
+	display:flex;
+	flex-direction:column;
+	font-size:0.75rem;
+}
+
+.submission-method .form-header {
+	text-align:center;
+}
+
+.submission-method-dialog {
+	display:flex;
+	align-items:center;
+	justify-content:space-between;
+	flex-direction:column;
+	margin-top:48px;
+	height:140px;
+}
+
+.submission-method-dialog > span {
+	color:$text1;
+}
+
+.submission-method-dialog button {
+	width:200px;
+	border-radius:3px;
+	display:flex;
+
+	i {
+		font-size:2em;
+	}
+
+	span {
+		white-space:normal;
+	}
+}
+
+.submission-method-dialog button.disabled {
+	opacity:0.4;
+	pointer-events:none;
+}

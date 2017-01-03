@@ -1,22 +1,22 @@
 import RecordRTC from 'recordrtc';
 
+const STATUS_PAUSED = 'paused';
+const STATUS_RECORDING = 'recording';
+const STATUS_PROCESSING = 'processing';
+
 export default class RecordRTCAdapter {
 
 	constructor() {
 		console.log('RecordRTCAdapter');
 		this.initialized   = false;
 		this.mediaRecorder = null;
-		this.chunks        = [];
-		this.status        = {
-			supported: this.isSupported(),
-			recording: false,
-			started: false,
-			pending: false,
-			complete: false
-		};
+		this.status        = null;
+
+		// this.supported = this.isSupported();
+		// this.supported = this.isSupported();
 	}
 
-	isSupported() {
+	static isSupported() {
 		return (navigator.mediaDevices !== undefined
 			&& navigator.mediaDevices.getUserMedia !== undefined);
 	}
@@ -35,40 +35,39 @@ export default class RecordRTCAdapter {
 			})
 			.catch(error => {
 				console.log(error);
-				this.supported = false;
 			});
 	}
 
 	start() {
-		this.status.recording = this.status.started = true;
+		this.status = STATUS_RECORDING;
 		this.recorder.startRecording();
 		console.log('record...');
 	}
 
 	pause() {
-		this.status.recording = false;
+		this.status = STATUS_PAUSED;
 		this.recorder.pauseRecording();
 		console.log('pause');
 	}
 
 	resume() {
-		this.status.recording = true;
+		this.status = STATUS_RECORDING;
 		this.recorder.resumeRecording();
 		console.log('resume');
 	}
 
-	stop(upload) {
-		this.status.recording = false;
+	process(cb) {
+		this.status = STATUS_PROCESSING;
 		console.log('stop');
-		this.recorder.stopRecording(audioUrl => {
+		this.recorder.stopRecording(() => {
 			let blob = this.recorder.getBlob();
-			upload(blob);
+			cb(blob);
 		});
 	}
 
 	restart() {
-		this.status.recording = this.status.complete = this.status.pending = this.status.started = false;
-		this.stop(() => {
+		this.status = null;
+		this.process(() => {
 			this.recorder.clearRecordedData();
 		});
 		console.log('restarting...');

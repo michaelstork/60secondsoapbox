@@ -56,7 +56,7 @@ if (window.cordova) {
 
 function init () {
     localStorage.removeItem('soapboxSubmission');
-    localStorage.removeItem('soapboxToken');
+    // localStorage.removeItem('soapboxToken');
 
     new Vue({
         el: '.vue-mount',
@@ -79,7 +79,7 @@ function init () {
         },
         created: function () {
             this.layout.panels.forEach((panel, p) => {
-                this.$set(this.layout.panels[p], 'valid', false);
+                this.$set(this.layout.panels[p], 'valid', true);
             });
 
             this.eventHub.$on('panelValidityChange', this.onPanelValidityChange);

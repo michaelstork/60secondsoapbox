@@ -7,7 +7,8 @@
 @import 'partials/async-input-indicators';
 @import 'partials/async-pending-indicator';
 @import 'partials/mdi';
-@import 'partials/soapbox-recorder';
+// @import 'partials/soapbox-recorder';
+@import 'partials/audio-status-indicator';
 
 @import 'panels/base-panel';
 @import 'panels/auth';
@@ -15,6 +16,11 @@
 @import 'panels/audio';
 @import 'panels/nominees';
 
+@import 'partials/status-indicator';
+
+@import 'submission-method/submission-method-dialog';
+@import 'submission-method/submission-method-upload';
+@import 'submission-method/submission-method-record';
 
 body {
 	font-family:'Roboto','Helvetica','Arial',sans-serif;
@@ -49,7 +55,11 @@ button {
 	color:$accent;
 
 	&:hover {
-		box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
+		box-shadow:0 0 2px rgba(0,0,0,.14),0 2px 6px rgba(0,0,0,.28);
+	}
+
+	&:active {
+		box-shadow:inset 0 1px 6px 0 rgba(0,0,0,0.2), inset 0 -1px 1px 0 rgba(0,0,0,0.1);
 	}
 
 	span, &:before {
@@ -126,12 +136,14 @@ a[disabled] {
 	}
 
 	@include queryWidth(min, 649px) {
-		& + .input-container {
+		& + .input-container,
+		& + p {
 			margin-top:32px;
 		}
 	}
 	@include queryWidth(max, 648px) {
-		& + .input-container {
+		& + .input-container,
+		& + p {
 			margin-top:18px;
 		}
 	}

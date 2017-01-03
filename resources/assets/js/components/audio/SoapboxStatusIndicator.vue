@@ -1,7 +1,19 @@
 
 <template>
-	<div class="panel-icon audio-status" :class="adapterStatusClasses">
-		<div class="status-indicator status-indicator-recording-status">
+	<div class="panel-icon">
+		<div v-if="!adapter.supported" class="status-indicator status-indicator-unsupported">
+			<i class="mdi mdi-volume-off"></i>
+		</div>
+		<div v-else-if="adapter.status === 'processing'" class="status-indicator status-indicator-processing">
+			
+		</div>
+		<div v-else-if="adapter.status === 'complete'" class="status-indicator status-indicator-complete">
+			
+		</div>
+		<div v-else class="status-indicator status-indicator-supported">
+			
+		</div>
+<!-- 		<div class="status-indicator status-indicator-recording-status">
 			<i class="mdi mdi-microphone"></i>
 			<soapbox-audio-timer :status="adapter.status"></soapbox-audio-timer>
 		</div>
@@ -15,7 +27,7 @@
 			<div v-else-if="adapter.status.complete" class="status-indicator status-indicator-complete" key="complete">
 				<i class="mdi mdi-check"></i>
 			</div>
-		</transition>
+		</transition> -->
 	</div>
 </template>
 
@@ -25,14 +37,7 @@
 	export default {
 		props: ['adapter'],
 		computed: {
-			adapterStatusClasses: function () {
-				return {
-					'status-unsupported': !this.adapter.status.supported,
-					'status-recording'  : this.adapter.status.recording,
-					'status-pending'    : this.adapter.status.pending,
-					'status-complete'   : this.adapter.status.complete
-				};
-			}
+
 		},
 		components: {
 			'soapbox-audio-timer': SoapboxAudioTimer

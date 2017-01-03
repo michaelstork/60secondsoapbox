@@ -5,37 +5,37 @@
 	padding:0 12px;
 }
 
-.audio-status {
-	display:flex;
-	flex-direction:column;
-	align-items:center;
-	color:#FFF;
-	position:relative;
-	overflow:hidden;
-	background-color:#EAEAEA;
-}
+// .audio-status {
+// 	display:flex;
+// 	flex-direction:column;
+// 	align-items:center;
+// 	color:#FFF;
+// 	position:relative;
+// 	overflow:hidden;
+// 	background-color:#EAEAEA;
+// }
 
-.status-indicator {
-	padding:8px 0;
-	position:absolute;
-	top:0;
-	bottom:0;
-	left:0;
-	right:0;
-	display:flex;
-	flex-direction:column;
-	align-items:center;
-	justify-content:center;
-	border-radius:50px;
+// .status-indicator {
+// 	padding:8px 0;
+// 	position:absolute;
+// 	top:0;
+// 	bottom:0;
+// 	left:0;
+// 	right:0;
+// 	display:flex;
+// 	flex-direction:column;
+// 	align-items:center;
+// 	justify-content:center;
+// 	border-radius:50px;
 	
-	i {
-		font-size:4em;
-	}
+// 	i {
+// 		font-size:4em;
+// 	}
 
-	span {
-		font-size:1.6em;
-	}
-}
+// 	span {
+// 		font-size:1.6em;
+// 	}
+// }
 
 .status-indicator-recording-status {
 	transition:background-color 0.2s $standardCurve;
@@ -44,43 +44,18 @@
 	}	
 }
 
-.status-indicator-unsupported {
-	color:$red;
-	font-size:1.2em;
-	background-color:#EAEAEA;
+// .status-indicator-unsupported {
+// 	color:$red;
+// 	font-size:1.2em;
+// 	background-color:#EAEAEA;
 
-	i {
-		position:relative;
-		top:-4px;
-	}
-}
+// 	i {
+// 		position:relative;
+// 		top:-4px;
+// 	}
+// }
 
-@keyframes uploadPulse {
-	0% {
-		transform:scale(1);
-	}
-	15% {
-		transform:scale(1.35);
-	}
-	85% {
-		transform:scale(0.85);
-	}
-	100% {
-		transform:scale(1);
-	}
-}
 
-.status-indicator-pending {
-	background-color:$accent;
-
-	i {
-		transform-origin:50% 50%;
-		animation:uploadPulse 1s ease-out infinite;
-	}
-}
-.status-indicator-complete {
-	background-color:$green;
-}
 
 .request-audio,
 .audio-controls {
@@ -169,14 +144,3 @@
 	opacity:0;
 }
 
-.audio-indicator-enter-active,
-.audio-indicator-leave-active {
-	transition:transform 0.25s $standardCurve;
-}
-.audio-indicator-enter {
-	transform:translateX(100%);
-}
-.audio-indicator-leave {
-	opacity:0;
-	transition:opacity 0.25s $standardCurve;
-}
