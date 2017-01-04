@@ -7,9 +7,9 @@
 				v-on:setSubmissionMethod="setSubmissionMethod"
 				v-on:setSelectedFile="setSelectedFile">
 			</submission-method-dialog>
-			<component v-else :is="subComponentId" :uploadAudioFile="uploadAudioFile" :selectedFile="selectedFile" v-on:clearAudioPreview="clearAudioPreview"></component>
+			<component v-else :is="subComponentId" :uploadAudioFile="uploadAudioFile" :selectedFile="selectedFile" v-on:setAudioPreviewStatus="setAudioPreviewStatus"></component>
 		</transition>
-		<soapbox-wave-surfer :url="audioUrl" :class="{active:audioUrl}"></soapbox-wave-surfer>
+		<soapbox-wave-surfer :url="audioUrl" :active="audioPreviewActive"></soapbox-wave-surfer>
 	</section>
 </template>
 
@@ -34,7 +34,8 @@
 				adapter: new RecordRTCAdapter,
 				submissionMethod: null,
 				selectedFile: null,
-				audioUrl: null
+				audioUrl: null,
+				audioPreviewActive: false
 			};
 
 			// const adapter = new RecordRTCAdapter;
@@ -66,6 +67,18 @@
 				this.selectedFile = file;
 				this.submissionMethod = 'upload';
 			},
+			setAudioPreviewStatus: function (status) {
+				this.audioPreviewActive = status;
+			},
+			// clearAudioPreview: function () {
+			// 	this.audioUrl = null;
+			// },
+			// activateAudioPreview: function () {
+			// 	this.audioPreviewActive = true;
+			// },
+			// deactivateAudioPreview: function () {
+			// 	this.audioPreviewActive = false;
+			// }
 			// chooseFile: function (file) {
 			// 	this.chosenFile = file;
 			// 	// this.uploadAudioFile(file);
@@ -82,6 +95,7 @@
 					{progress: pe => { console.log(pe); }}
 				).then(response => {
 					this.audioUrl = response.data.audioUrl;
+					this.setAudioPreviewStatus(true);
 					return response;
 				});
 				// ).then(
@@ -111,9 +125,6 @@
 			composePanelData: function () {
 				return {audioUrl: this.audioUrl};
 			},
-			clearAudioPreview: function () {
-				this.audioUrl = null;
-			}
 			// toggle: function () {
 			// 	let method = this.audioAdapter.status.recording
 			// 		? 'pause'

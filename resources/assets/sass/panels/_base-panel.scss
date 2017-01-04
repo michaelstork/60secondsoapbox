@@ -39,7 +39,8 @@ $navHeight:36px;
 	color:$text1;
 	position:relative;
 	background-color:#FFF;
-	background-image:linear-gradient(to bottom, #FFF 60%, #F0F0F0 100%);
+	// background-image:linear-gradient(to bottom, #FFF 90%, #FAFAFA 100%);
+
 
 	@include queryWidth(min, 769px) {
 		padding:32px;
@@ -81,6 +82,7 @@ $navHeight:36px;
 	box-sizing:border-box;
 	padding:0 12px;
 	background-color:#F9F9F9;
+	border-top:1px solid #F0F0F0;
 }
 
 .panel-nav a {

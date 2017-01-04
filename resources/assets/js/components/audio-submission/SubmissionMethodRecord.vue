@@ -1,6 +1,6 @@
 
 <template>
-	<div class="submission-method-record">
+	<div class="submission-method-record" :class="statusClassList">
 		<div class="panel-icon">
 			<transition name="status-indicator">
 				<div v-if="status === 'pending'" class="status-indicator status-indicator-pending" key="pending">
@@ -16,16 +16,37 @@
 		</div>
 		<div class="audio-controls">
 			<button v-on:click="toggleRecording" class="record-button" :disabled="status === 'pending'">
-				<span>{{ status === 'recording' ? 'Pause' : 'Record' }}</span>
+				<div class="record">
+					<i class="mdi mdi-record"></i>
+					<span>{{ adapter.recordingStarted ? 'Resume Recording' : 'Start Recording' }}</span>
+				</div>
+				<div class="pause">
+					<i class="mdi mdi-pause-circle"></i>
+					<span>Pause Recording</span>
+				</div>
 			</button>
 			<a v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'">
 				<i class="mdi mdi-refresh"></i>
 				<span>Start Over</span>
 			</a>
-			<a v-on:click="previewAudio" :disabled="!adapter.recordingStarted">
+			<!-- <div>
+				<a v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'">
+					<i class="mdi mdi-refresh"></i>
+					<span>Start Over</span>
+				</a>
+				<a v-on:click="previewAudio" :disabled="!adapter.recordingStarted">
+					<i class="mdi mdi-volume-high"></i>
+					<span>Preview</span>
+				</a>
+			</div> -->
+			<button v-on:click="previewAudio" :disabled="!adapter.recordingStarted" class="preview-audio round">
 				<i class="mdi mdi-volume-high"></i>
 				<span>Preview</span>
-			</a>
+			</button>
+			<!-- <a v-on:click="previewAudio" :disabled="!adapter.recordingStarted">
+				<i class="mdi mdi-volume-high"></i>
+				<span>Preview</span>
+			</a> -->
 		</div>
 		<!-- <div :class="'status-'+status">
 			<p class="status-message-pending form-header">Uploading {{ file.name }}...</p>
@@ -50,6 +71,11 @@
 				adapter: new RecordRTCAdapter
 			};
 		},
+		computed: {
+			statusClassList: function () {
+				return 'status-' + this.status;
+			}
+		},
 		created: function () {
 			this.adapter.initialize();
 		},
@@ -59,13 +85,14 @@
 					this.status = 'paused';
 					this.adapter.pause();
 				} else {
-					this.$emit('clearAudioPreview');
+					this.$emit('setAudioPreviewStatus', false);
 					this.adapter.resume();
 					this.status = 'recording';
 				}
 			},
 			previewAudio: function () {
 				this.status = 'pending';
+				// this.$emit('setAudioPreviewStatus', true);
 				this.adapter.process(blob => {
 					this.uploadAudioFile(blob)
 						.then(
@@ -76,7 +103,7 @@
 			},
 			restart: function () {
 				if (!window.confirm('Are you sure you want to start over?')) return;
-				this.$emit('clearAudioPreview');
+				this.$emit('setAudioPreviewStatus', false);
 				this.adapter.restart();
 				this.status = 'paused';
 			}

@@ -56,7 +56,7 @@
 			},
 			retryUpload: function (file) {
 				this.status = 'pending';
-				this.$emit('clearAudioPreview');
+				this.$emit('setAudioPreviewStatus', false);
 				this.file = file;
 				this.doUpload();
 			}

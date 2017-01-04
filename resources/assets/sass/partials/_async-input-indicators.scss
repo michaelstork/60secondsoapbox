@@ -1,78 +1,81 @@
-.async-error-message {
-	color:$red;
-	font-size:0.7rem;
-	line-height:normal;
-	position:absolute;
-	left:0;
-	top:54px;
-}
+.input-container {
 
-.async-valid-indicator,
-.async-invalid-indicator,
-.async-pending-indicator {
-	position:absolute;
-	bottom:0;
-	right:0;
-	margin:auto;
-	font-size:1.4rem;
-	height:28px;
-}
-
-.async-valid-indicator {
-	color:$green;
-}
-
-.async-invalid-indicator {
-	color:$red;
-}
-
-.async-valid-indicator,
-.async-invalid-indicator,
-.async-error-message {
-	transition:transform 0.2s $sharpCurve;
-	transform:scale(0);
-}
-
-.async-pending-indicator {
-	height:16px;
-	bottom:8px;
-	right:4px;
-	transform:none;
-	transition:opacity 0.2s ease-out;
-	opacity:0;
-}
-
-.async-valid:not(.async-pending) .async-valid-indicator,
-.async-error:not(.async-pending) .async-invalid-indicator,
-.async-error:not(.async-pending) .async-error-message {
-	transform:scale(1);
-	transition-delay:0.2s;
-}
-
-.async-pending .async-pending-indicator {
-	opacity:1;
-	transition-delay:0.2s;
-}
-
-.async-valid input ~ .underline,
-.async-valid input:focus ~ .underline {
-	background-color:$green;
-}
-.async-error input ~ .underline,
-.async-error input:focus ~ .underline {
-	background-color:$red;
-}
-
-input ~ .underline,
-input:focus ~ .underline {
-	.async-valid &,
-	.async-error & {
-		transform:scale(1, 1);
+	.async-error-message {
+		color:$red;
+		font-size:0.7rem;
+		line-height:normal;
+		position:absolute;
+		left:0;
+		top:54px;
 	}
-	.async-valid & {
+
+	.async-valid-indicator,
+	.async-invalid-indicator,
+	.async-pending-indicator {
+		position:absolute;
+		bottom:0;
+		right:0;
+		margin:auto;
+		font-size:1.4rem;
+		height:28px;
+	}
+
+	.async-valid-indicator {
+		color:$green;
+	}
+
+	.async-invalid-indicator {
+		color:$red;
+	}
+
+	.async-valid-indicator,
+	.async-invalid-indicator,
+	.async-error-message {
+		transition:transform 0.2s $sharpCurve;
+		transform:scale(0);
+	}
+
+	.async-pending-indicator {
+		height:16px;
+		bottom:8px;
+		right:4px;
+		transform:none;
+		transition:opacity 0.2s ease-out;
+		opacity:0;
+	}
+
+	.async-valid:not(.async-pending) .async-valid-indicator,
+	.async-error:not(.async-pending) .async-invalid-indicator,
+	.async-error:not(.async-pending) .async-error-message {
+		transform:scale(1);
+		transition-delay:0.2s;
+	}
+
+	.async-pending .async-pending-indicator {
+		opacity:1;
+		transition-delay:0.2s;
+	}
+
+	.async-valid input ~ .underline,
+	.async-valid input:focus ~ .underline {
 		background-color:$green;
 	}
-	.async-error & {
+	.async-error input ~ .underline,
+	.async-error input:focus ~ .underline {
 		background-color:$red;
+	}
+
+	input ~ .underline,
+	input:focus ~ .underline {
+		.async-valid &,
+		.async-error & {
+			transform:scale(1, 1);
+		}
+		.async-valid & {
+			background-color:$green;
+		}
+		.async-error & {
+			background-color:$red;
+		}
 	}
 }
