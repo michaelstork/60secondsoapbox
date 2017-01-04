@@ -15,9 +15,17 @@
 			</transition>
 		</div>
 		<div :class="'status-'+status">
-			<p class="status-message-pending form-header">Uploading {{ selectedFile.name }}...</p>
-			<p class="status-message-complete form-header">Upload Complete!</p>
-			<p class="status-message-error form-header">Oops! Something went wrong</p>
+			<p class="status-message-pending form-header">Uploading {{ file.name }}...</p>
+			<p class="status-message-complete form-header">
+				Upload Complete!
+				<br>
+				Click continue below, or <a href="#" v-file-upload-link:audioUpload="retryUpload">upload a different file.</a>
+			</p>
+			<p class="status-message-error form-header">
+				Oops! Something went wrong.
+				<br>
+				<a href="#" v-file-upload-link:audioUpload="retryUpload">Click here to try again.</a>
+			</p>
 		</div>
 	</div>
 </template>
@@ -29,23 +37,29 @@
 		props: ['uploadAudioFile', 'selectedFile'],
 		data: function () {
 			return {
-				status: 'pending'
+				status: 'pending',
+				file: this.selectedFile
 			};
 		},
 		mounted: function () {
-			this.uploadAudioFile(this.selectedFile)
-				.then(
-					() => {
-						setTimeout(() => {
-							this.status = 'complete';
-						}, 3000);
-					},
-					() => {
-						setTimeout(() => {
-							this.status = 'error';
-						}, 3000);
-					}
-				);
+			setTimeout(() => {
+				this.doUpload();
+			}, 1000);
+		},
+		methods: {
+			doUpload: function () {
+				return this.uploadAudioFile(this.file)
+					.then(
+						() => { this.status = 'complete'; },
+						() => { this.status = 'error'; }
+					);
+			},
+			retryUpload: function (file) {
+				this.status = 'pending';
+				this.$emit('clearAudioPreview');
+				this.file = file;
+				this.doUpload();
+			}
 		},
 		directives: {
 			fileUploadLink: FileUploadLink

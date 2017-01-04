@@ -1,16 +1,13 @@
 import RecordRTC from 'recordrtc';
 
-const STATUS_PAUSED = 'paused';
-const STATUS_RECORDING = 'recording';
-const STATUS_PROCESSING = 'processing';
-
 export default class RecordRTCAdapter {
 
 	constructor() {
 		console.log('RecordRTCAdapter');
 		this.initialized   = false;
 		this.mediaRecorder = null;
-		this.status        = null;
+		this.recordingStarted = false;
+		// this.status        = null;
 
 		// this.supported = this.isSupported();
 		// this.supported = this.isSupported();
@@ -39,37 +36,41 @@ export default class RecordRTCAdapter {
 	}
 
 	start() {
-		this.status = STATUS_RECORDING;
+		// this.status = 'recording';
 		this.recorder.startRecording();
-		console.log('record...');
+		this.recordingStarted = true;
 	}
 
 	pause() {
-		this.status = STATUS_PAUSED;
+		// this.status = 'paused';
 		this.recorder.pauseRecording();
-		console.log('pause');
 	}
 
 	resume() {
-		this.status = STATUS_RECORDING;
+		if (!this.recordingStarted) {
+			this.start();
+			return;
+		}
+		// if (this.status === null) {
+			// this.start();
+			// return;
+		// }
+
+		// this.status = 'recording';
 		this.recorder.resumeRecording();
-		console.log('resume');
 	}
 
 	process(cb) {
-		this.status = STATUS_PROCESSING;
-		console.log('stop');
 		this.recorder.stopRecording(() => {
-			let blob = this.recorder.getBlob();
-			cb(blob);
+			cb(this.recorder.getBlob());
 		});
 	}
 
 	restart() {
-		this.status = null;
+		// this.status = null;
+		this.recordingStarted = false;
 		this.process(() => {
 			this.recorder.clearRecordedData();
 		});
-		console.log('restarting...');
 	}
 }

@@ -1,5 +1,5 @@
 <template>
-	<div class="wavesurfer-container" :class="{active:url}">
+	<div class="wavesurfer-container">
 		<div ref="container" class="wavesurfer" :class="{pending:pending}"></div>
 		<!-- <div class="wavesurfer-zoom-controls">
 			<i v-on:click="setZoom(zoom += 0.15)" class="mdi mdi-magnify-plus"></i>
@@ -28,7 +28,6 @@
 			return {
 				wavesurfer: null,
 				zoom: 1,
-				active: false,
 				pending: false
 			}
 		},
@@ -62,7 +61,6 @@
 		},
 		watch: {
 			url: function (url) {
-				console.log('url: ' + url);
 				if (!url) return;
 				this.pending = true;
 				this.wavesurfer.load(url);

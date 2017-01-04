@@ -3,7 +3,7 @@ $controlsHeight:40px;
 
 .wavesurfer-container {
 	width:100%;
-	background-color:#EEE;
+	// background-color:#EEE;
 	display:flex;
 	// margin-top:32px;
 	flex-direction:column;
@@ -13,6 +13,8 @@ $controlsHeight:40px;
 	position:absolute;
 	// height:144px;
 	// bottom:-144px;
+	background-image:linear-gradient(to bottom, #FFF, #F0F0F0);
+
 	top:100%;
 	left:0;
 	transition:transform 0.3s $standardCurve;
