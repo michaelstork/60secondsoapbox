@@ -39,6 +39,7 @@ $navHeight:36px;
 	color:$text1;
 	position:relative;
 	background-color:#FFF;
+	background-image:linear-gradient(to bottom, #FFF 60%, #F0F0F0 100%);
 
 	@include queryWidth(min, 769px) {
 		padding:32px;

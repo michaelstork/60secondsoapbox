@@ -6,18 +6,21 @@ $mdi-icons: (
 	"arrow-right-bold-circle-outline": F057,
 	"refresh": F450,
 	"microphone": F36C,
+	"microphone-off": F36D,
 	"cloud-upload": F167,
 	"check": F12C,
 	"alert": F026,
 	"exclamation": F205,
 	"volume-off": F581,
+	"volume-high": F57E,
 	"voice": F5CB,
 	"play": F40A,
 	"pause": F3E4,
 	"magnify-plus": F34B,
 	"magnify-minus": F34A,
 	"fast-forward": F211,
-	"rewind": F45F
+	"rewind": F45F,
+	"record-rec": F44B
 );
 
 @import '../../../../node_modules/mdi/scss/functions';

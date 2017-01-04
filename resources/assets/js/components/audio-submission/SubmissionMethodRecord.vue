@@ -18,12 +18,14 @@
 			<button v-on:click="toggleRecording" class="record-button" :disabled="status === 'pending'">
 				<span>{{ status === 'recording' ? 'Pause' : 'Record' }}</span>
 			</button>
-			<button v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'">
-				<span>Restart</span>
-			</button>
-			<button v-on:click="previewAudio" class="stop-button" :disabled="!adapter.recordingStarted">
+			<a v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'">
+				<i class="mdi mdi-refresh"></i>
+				<span>Start Over</span>
+			</a>
+			<a v-on:click="previewAudio" :disabled="!adapter.recordingStarted">
+				<i class="mdi mdi-volume-high"></i>
 				<span>Preview</span>
-			</button>
+			</a>
 		</div>
 		<!-- <div :class="'status-'+status">
 			<p class="status-message-pending form-header">Uploading {{ file.name }}...</p>
@@ -73,6 +75,7 @@
 				});
 			},
 			restart: function () {
+				if (!window.confirm('Are you sure you want to start over?')) return;
 				this.$emit('clearAudioPreview');
 				this.adapter.restart();
 				this.status = 'paused';
