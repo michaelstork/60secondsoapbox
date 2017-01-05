@@ -10,7 +10,7 @@
 	}
 
 	export default {
-		props: ['status'],
+		props: ['status', 'reset'],
 		data: function () {
 			return {
 				interval: null,
@@ -18,16 +18,21 @@
 				total: 0
 			};
 		},
+		computed: {
+			isRecording: function () {
+				return this.status === 'recording';
+			}
+		},
 		watch: {
-			'status.recording': function (recording) {
+			isRecording: function (recording) {
 				if (recording) {
 					this.startTimer();
 				} else {
 					this.stopTimer();
 				}
 			},
-			'status.started': function (started) {
-				if (!started) this.resetTimer();
+			reset: function (reset) {
+				if (reset) this.resetTimer();
 			}
 		},
 		methods: {

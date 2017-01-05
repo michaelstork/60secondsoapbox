@@ -1,19 +1,7 @@
 
 <template>
 	<div class="submission-method-upload">
-		<div class="panel-icon">
-			<transition name="status-indicator">
-				<div v-if="status === 'pending'" class="status-indicator status-indicator-pending" key="pending">
-					<i class="mdi mdi-cloud-upload"></i>
-				</div>
-				<div v-else-if="status === 'complete'" class="status-indicator status-indicator-complete" key="complete">
-					<i class="mdi mdi-check"></i>
-				</div>
-				<div v-else class="status-indicator status-indicator-error" key="error">
-					<i class="mdi mdi-alert"></i>
-				</div>
-			</transition>
-		</div>
+		<status-indicator :status="status"></status-indicator>		
 		<div :class="'status-'+status">
 			<p class="status-message-pending form-header">Uploading {{ file.name }}...</p>
 			<p class="status-message-complete form-header">
@@ -32,6 +20,7 @@
 
 <script>
 	import FileUploadLink from '../../directives/fileUploadLink';
+	import StatusIndicator from '../audio/SoapboxStatusIndicator.vue';
 
 	export default {
 		props: ['uploadAudioFile', 'selectedFile'],
@@ -63,6 +52,9 @@
 		},
 		directives: {
 			fileUploadLink: FileUploadLink
+		},
+		components: {
+			'status-indicator': StatusIndicator
 		}
 	}
 </script>

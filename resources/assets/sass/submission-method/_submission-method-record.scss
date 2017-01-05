@@ -5,12 +5,9 @@
 	padding-top:64px;
 }
 
-
 .record-button {
 	position:relative;
 	width:200px;
-
-	
 }
 
 .audio-controls {
@@ -19,12 +16,12 @@
 	align-items:center;
 	height:140px;
 
-	button {
+	.record-button {
 		position:relative;
 		width:200px;
 	}
 
-	button div {
+	.record-button div {
 		width:160px;
 		height:100%;
 		display:flex;
@@ -35,24 +32,19 @@
 		margin:auto;
 	}
 
-	button i {
+	.record-button i {
 		flex:0 0 30px;
 		text-align:center;
 		line-height:36px;
 	}
 
-	button span {
+	.record-button span {
 		flex:1 0 auto;
 		text-align:center;
 		line-height:36px;
 	}
 
-	a {
-		color:$text2;
-		margin-top:24px;
-	}
-
-	.pause {
+	.record-button .pause-button-content {
 		display:none;
 		color:$text2;
 		
@@ -60,7 +52,8 @@
 			font-size:1.4em;
 		}
 	}
-	.record {
+
+	.record-button .record-button-content {
 		color:$red;
 
 		i {
@@ -68,26 +61,13 @@
 		}
 	}
 
-	.status-recording & button {
-		.pause {
+	.status-recording & {
+		.pause-button-content {
 			display:flex;
 		}
-		.record {
+		.record-button-content {
 			display:none;
 		}
 	}
 
-	.preview-audio {
-		top:100px;
-		transition:opacity 0.15s ease-out;
-		
-		span {
-			text-transform:none;
-			color:$text2;
-		}
-
-		&.active {
-			opacity:0;
-		}
-	}
 }

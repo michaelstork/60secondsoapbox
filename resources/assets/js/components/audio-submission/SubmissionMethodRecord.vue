@@ -1,67 +1,45 @@
 
 <template>
 	<div class="submission-method-record" :class="statusClassList">
-		<div class="panel-icon">
-			<transition name="status-indicator">
-				<div v-if="status === 'pending'" class="status-indicator status-indicator-pending" key="pending">
-					<i class="mdi mdi-cloud-upload"></i>
-				</div>
-				<div v-else-if="status === 'complete'" class="status-indicator status-indicator-complete" key="complete">
-					<i class="mdi mdi-check"></i>
-				</div>
-				<div v-else class="status-indicator status-indicator-error" key="error">
-					<i class="mdi mdi-alert"></i>
-				</div>
-			</transition>
-		</div>
+		<status-indicator :status="status">
+			<div class="status-indicator status-indicator-recording">
+				<i class="mdi mdi-microphone"></i>
+				<audio-timer :status="status" :reset="!adapter.recordingStarted"></audio-timer>
+			</div>
+		</status-indicator>		
 		<div class="audio-controls">
 			<button v-on:click="toggleRecording" class="record-button" :disabled="status === 'pending'">
-				<div class="record">
+				<div class="record-button-content">
 					<i class="mdi mdi-record"></i>
 					<span>{{ adapter.recordingStarted ? 'Resume Recording' : 'Start Recording' }}</span>
 				</div>
-				<div class="pause">
+				<div class="pause-button-content">
 					<i class="mdi mdi-pause-circle"></i>
 					<span>Pause Recording</span>
 				</div>
 			</button>
-			<a v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'">
+			<!-- <a v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'">
 				<i class="mdi mdi-refresh"></i>
 				<span>Start Over</span>
-			</a>
-			<!-- <div>
-				<a v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'">
-					<i class="mdi mdi-refresh"></i>
-					<span>Start Over</span>
-				</a>
-				<a v-on:click="previewAudio" :disabled="!adapter.recordingStarted">
-					<i class="mdi mdi-volume-high"></i>
-					<span>Preview</span>
-				</a>
-			</div> -->
+			</a> -->
+			
 			<button v-on:click="previewAudio" :disabled="!adapter.recordingStarted" class="preview-audio round">
 				<i class="mdi mdi-volume-high"></i>
 				<span>Preview</span>
 			</button>
-			<!-- <a v-on:click="previewAudio" :disabled="!adapter.recordingStarted">
-				<i class="mdi mdi-volume-high"></i>
-				<span>Preview</span>
-			</a> -->
+			<button v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'" class="restart-audio round">
+				<i class="mdi mdi-refresh"></i>
+				<span>Start Over</span>
+			</button>
+
 		</div>
-		<!-- <div :class="'status-'+status">
-			<p class="status-message-pending form-header">Uploading {{ file.name }}...</p>
-			<p class="status-message-complete form-header">Upload Complete!</p>
-			<p class="status-message-error form-header">
-				Oops! Something went wrong.
-				<br>
-				<a href="#" v-file-upload-link:audioUpload="retryUpload">Click here to try again.</a>
-			</p>
-		</div> -->
 	</div>
 </template>
 
 <script>
 	import RecordRTCAdapter from '../../adapters/RecordRTC';
+	import StatusIndicator from '../audio/SoapboxStatusIndicator.vue';
+	import AudioTimer from '../audio/AudioTimer.vue';
 
 	export default {
 		props: ['uploadAudioFile'],
@@ -107,6 +85,10 @@
 				this.adapter.restart();
 				this.status = 'paused';
 			}
+		},
+		components: {
+			'status-indicator': StatusIndicator,
+			'audio-timer': AudioTimer
 		}
 	}
 </script>

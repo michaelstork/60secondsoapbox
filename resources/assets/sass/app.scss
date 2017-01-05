@@ -9,6 +9,7 @@
 @import 'partials/mdi';
 // @import 'partials/soapbox-recorder';
 @import 'partials/audio-status-indicator';
+@import 'partials/buttons';
 
 @import 'panels/base-panel';
 @import 'panels/auth';
@@ -22,6 +23,8 @@
 @import 'submission-method/submission-method-dialog';
 @import 'submission-method/submission-method-upload';
 @import 'submission-method/submission-method-record';
+
+
 
 body {
 	font-family:'Roboto','Helvetica','Arial',sans-serif;
@@ -40,72 +43,6 @@ body:before {
 	height:260px;
 	background-color:$dark;
 }
-
-button {
-	cursor:pointer;
-	border-radius:2px;
-	background-color:#FFF;
-	display:flex;
-	box-sizing:border-box;
-	padding:0 12px;
-	align-items:center;
-	justify-content:center;
-	min-width:140px;
-	height:36px;
-	color:$accent;
-	// box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
-	@include elevation1;
-	&:hover {
-		// box-shadow:0 0 2px rgba(0,0,0,.14),0 2px 6px rgba(0,0,0,.28);
-		@include elevation2;
-	}
-
-	&:active {
-		@include elevation1inset;
-	}
-
-	span, &:before {
-		font-size:0.8rem;
-		line-height:normal;
-		white-space:nowrap;
-		margin:0 auto;
-		color:inherit;
-		text-transform:uppercase;
-	}
-
-	&.round {
-		min-width:0;
-		width:40px;
-		height:40px;
-		border-radius:20px;
-		font-size:2em;
-		position:relative;
-		flex-direction:column;
-		align-items:center;
-
-		i {
-			height:40px;
-			line-height:40px;
-		}
-
-		span {
-			position:absolute;
-			font-size:0.7rem;
-			text-align:center;
-			line-height:normal;
-			bottom:-20px;
-		}
-	}
-}
-
-button[disabled],
-a[disabled] {
-	cursor:default;
-	pointer-events:none;
-	opacity:0.3;
-}
-
-
 .container {
 	position:relative;
 	z-index:1;

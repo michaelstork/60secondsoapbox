@@ -1,0 +1,72 @@
+
+button {
+	cursor:pointer;
+	border-radius:2px;
+	background-color:#FFF;
+	display:flex;
+	box-sizing:border-box;
+	padding:0 12px;
+	align-items:center;
+	justify-content:center;
+	min-width:140px;
+	height:36px;
+	color:$accent;
+
+	@include elevation1;
+	&:hover {
+		@include elevation2;
+	}
+	&:active {
+		@include elevation1inset;
+	}
+
+	span, &:before {
+		font-size:0.8rem;
+		line-height:normal;
+		white-space:nowrap;
+		margin:0 auto;
+		color:inherit;
+		text-transform:uppercase;
+	}
+
+	&.round {
+		min-width:0;
+		width:40px;
+		height:40px;
+		border-radius:20px;
+		font-size:2em;
+		position:relative;
+		flex-direction:column;
+		align-items:center;
+		
+		@include elevation2;
+		&:hover {
+			@include elevation3;
+		}
+		&:active {
+			@include elevation3inset;
+		}
+
+		i {
+			height:40px;
+			line-height:40px;
+		}
+
+		span {
+			position:absolute;
+			font-size:0.7rem;
+			text-align:center;
+			line-height:normal;
+			bottom:-20px;
+			text-transform:none;
+			color:$text2;
+		}
+	}
+}
+
+button[disabled],
+a[disabled] {
+	cursor:default;
+	pointer-events:none;
+	opacity:0.3;
+}
