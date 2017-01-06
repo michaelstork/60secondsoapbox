@@ -23,6 +23,9 @@
 				return this.status === 'recording';
 			}
 		},
+		destroyed: function () {
+			clearInterval(this.interval);
+		},
 		watch: {
 			isRecording: function (recording) {
 				if (recording) {
@@ -51,6 +54,7 @@
 			resetTimer: function () {
 				this.stopTimer();
 				this.total = 0;
+				console.log('renderin reset');
 				this.renderTimer(moment.duration(0));
 			},
 			getMillisecondsSince: function (since) {

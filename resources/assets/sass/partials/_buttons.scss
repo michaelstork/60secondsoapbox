@@ -1,3 +1,4 @@
+$buttonHeight:36px;
 
 button {
 	cursor:pointer;
@@ -9,7 +10,7 @@ button {
 	align-items:center;
 	justify-content:center;
 	min-width:140px;
-	height:36px;
+	height:$buttonHeight;
 	color:$accent;
 
 	@include elevation1;
@@ -20,9 +21,14 @@ button {
 		@include elevation1inset;
 	}
 
-	span, &:before {
+	span, i {
+		height:$buttonHeight;
+		line-height:$buttonHeight;
+		display:block;
+	}
+
+	span {
 		font-size:0.8rem;
-		line-height:normal;
 		white-space:nowrap;
 		margin:0 auto;
 		color:inherit;
@@ -55,6 +61,7 @@ button {
 		span {
 			position:absolute;
 			font-size:0.7rem;
+			height:auto;
 			text-align:center;
 			line-height:normal;
 			bottom:-20px;

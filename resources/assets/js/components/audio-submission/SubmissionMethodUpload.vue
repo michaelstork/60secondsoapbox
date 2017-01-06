@@ -23,7 +23,7 @@
 	import StatusIndicator from '../audio/SoapboxStatusIndicator.vue';
 
 	export default {
-		props: ['uploadAudioFile', 'selectedFile'],
+		props: ['uploadAudioFile', 'selectedFile', 'requestPanelNavigation', 'audioSubmissionValid'],
 		data: function () {
 			return {
 				status: 'pending',

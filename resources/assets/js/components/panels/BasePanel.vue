@@ -18,6 +18,9 @@
 			}
 		},
 		methods: {
+			requestPanelNavigation: function () {
+				this.eventHub.$emit('requestPanelNavigation');
+			},
 			onPanelNavigation: function () {
 				if (this.isActivePanel && this.isValidPanel) this.savePanelData();
 			},

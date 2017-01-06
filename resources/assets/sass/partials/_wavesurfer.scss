@@ -3,61 +3,51 @@ $controlsHeight:40px;
 
 .wavesurfer-container {
 	width:100%;
-	// background-color:#EEE;
 	display:flex;
-	// margin-top:32px;
 	flex-direction:column;
 	justify-content:space-between;
 	align-items:center;
-	// padding-bottom:12px;
 
 	position:absolute;
-	// height:144px;
-	// bottom:-144px;
+
 	background-image:linear-gradient(to top, #FFF, #F7F7F7);
-	// background-color:#FFF;
+
 
 	border-top:1px solid #F0F0F0;
 	box-sizing:border-box;
 
 	top:100%;
-	// bottom:0;
 	left:0;
 	transition:transform 0.3s $standardCurve;
 
-	// &:not(.active):after {
-	// 	content:'';
-	// 	width:100%;
-	// 	height:1px;
-	// 	position:absolute;
-	// 	top:0;
-	// 	bottom:0;
-	// 	left:0;
-	// 	margin:auto;
-	// 	background-color:#DDD;
-	// }
-	
-	// opacity:0;
-	// transition:opacity 0.2s $standardCurve;
-
 	&.active {
 		transform:translateY(-100%);
-		// opacity:1;
 	}
 	&.pending .wavesurfer {
 		opacity:0;
 	}
 }
 
-.wavesurfer-container .async-pending-indicator {
+// .wavesurfer-container .async-pending-indicator {
+// 	position:absolute;
+// 	height:24px;
+// 	top:28px;
+// 	transition:opacity 0.3s $standardCurve;
+// 	opacity:0;
+// }
+// .wavesurfer-container.pending .async-pending-indicator {
+// 	opacity:1;
+// }
+
+.wavesurfer-container .reset-button {
 	position:absolute;
-	height:24px;
-	top:28px;
-	transition:opacity 0.3s $standardCurve;
-	opacity:0;
+	left:32px;
+	bottom:44px;
 }
-.wavesurfer-container.pending .async-pending-indicator {
-	opacity:1;
+.wavesurfer-container .save-button {
+	position:absolute;
+	right:32px;
+	bottom:44px;
 }
 
 .wavesurfer-controls {
@@ -65,49 +55,17 @@ $controlsHeight:40px;
 	font-size:1.8em;
 	width:140px;
 	justify-content:space-between;
-	margin:18px auto;
-
-	button {
-		// transform:scale(0.9);
-	}
+	box-sizing:border-box;
+	padding:18px 0 44px 0;
 
 	i {
 		color:$text2;
 		font-size:0.6em;
-		// cursor:pointer;
-		// display:block;
-		// background-color:#FFF;
-		// border-radius:20px;
-		// width:40px;
-		// height:40px;
-		// line-height:40px;
-		// text-align:center;
-		// position:relative;
-		// z-index:2;
-		// color:$text2;
-		// @include elevation1;
-
-		// &:hover {
-		// 	@include elevation2;
-		// }
-
-		// &:active {
-		// 	@include elevation1inset;
-		// }
 	}
 
 	.skip-back,
 	.skip-forward {
 		transform:scale(0.75);
-		// z-index:1;
-		// top:3px;
-		// font-size:0.8em;
-		// width:34px;
-		// height:34px;
-		// line-height:34px;
-		// border-radius:17px;
-
-		// opacity:0;
 	}
 
 	.skip-forward {

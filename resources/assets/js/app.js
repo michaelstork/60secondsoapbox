@@ -69,33 +69,27 @@ function init () {
                 return {
                     transform: 'translateX(' + (this.layout.activePanelIndex * -100) + '%)'
                 };
-            },
-            canNavigateBack: function () {
-                return (this.layout.activePanelIndex > 1);
-            },
-            canNavigateForward: function () {
-                return (this.activePanel.valid);
             }
         },
         created: function () {
             this.layout.panels.forEach((panel, p) => {
-                this.$set(this.layout.panels[p], 'valid', true);
+                this.$set(this.layout.panels[p], 'valid', false);
             });
 
             this.eventHub.$on('panelValidityChange', this.onPanelValidityChange);
+            this.eventHub.$on('requestPanelNavigation', this.onRequestPanelNavigation);
             this.eventHub.$on('commitSavedData', this.commitSavedData);
         },
         methods: {
+            onRequestPanelNavigation: function () {
+                if (this.activePanel.valid) this.navigateForward();
+            },
             onPanelValidityChange: function (name, status) {
                 console.log('panelValidityChange: '+name+' -> '+status);
                 this.getPanelByName(name).valid = status;
             },
             getPanelByName: function (name) {
                 return this.layout.panels.find(panel => panel.name === name);
-            },
-            navigateBack: function () {
-                this.eventHub.$emit('panelNavigation');
-                this.layout.activePanelIndex -= 1;
             },
             navigateForward: function () {
                 this.eventHub.$emit('panelNavigation');

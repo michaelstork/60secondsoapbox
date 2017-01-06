@@ -8,7 +8,7 @@
 			</div>
 		</status-indicator>		
 		<div class="audio-controls">
-			<button v-on:click="toggleRecording" class="record-button" :disabled="status === 'pending'">
+			<button v-on:click="toggleRecording" class="record-button" :disabled="status === 'pending'" tabIndex="-1">
 				<div class="record-button-content">
 					<i class="mdi mdi-record"></i>
 					<span>{{ adapter.recordingStarted ? 'Resume Recording' : 'Start Recording' }}</span>
@@ -18,20 +18,20 @@
 					<span>Pause Recording</span>
 				</div>
 			</button>
-			<!-- <a v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'">
-				<i class="mdi mdi-refresh"></i>
-				<span>Start Over</span>
-			</a> -->
-			
-			<button v-on:click="previewAudio" :disabled="!adapter.recordingStarted" class="preview-audio round">
-				<i class="mdi mdi-volume-high"></i>
-				<span>Preview</span>
-			</button>
-			<button v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'" class="restart-audio round">
-				<i class="mdi mdi-refresh"></i>
-				<span>Start Over</span>
-			</button>
-
+			<nav>
+				<button v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'" class="restart-audio round" tabIndex="-1">
+					<i class="mdi mdi-refresh"></i>
+					<span>Start Over</span>
+				</button>
+				<button v-on:click="previewAudio" :disabled="!adapter.recordingStarted" class="preview-audio round" tabIndex="-1">
+					<i class="mdi mdi-volume-high"></i>
+					<span>Preview</span>
+				</button>
+				<button v-on:click="requestPanelNavigation" :disabled="!audioSubmissionValid" class="save-audio round" tabIndex="-1">
+					<i class="mdi mdi-content-save"></i>
+					<span>Save &amp; Continue</span>
+				</button>
+			</nav>
 		</div>
 	</div>
 </template>
@@ -42,7 +42,7 @@
 	import AudioTimer from '../audio/AudioTimer.vue';
 
 	export default {
-		props: ['uploadAudioFile'],
+		props: ['uploadAudioFile', 'requestPanelNavigation', 'audioSubmissionValid'],
 		data: function () {
 			return {
 				status: 'paused',
@@ -70,7 +70,6 @@
 			},
 			previewAudio: function () {
 				this.status = 'pending';
-				// this.$emit('setAudioPreviewStatus', true);
 				this.adapter.process(blob => {
 					this.uploadAudioFile(blob)
 						.then(
@@ -80,10 +79,7 @@
 				});
 			},
 			restart: function () {
-				if (!window.confirm('Are you sure you want to start over?')) return;
-				this.$emit('setAudioPreviewStatus', false);
-				this.adapter.restart();
-				this.status = 'paused';
+				this.$emit('resetPanel');
 			}
 		},
 		components: {
