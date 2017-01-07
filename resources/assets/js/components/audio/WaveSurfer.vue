@@ -1,9 +1,11 @@
 <template>
 	<div class="wavesurfer-container" :class="{pending:pending, active: active}">
 		<div ref="container" class="wavesurfer"></div>
-		<svg class="async-pending-indicator" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-			<circle fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-		</svg>
+		<transition name="fade">
+			<svg v-if="isLoading" class="async-pending-indicator" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+				<circle fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+			</svg>
+		</transition>
 		<nav>
 			<button v-on:click="reset" class="round reset-button" tabIndex="-1">
 				<i class="mdi mdi-refresh"></i>
@@ -40,6 +42,9 @@
 		computed: {
 			isPlaying: function () {
 				return this.wavesurfer && this.wavesurfer.isPlaying();
+			},
+			isLoading: function () {
+				return this.active && this.pending;
 			}
 		},
 		mounted: function () {

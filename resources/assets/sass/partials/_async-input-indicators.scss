@@ -40,20 +40,18 @@
 	right:4px;
 	transform:none;
 	transition:opacity 0.2s ease-out;
-	opacity:0;
 }
 
 .input-container {
+
+	.async-pending-indicator {
+		opacity:0;
+	}
 	
 	&.async-valid:not(.async-pending) .async-valid-indicator,
 	&.async-error:not(.async-pending) .async-invalid-indicator,
 	&.async-error:not(.async-pending) .async-error-message {
 		transform:scale(1);
-		transition-delay:0.2s;
-	}
-
-	&.async-pending .async-pending-indicator {
-		opacity:1;
 		transition-delay:0.2s;
 	}
 
