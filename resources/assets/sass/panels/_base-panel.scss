@@ -39,6 +39,7 @@ $navHeight:36px;
 	color:$text1;
 	position:relative;
 	background-color:#FFF;
+	border-radius:$contentPanelBorderRadius;
 	
 	display:flex;
 	flex-direction:column;
@@ -51,6 +52,7 @@ $navHeight:36px;
 	}
 
 	h3 {
+		font-size:1.1rem;
 		line-height:1.4em;
 		font-weight:600;
 		margin-bottom:1.4em;
@@ -77,6 +79,7 @@ $navHeight:36px;
 	bottom:0;
 	left:0;
 	background-color:#F9F9F9;
+	border-radius:$contentPanelBorderRadius;
 
 	@include queryWidth(min, 769px) {
 		padding:0 24px;

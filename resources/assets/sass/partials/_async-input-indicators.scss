@@ -35,7 +35,7 @@
 }
 
 .async-pending-indicator {
-	height:16px;
+	height:20px;
 	bottom:8px;
 	right:4px;
 	transform:none;
@@ -48,6 +48,10 @@
 		opacity:0;
 	}
 	
+	&.async-pending .async-pending-indicator {
+		opacity:1;
+	}
+
 	&.async-valid:not(.async-pending) .async-valid-indicator,
 	&.async-error:not(.async-pending) .async-invalid-indicator,
 	&.async-error:not(.async-pending) .async-error-message {

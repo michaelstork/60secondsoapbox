@@ -1,5 +1,5 @@
 $rectButtonHeight:36px;
-$roundButtonDiameter:40px;
+$roundButtonDiameter:42px;
 
 button {
 	display:flex;
@@ -9,6 +9,7 @@ button {
 	cursor:pointer;
 	position:relative;
 	transition:opacity 0.125s ease-out;
+	-webkit-tap-highlight-color:transparent;
 	
 	&[disabled] {
 		cursor:default;
@@ -52,7 +53,7 @@ button.rect {
 }
 
 button.round {
-	width:$roundButtonDiameter;
+	width:auto;
 	background-color:transparent;
 	flex-direction:column;
 
@@ -62,7 +63,7 @@ button.round {
 	}
 
 	i:last-child {
-		margin-bottom:calc(0.7rem + 8px);
+		margin-bottom:calc(0.8rem + 8px);
 	}
 
 	i:before {
@@ -83,9 +84,9 @@ button.round {
 	}
 
 	span {
-		font-size:0.7rem;
-		height:0.7rem;
-		line-height:0.7rem;
+		font-size:0.8rem;
+		height:1rem;
+		line-height:0.8rem;
 		text-transform:none;
 		color:$text2;
 		margin-top:8px;

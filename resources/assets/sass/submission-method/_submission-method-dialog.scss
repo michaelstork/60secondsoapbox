@@ -3,7 +3,7 @@
 	height:100%;
 	display:flex;
 	flex-direction:column;
-	font-size:0.75rem;
+	font-size:0.8rem;
 }
 
 .submission-method .form-header {
@@ -19,7 +19,7 @@
 }
 
 .submission-method-dialog nav {
-	justify-content:center;
+	padding:0;
 }
 
 .submission-method-dialog .divider {
@@ -29,13 +29,8 @@
 }
 
 .submission-method-dialog button {
-	width:auto;
-	&:first-of-type {
-		margin-right:25%;
-		transform:translateX(50%);
-	}
+	&:first-of-type,
 	&:last-of-type {
-		margin-left:25%;
-		transform:translateX(-50%);
+		margin:0 auto;
 	}
 }
