@@ -9,19 +9,13 @@
 				<i class="mdi mdi-refresh"></i>
 				<span>Start Over</span>
 			</button>
-			<button v-on:click="wavesurfer.skipBackward()" title="Skip Backwards" class="round skip-back-button" :disabled="pending" tabIndex="-1">
-				<i class="mdi mdi-rewind"></i>
-			</button>
 			<button v-on:click="wavesurfer.playPause()" title="Play/Pause" class="round play-pause" :disabled="pending" tabIndex="-1">
 				<i class="mdi mdi-play"
 					:class="{
 						'mdi-pause': isPlaying
 					}">
 				</i>
-				<span>{{ isPlaying ? 'Pause' : 'Play' }}</span>
-			</button>
-			<button v-on:click="wavesurfer.skipForward()" title="Skip Forward" class="round skip-forward-button" :disabled="pending" tabIndex="-1">
-				<i class="mdi mdi-fast-forward"></i>
+				<span>{{ isPlaying ? 'Pause' : ' Play ' }}</span>
 			</button>
 			<button v-on:click="requestPanelNavigation" :disabled="!audioSubmissionValid" class="save-button round" tabIndex="-1">
 				<i class="mdi mdi-content-save"></i>

@@ -5,79 +5,88 @@
 	padding-top:64px;
 }
 
+.audio-controls {
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
+
 .record-button {
 	position:relative;
 	width:200px;
 }
 
-.audio-controls {
+.record-button div {
+	width:160px;
+	height:100%;
 	display:flex;
-	flex-direction:column;
-	align-items:center;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	margin:auto;
+}
 
-	.record-button {
-		position:relative;
-		width:200px;
-	}
+.record-button i {
+	flex:0 0 30px;
+	text-align:center;
+	line-height:36px;
+}
 
-	.record-button div {
-		width:160px;
-		height:100%;
-		display:flex;
-		position:absolute;
-		top:0;
-		left:0;
-		right:0;
-		margin:auto;
-	}
+.record-button span {
+	flex:1 0 auto;
+	text-align:center;
+	line-height:36px;
+}
 
-	.record-button i {
-		flex:0 0 30px;
-		text-align:center;
-		line-height:36px;
-	}
-
-	.record-button span {
-		flex:1 0 auto;
-		text-align:center;
-		line-height:36px;
-	}
-
-	.record-button .pause-button-content {
-		display:none;
-		color:$text2;
-		
-		i {
-			font-size:1.4em;
-		}
-	}
-
-	.record-button .record-button-content {
-		color:$red;
-
-		i {
-			font-size:1.8em;
-		}
+.record-button .pause-button-content {
+	display:none;
+	color:$text2;
+	
+	i {
+		font-size:1.4em;
 	}
 
 	.status-recording & {
-		.pause-button-content {
-			display:flex;
+		display:flex;
+	}
+}
+
+.record-button .record-button-content {
+	color:$red;
+
+	i {
+		font-size:1.8em;
+	}
+
+	.status-recording & {
+		display:none;
+	}
+}
+
+.submission-method-record nav {
+	justify-content:center;
+
+	button {
+		&:first-of-type {
+			margin-right:25%;
+			transform:translateX(50%);
 		}
-		.record-button-content {
-			display:none;
+		&:last-of-type {
+			margin-left:25%;
+			transform:translateX(-50%);
 		}
 	}
 }
 
-.audio-preview-active .submission-method-record,
-.submission-method-record.status-pending {
-	.restart-audio-button,
-	.save-audio-button {
-		opacity:0;
-		transition:opacity 0.1s ease-out;
-	}
-	.preview-audio-button {
-		opacity:0.4;
+.submission-method-record {	
+	.audio-preview-active & nav,
+	&.status-pending {
+		button {
+			opacity:0.4;
+		}
+		.preview-audio-button {
+			opacity:0.4;
+		}
 	}
 }

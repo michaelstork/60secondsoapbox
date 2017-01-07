@@ -39,28 +39,15 @@
 	opacity:1;
 }
 
-.wavesurfer-container nav {
-	justify-content:center;
-	
-	.skip-back-button,
-	.skip-forward-button {
-		transform:scale(0.75);
+.wavesurfer-container button {
+	&:first-of-type {
+		margin-right:25%;
+		transform:translateX(50%);
 	}
-	.skip-forward-button {
-		transform-origin:50% 50%;
-		margin-right:auto;
+	&:last-of-type {
+		margin-left:25%;
+		transform:translateX(-50%);
 	}
-	.skip-back-button {
-		transform-origin:50% 50%;
-		margin-left:auto;
-	}
-}
-
-.wavesurfer-zoom-controls {
-	width:100%;
-	display:flex;
-	color:#DDD;
-	font-size:1.7em;
 }
 
 .wavesurfer {

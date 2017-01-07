@@ -21,21 +21,21 @@ $sharpCurve:cubic-bezier(0.4, 0.0, 0.6, 1);
 $panelBG: #F7F7F7;
 $audioHeight:280px;
 
-@mixin elevation1 {
+@mixin shadow_1 {
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 -1px 2px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.24);	
 }
-@mixin elevation1inset {
+@mixin shadow_1_inset {
 	box-shadow: inset 0 1px 3px rgba(0,0,0,0.12), inset 0 -1px 2px rgba(0,0,0,0.02), inset 0 1px 2px rgba(0,0,0,0.24);
 }
-@mixin elevation2 {
+@mixin shadow_2 {
 	box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 -1px 2px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.23);
 }
-@mixin elevation2inset {
+@mixin shadow_2_inset {
 	box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), inset 0 -3px 4px rgba(0,0,0,0.02), inset 0 3px 6px rgba(0,0,0,0.23);
 }
-@mixin elevation3 {
+@mixin shadow_3 {
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 -3px 4px rgba(0,0,0,0.02), 0 3px 6px rgba(0,0,0,0.23);
 }
-@mixin elevation3inset {
+@mixin shadow_3_inset {
 	box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), inset 0 -3px 4px rgba(0,0,0,0.02), inset 0 3px 6px rgba(0,0,0,0.23);
 }

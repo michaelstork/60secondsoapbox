@@ -8,7 +8,7 @@
 			</div>
 		</status-indicator>		
 		<div class="audio-controls">
-			<button v-on:click="toggleRecording" class="record-button" :disabled="status === 'pending'" tabIndex="-1">
+			<button v-on:click="toggleRecording" class="record-button rect" :disabled="status === 'pending'" tabIndex="-1">
 				<div class="record-button-content">
 					<i class="mdi mdi-record"></i>
 					<span>{{ adapter.recordingStarted ? 'Resume Recording' : 'Start Recording' }}</span>

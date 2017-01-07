@@ -1,80 +1,93 @@
-$buttonHeight:36px;
+$rectButtonHeight:36px;
+$roundButtonDiameter:40px;
 
 button {
-	cursor:pointer;
-	border-radius:2px;
-	background-color:#FFF;
 	display:flex;
 	box-sizing:border-box;
-	padding:0 12px;
 	align-items:center;
 	justify-content:center;
-	min-width:140px;
-	height:$buttonHeight;
-	color:$accent;
-	transition:opacity 0.15s ease-out;
-
-	@include elevation1;
-	&:hover {
-		@include elevation2;
+	cursor:pointer;
+	position:relative;
+	transition:opacity 0.125s ease-out;
+	
+	&[disabled] {
+		cursor:default;
+		pointer-events:none;
+		opacity:0.4;
 	}
+}
+
+button span {
+	white-space:nowrap;
+	margin:0 auto;
+}
+
+button.rect {
+	background-color:#FFF;
+	padding:0 12px;
+	color:$accent;
+	border-radius:2px;
+	min-width:$rectButtonHeight;
+	height:$rectButtonHeight;
+	@include shadow_1;
+
+	&:hover {
+		@include shadow_2;
+	}
+
 	&:active {
-		@include elevation1inset;
+		@include shadow_1_inset;
 	}
 
 	span, i {
-		height:$buttonHeight;
-		line-height:$buttonHeight;
+		height:$rectButtonHeight;
+		line-height:$rectButtonHeight;
 		display:block;
 	}
 
 	span {
 		font-size:0.8rem;
-		white-space:nowrap;
-		margin:0 auto;
-		color:inherit;
 		text-transform:uppercase;
-	}
-
-	&.round {
-		min-width:0;
-		width:40px;
-		height:40px;
-		border-radius:20px;
-		font-size:2em;
-		position:relative;
-		flex-direction:column;
-		align-items:center;
-
-		@include elevation2;
-		&:hover {
-			@include elevation3;
-		}
-		&:active {
-			@include elevation3inset;
-		}
-
-		i {
-			height:40px;
-			line-height:40px;
-		}
-
-		span {
-			position:absolute;
-			font-size:0.7rem;
-			height:auto;
-			text-align:center;
-			line-height:normal;
-			bottom:-20px;
-			text-transform:none;
-			color:$text2;
-		}
 	}
 }
 
-button[disabled],
-a[disabled] {
-	cursor:default;
-	pointer-events:none;
-	opacity:0.4;
+button.round {
+	width:$roundButtonDiameter;
+	background-color:transparent;
+	flex-direction:column;
+
+	i {
+		font-size:1.8em;
+		color:$accent;
+	}
+
+	i:last-child {
+		margin-bottom:calc(0.7rem + 8px);
+	}
+
+	i:before {
+		background-color:#FFF;
+		border-radius:#{$roundButtonDiameter / 2};
+		@include shadow_2;
+		width:$roundButtonDiameter;
+		height:$roundButtonDiameter;
+		line-height:$roundButtonDiameter;
+	}
+
+	&:hover i:before {
+		@include shadow_3;
+	}
+
+	&:active i:before {
+		@include shadow_3_inset;
+	}
+
+	span {
+		font-size:0.7rem;
+		height:0.7rem;
+		line-height:0.7rem;
+		text-transform:none;
+		color:$text2;
+		margin-top:8px;
+	}
 }

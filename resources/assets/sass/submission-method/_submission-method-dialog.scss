@@ -14,29 +14,28 @@
 	display:flex;
 	align-items:center;
 	justify-content:space-between;
-	flex-direction:column;
 	margin-top:48px;
 	height:140px;
 }
 
-.submission-method-dialog > span {
-	color:$text1;
+.submission-method-dialog nav {
+	justify-content:center;
+}
+
+.submission-method-dialog .divider {
+	height:80%;
+	width:1px;
+	background-color:#DFDFDF;
 }
 
 .submission-method-dialog button {
-	width:200px;
-	display:flex;
-
-	i {
-		font-size:2em;
+	width:auto;
+	&:first-of-type {
+		margin-right:25%;
+		transform:translateX(50%);
 	}
-
-	span {
-		white-space:normal;
+	&:last-of-type {
+		margin-left:25%;
+		transform:translateX(-50%);
 	}
-}
-
-.submission-method-dialog button.disabled {
-	opacity:0.4;
-	pointer-events:none;
 }
