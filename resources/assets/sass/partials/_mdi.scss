@@ -2,8 +2,6 @@
 @import '../../../../node_modules/mdi/scss/variables';
 
 $mdi-icons: (
-	"arrow-left-bold-circle-outline": F050,
-	"arrow-right-bold-circle-outline": F057,
 	"refresh": F450,
 	"microphone": F36C,
 	"microphone-off": F36D,
@@ -11,23 +9,14 @@ $mdi-icons: (
 	"check": F12C,
 	"alert": F026,
 	"exclamation": F205,
-	"volume-off": F581,
 	"volume-high": F57E,
 	"voice": F5CB,
 	"play": F40A,
 	"pause": F3E4,
 	"pause-circle": F3E5,
-	"magnify-plus": F34B,
-	"magnify-minus": F34A,
-	"fast-forward": F211,
-	"rewind": F45F,
-	"record-rec": F44B,
 	"record": F44A,
-	"chevron-left": F141,
-	"chevron-right": F142,
 	"content-save": F193,
-	"keyboard-backspace": F30D,
-	"close": F156
+	"keyboard-backspace": F30D
 );
 
 @import '../../../../node_modules/mdi/scss/functions';

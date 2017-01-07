@@ -2,7 +2,13 @@
 
 .submission-method-record {
 	box-sizing:border-box;
-	padding-top:64px;
+	
+	@include queryWidth(min, 769px) {
+		padding-top:64px;
+	}
+	@include queryWidth(max, 768px) {
+		padding-top:156px;
+	}
 }
 
 .audio-controls {
@@ -78,15 +84,3 @@
 		}
 	}
 }
-
-// .submission-method-record {	
-// 	.audio-preview-active & nav,
-// 	&.status-pending {
-		// button {
-		// 	opacity:0.4;
-		// }
-		// .preview-audio-button {
-		// 	opacity:0.4;
-		// }
-// 	}
-// }

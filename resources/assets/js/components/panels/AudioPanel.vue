@@ -15,8 +15,8 @@
 				:selectedFile="selectedFile">
 				<soapbox-wave-surfer
 					:audioEventHub="audioEventHub"
-					:adapter="adapter"
 					:url="audioUrl"
+					:adapter="adapter"
 					:audioSubmissionValid="audioSubmissionValid"
 					:requestPanelNavigation="requestPanelNavigation">
 				</soapbox-wave-surfer>
@@ -74,7 +74,6 @@
 				this.submissionMethod = null;
 				this.audioSubmissionValid = false;
 				this.audioUrl = null;
-				this.audioPreviewActive = null;
 				this.selectedFile = null;
 				if (this.adapter.initialized) this.adapter.restart();
 			},
@@ -100,7 +99,6 @@
 			},
 			handleUploadSuccess: function (response) {
 				this.audioUrl = response.data.audioUrl;
-				this.audioSubmissionValid = true;
 				return response;
 			},
 			handleUploadFailure: function (response) {

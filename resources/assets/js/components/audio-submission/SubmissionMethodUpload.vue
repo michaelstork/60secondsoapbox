@@ -3,17 +3,17 @@
 	<div class="submission-method-upload">
 		<status-indicator :status="status"></status-indicator>		
 		<div :class="'status-'+status">
-			<p class="status-message-pending form-header">Uploading {{ file.name }}...</p>
-			<p class="status-message-complete form-header">
+			<h3 class="status-message-pending">Uploading {{ file.name }}...</h3>
+			<h3 class="status-message-complete">
 				Upload Complete!
 				<br>
 				Click continue below, or <a href="#" v-file-upload-link:audioUpload="retryUpload">upload a different file.</a>
-			</p>
-			<p class="status-message-error form-header">
+			</h3>
+			<h3 class="status-message-error">
 				Oops! Something went wrong.
 				<br>
 				<a href="#" v-file-upload-link:audioUpload="retryUpload">Click here to try again.</a>
-			</p>
+			</h3>
 		</div>
 		<slot></slot>
 	</div>
@@ -46,7 +46,6 @@
 					);
 			},
 			retryUpload: function (file) {
-				// this.$emit('setAudioPreviewStatus', false);
 				this.file = file;
 				this.doUpload();
 			}

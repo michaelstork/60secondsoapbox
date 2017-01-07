@@ -7,15 +7,11 @@
 	align-items:center;
 	position:absolute;
 	z-index:1;
-	// background-image:linear-gradient(to top, #FFF, #F9F9F9);
-	// border-top:1px solid #F0F0F0;
 	box-sizing:border-box;
-	height:165px;
-	padding-top:84px;
+	height:205px;
+	padding-top:124px;
 	bottom:0;
 	left:0;
-	// transition:transform 0.3s $standardCurve;
-	// transform:translateY(100%);
 
 	&.active .wavesurfer {
 		opacity:1;
@@ -40,6 +36,8 @@
 }
 
 .wavesurfer-container button {
+	width:40px;
+
 	&:first-of-type {
 		margin-right:25%;
 		transform:translateX(50%);
@@ -59,8 +57,9 @@
 	flex:0 0 80px;
 	width:100%;
 	position:relative;
-	top:-84px;
+	top:-124px;
 	transition:opacity 0.15s ease-out;
 	z-index:1;
+	background-color:#F0F0F0;
 	opacity:0;
 }

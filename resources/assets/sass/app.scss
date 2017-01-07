@@ -1,7 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,600);
 
 @import 'partials/variables';
-@import 'partials/mixins';
 @import 'partials/normalize';
 @import 'partials/inputs';
 @import 'partials/async-input-indicators';
@@ -62,42 +61,6 @@ body:before {
 			width:600px;
 			border-radius:$contentPanelBorderRadius;
 			@include shadow_1;
-		}
-	}
-}
-
-.break-below-400 {
-	display:none;
-	@include queryWidth(max, 400px) {
-		display:inline;
-	}
-}
-.break-above-400 {
-	display:none;
-	@include queryWidth(min, 400px) {
-		display:inline;
-	}
-}
-
-.form-header {
-	// font-size:0.95rem;
-	font-weight:600;
-	margin-bottom:0;
-
-	.input-container + & {
-		margin-top:32px;
-	}
-
-	@include queryWidth(min, 649px) {
-		& + .input-container,
-		& + p {
-			margin-top:32px;
-		}
-	}
-	@include queryWidth(max, 648px) {
-		& + .input-container,
-		& + p {
-			margin-top:18px;
 		}
 	}
 }

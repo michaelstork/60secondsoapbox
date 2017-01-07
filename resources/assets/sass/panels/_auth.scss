@@ -25,25 +25,7 @@
 	text-align:center;
 }
 
-.auth-panel h3 {
-	// text-align:center;
-	// @include queryWidth(min, 501px) {
-	// 	font-size:1.3em;
-	// }
-	// @include queryWidth(max, 500px) {
-	// 	font-size:1.1em;
-	// }
-}
-
 @include queryWidth(max, 648px) {
-	.auth-panel {
-		// padding-top:48px;
-	}
-
-	.auth-panel p {
-		font-size:0.8rem;
-	}
-
 	.auth-panel .input-container {
 		margin-top:32px;
 	}

@@ -39,13 +39,13 @@ $navHeight:36px;
 	color:$text1;
 	position:relative;
 	background-color:#FFF;
-	border-radius:$contentPanelBorderRadius;
 	
 	display:flex;
 	flex-direction:column;
 
 	@include queryWidth(min, 769px) {
 		padding:32px 32px 85px 32px;
+		border-radius:$contentPanelBorderRadius;
 	}
 	@include queryWidth(max, 768px) {
 		padding:24px 24px 85px 24px;
@@ -69,7 +69,7 @@ $navHeight:36px;
 
 .content-panel nav {
 	width:100%;
-	border-top:1px solid #F0F0F0;
+	border-top:1px solid #EAEAEA;
 	height:85px;
 	display:flex;
 	justify-content:center;
@@ -79,10 +79,12 @@ $navHeight:36px;
 	bottom:0;
 	left:0;
 	background-color:#F9F9F9;
-	border-radius:$contentPanelBorderRadius;
+	
 
 	@include queryWidth(min, 769px) {
 		padding:0 24px;
+		border-bottom-left-radius:$contentPanelBorderRadius;
+		border-bottom-right-radius:$contentPanelBorderRadius;
 	}
 	@include queryWidth(max, 768px) {
 		padding:0 18px;
