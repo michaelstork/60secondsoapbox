@@ -20,7 +20,7 @@
 
 <script>
 	import FileUploadLink from '../../directives/fileUploadLink';
-	import StatusIndicator from '../audio/SoapboxStatusIndicator.vue';
+	import StatusIndicator from '../audio/StatusIndicator.vue';
 
 	export default {
 		props: ['uploadAudioFile', 'selectedFile', 'requestPanelNavigation', 'audioSubmissionValid'],

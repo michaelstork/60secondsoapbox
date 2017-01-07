@@ -2,7 +2,7 @@
 <template>
 	<section class="info-panel content-panel" v-on:dblclick="fillForm">
 		<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange"></soapbox-form>
-		<nav>
+		<nav v-on:touchstart="fillForm">
 			<button class="round"
 				:disabled="!isValidPanel"
 				v-on:click="requestPanelNavigation">

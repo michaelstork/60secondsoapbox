@@ -27,7 +27,7 @@ $navHeight:36px;
 		padding-top:$trackPaddingTop;
 	}
 	@include queryWidth(max, 648px) {
-		height:calc(100vh - #{$navHeight});
+		height:100vh;
 	}
 }
 
@@ -71,11 +71,19 @@ $navHeight:36px;
 
 .content-panel nav {
 	width:100%;
-	margin:auto 0 12px 0;
-	padding-top:24px;
+	// margin:auto 0 12px 0;
+	// padding-top:24px;
+	border-top:1px solid #F0F0F0;
+	height:85px;
 	display:flex;
 	justify-content:space-between;
-	align-items:center;
+	// align-items:center;
+	padding:12px 18px 0 18px;
+	box-sizing:border-box;
+	position:absolute;
+	bottom:0;
+	left:0;
+	background-color:#F9F9F9;
 }
 
 .content-panel nav button {

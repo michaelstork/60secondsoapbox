@@ -18,27 +18,27 @@
 					<span>Pause Recording</span>
 				</div>
 			</button>
-			<nav>
-				<button v-on:click="restart" :disabled="!adapter.recordingStarted || status === 'pending'" class="restart-audio round" tabIndex="-1">
-					<i class="mdi mdi-refresh"></i>
-					<span>Start Over</span>
-				</button>
-				<button v-on:click="previewAudio" :disabled="!adapter.recordingStarted" class="preview-audio round" tabIndex="-1">
-					<i class="mdi mdi-volume-high"></i>
-					<span>Preview</span>
-				</button>
-				<button v-on:click="requestPanelNavigation" :disabled="!audioSubmissionValid" class="save-audio round" tabIndex="-1">
-					<i class="mdi mdi-content-save"></i>
-					<span>Save &amp; Continue</span>
-				</button>
-			</nav>
 		</div>
+		<nav>
+			<button v-on:click="restart" :disabled="audioControlsDisabled" class="restart-audio-button round" tabIndex="-1">
+				<i class="mdi mdi-refresh"></i>
+				<span>Start Over</span>
+			</button>
+			<button v-on:click="previewAudio" :disabled="audioControlsDisabled" class="preview-audio-button round" tabIndex="-1">
+				<i class="mdi mdi-volume-high"></i>
+				<span>Preview</span>
+			</button>
+			<button v-on:click="requestPanelNavigation" :disabled="audioControlsDisabled || !audioSubmissionValid" class="save-audio-button round" tabIndex="-1">
+				<i class="mdi mdi-content-save"></i>
+				<span>Save</span>
+			</button>
+		</nav>
 	</div>
 </template>
 
 <script>
 	import RecordRTCAdapter from '../../adapters/RecordRTC';
-	import StatusIndicator from '../audio/SoapboxStatusIndicator.vue';
+	import StatusIndicator from '../audio/StatusIndicator.vue';
 	import AudioTimer from '../audio/AudioTimer.vue';
 
 	export default {
@@ -52,6 +52,9 @@
 		computed: {
 			statusClassList: function () {
 				return 'status-' + this.status;
+			},
+			audioControlsDisabled: function () {
+				return (!this.adapter.recordingStarted || this.status === 'pending');
 			}
 		},
 		created: function () {

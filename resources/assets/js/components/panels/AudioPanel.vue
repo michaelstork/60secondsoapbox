@@ -1,6 +1,6 @@
 
 <template>
-	<section class="audio-panel content-panel">
+	<section class="audio-panel content-panel" :class="{'audio-preview-active': audioPreviewActive}">
 		<transition name="fade" mode="out-in">
 			<submission-method-dialog
 				v-if="!submissionMethod"
@@ -79,6 +79,7 @@
 			},
 			setAudioPreviewStatus: function (status) {
 				this.audioPreviewActive = status;
+				if (!status) this.audioUrl = null;
 			},
 			uploadAudioFile: function (file) {
 				let formData = new FormData();

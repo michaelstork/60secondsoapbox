@@ -38,6 +38,14 @@
 
 @include queryWidth(max, 648px) {
 	.auth-panel {
-		padding-top:48px;
+		// padding-top:48px;
+	}
+
+	.auth-panel p {
+		font-size:0.75rem;
+	}
+
+	.auth-panel .input-container {
+		margin-top:32px;
 	}
 }

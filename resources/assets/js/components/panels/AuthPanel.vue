@@ -1,11 +1,11 @@
 
 <template>
 	<section class="auth-panel content-panel" v-on:dblclick="fillForm">
-		<h3 tabIndex="-1">You've been nominated to record an episode of <br class="mobile-break"><a href="https://www.aliem.com/category/clinical/60-second-soapbox/" target="_blank" tabIndex="-1">60 Second Soapbox!</a></h3>
+		<h3 tabIndex="-1">You've been nominated to record an episode of <a href="https://www.aliem.com/category/clinical/60-second-soapbox/" target="_blank" tabIndex="-1">60 Second Soapbox!</a></h3>
 		<p class="intro">Any topic is on the table – clinical, academic, economic, or whatever else may interest an EM-centric audience. We carefully remix your audio to add an extra splash of drama and excitement. Even more exciting, you'll get to challenge 3 of your peers to stand on a soapbox of their own!</p>
 		<p>If you'd like to participate, enter your invitation code below!</p>
 		<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
-		<nav>
+		<nav v-on:touchstart="fillForm">
 			<button class="round"
 				:disabled="!isValidPanel"
 				v-on:click="requestPanelNavigation">
