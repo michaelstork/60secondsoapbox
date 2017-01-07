@@ -7,14 +7,11 @@
 @import 'partials/async-input-indicators';
 @import 'partials/async-pending-indicator';
 @import 'partials/mdi';
-// @import 'partials/soapbox-recorder';
-@import 'partials/audio-status-indicator';
 @import 'partials/buttons';
 
 @import 'panels/base-panel';
 @import 'panels/auth';
 @import 'panels/info';
-@import 'panels/audio';
 @import 'panels/nominees';
 
 @import 'partials/status-indicator';
@@ -78,11 +75,6 @@ body:before {
 		display:inline;
 	}
 }
-
-	
-
-
-
 
 .form-header {
 	font-size:0.95rem;

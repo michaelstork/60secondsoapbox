@@ -30,7 +30,7 @@
 
 <script>
 	import SoapboxBasePanel from './BasePanel.vue';
-	import SoapboxWaveSurfer from '../audio/SoapboxWaveSurfer.vue';
+	import WaveSurfer from '../audio/WaveSurfer.vue';
 	import RecordRTCAdapter from '../../adapters/RecordRTC';
 	import {URLS} from '../../config/index';
 
@@ -110,7 +110,7 @@
 			'submission-method-dialog': SubmissionMethodDialog,
 			'submission-method-upload': SubmissionMethodUpload,
 			'submission-method-record': SubmissionMethodRecord,
-			'soapbox-wave-surfer': SoapboxWaveSurfer
+			'soapbox-wave-surfer': WaveSurfer
 		}
 	}
 </script>

@@ -44,14 +44,10 @@ $navHeight:36px;
 	flex-direction:column;
 
 	@include queryWidth(min, 769px) {
-		padding:32px;
+		padding:32px 32px 85px 32px;
 	}
 	@include queryWidth(max, 768px) {
-		padding:24px;
-	}
-	@include queryWidth(max, 648px) {
-		padding-bottom:60px;
-		overflow:auto;
+		padding:24px 24px 85px 24px;
 	}
 
 	h3 {
@@ -71,13 +67,10 @@ $navHeight:36px;
 
 .content-panel nav {
 	width:100%;
-	// margin:auto 0 12px 0;
-	// padding-top:24px;
 	border-top:1px solid #F0F0F0;
 	height:85px;
 	display:flex;
 	justify-content:space-between;
-	// align-items:center;
 	padding:12px 18px 0 18px;
 	box-sizing:border-box;
 	position:absolute;
@@ -92,56 +85,3 @@ $navHeight:36px;
 		margin-right:auto;
 	}
 }
-
-// .panel-nav {
-// 	position:relative;
-// 	z-index:2;
-// }
-
-// .panel-nav div {
-// 	flex:0 0 100%;
-// 	display:flex;
-// 	justify-content:space-between;
-// 	height:$navHeight;
-// 	width:100%;
-// 	box-sizing:border-box;
-// 	padding:0 12px;
-// 	background-color:#F9F9F9;
-// 	border-top:1px solid #F0F0F0;
-// }
-
-// .panel-nav a {
-// 	text-decoration:none;
-// 	text-transform:uppercase;
-// 	font-size:0.85em;
-// 	color:#999;
-// 	height:$navHeight;
-// 	line-height:$navHeight;
-// 	transition:opacity 0.2s ease-out;
-
-// 	&:first-child {
-// 		margin-right:auto;
-// 	}
-// 	&:last-child {
-// 		margin-left:auto;
-// 	}
-
-// 	span {
-// 		vertical-align:top;
-// 	}
-	
-// 	i {
-// 		color:$accent;
-// 		font-size:20px;
-// 		position:relative;
-// 		top:-1px;
-		
-// 		&:last-child {
-// 			margin-left:4px;
-// 		}
-// 		&:first-child {
-// 			margin-right:4px;
-// 		}
-// 	}
-
-// }

@@ -4,16 +4,12 @@
 		<svg class="async-pending-indicator" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
 			<circle fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
 		</svg>
-		<!-- <div class="wavesurfer-zoom-controls">
-			<i v-on:click="setZoom(zoom += 0.15)" class="mdi mdi-magnify-plus"></i>
-			<i v-on:click="setZoom(zoom -= 0.15)" class="mdi mdi-magnify-minus"></i>
-		</div> -->
 		<nav>
 			<button v-on:click="reset" class="round reset-button" tabIndex="-1">
 				<i class="mdi mdi-refresh"></i>
 				<span>Start Over</span>
 			</button>
-			<button v-on:click="wavesurfer.skipBackward()" title="Skip Forward" class="round skip-back-button" :disabled="pending" tabIndex="-1">
+			<button v-on:click="wavesurfer.skipBackward()" title="Skip Backwards" class="round skip-back-button" :disabled="pending" tabIndex="-1">
 				<i class="mdi mdi-rewind"></i>
 			</button>
 			<button v-on:click="wavesurfer.playPause()" title="Play/Pause" class="round play-pause" :disabled="pending" tabIndex="-1">
@@ -24,7 +20,7 @@
 				</i>
 				<span>{{ isPlaying ? 'Pause' : 'Play' }}</span>
 			</button>
-			<button v-on:click="wavesurfer.skipForward()" title="Skip Backward" class="round skip-forward-button" :disabled="pending" tabIndex="-1">
+			<button v-on:click="wavesurfer.skipForward()" title="Skip Forward" class="round skip-forward-button" :disabled="pending" tabIndex="-1">
 				<i class="mdi mdi-fast-forward"></i>
 			</button>
 			<button v-on:click="requestPanelNavigation" :disabled="!audioSubmissionValid" class="save-button round" tabIndex="-1">
