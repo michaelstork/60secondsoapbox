@@ -110,3 +110,13 @@ body:before {
 .fade-leave-active {
 	opacity:0;
 }
+
+.scale-enter-active,
+.scale-leave-active {
+	transition:transform 0.2s $standardCurve;
+	transform-origin:50% 50%;
+}
+.scale-enter,
+.scale-leave-active {
+	transform:scale(0);
+}

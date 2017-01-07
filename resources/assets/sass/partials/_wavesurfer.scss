@@ -7,18 +7,18 @@
 	align-items:center;
 	position:absolute;
 	z-index:1;
-	background-image:linear-gradient(to top, #FFF, #F9F9F9);
-	border-top:1px solid #F0F0F0;
+	// background-image:linear-gradient(to top, #FFF, #F9F9F9);
+	// border-top:1px solid #F0F0F0;
 	box-sizing:border-box;
 	height:165px;
 	padding-top:84px;
 	bottom:0;
 	left:0;
-	transition:transform 0.3s $standardCurve;
-	transform:translateY(100%);
+	// transition:transform 0.3s $standardCurve;
+	// transform:translateY(100%);
 
-	&.active {
-		transform:translateY(0);
+	&.active .wavesurfer {
+		opacity:1;
 	}
 	&.pending .wavesurfer {
 		opacity:0;
@@ -48,6 +48,11 @@
 		margin-left:25%;
 		transform:translateX(-50%);
 	}
+
+	&.preview-audio-button,
+	&.play-pause-button {
+		width:46px;
+	}
 }
 
 .wavesurfer {
@@ -57,4 +62,5 @@
 	top:-84px;
 	transition:opacity 0.15s ease-out;
 	z-index:1;
+	opacity:0;
 }

@@ -15,6 +15,7 @@
 				<a href="#" v-file-upload-link:audioUpload="retryUpload">Click here to try again.</a>
 			</p>
 		</div>
+		<slot></slot>
 	</div>
 </template>
 
@@ -23,7 +24,7 @@
 	import StatusIndicator from '../audio/StatusIndicator.vue';
 
 	export default {
-		props: ['uploadAudioFile', 'selectedFile', 'requestPanelNavigation', 'audioSubmissionValid'],
+		props: ['uploadAudioFile', 'selectedFile'],
 		data: function () {
 			return {
 				status: 'pending',
@@ -37,6 +38,7 @@
 		},
 		methods: {
 			doUpload: function () {
+				this.status = 'pending';
 				return this.uploadAudioFile(this.file)
 					.then(
 						() => { this.status = 'complete'; },
@@ -44,8 +46,7 @@
 					);
 			},
 			retryUpload: function (file) {
-				this.status = 'pending';
-				this.$emit('setAudioPreviewStatus', false);
+				// this.$emit('setAudioPreviewStatus', false);
 				this.file = file;
 				this.doUpload();
 			}

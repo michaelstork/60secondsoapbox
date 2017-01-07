@@ -1,6 +1,6 @@
 
 <template>
-	<section class="audio-panel content-panel" :class="{'audio-preview-active': audioPreviewActive}">
+	<section class="audio-panel content-panel">
 		<transition name="fade" mode="out-in">
 			<submission-method-dialog
 				v-if="!submissionMethod"
@@ -9,26 +9,24 @@
 			</submission-method-dialog>
 			<component v-else
 				:is="subComponentId"
+				:audioEventHub="audioEventHub"
+				:adapter="adapter"
 				:uploadAudioFile="uploadAudioFile"
-				:selectedFile="selectedFile"
-				:audioSubmissionValid="audioSubmissionValid"
-				:requestPanelNavigation="requestPanelNavigation"
-				v-on:setAudioPreviewStatus="setAudioPreviewStatus"
-				v-on:resetPanel="resetPanel">
+				:selectedFile="selectedFile">
+				<soapbox-wave-surfer
+					:audioEventHub="audioEventHub"
+					:adapter="adapter"
+					:url="audioUrl"
+					:audioSubmissionValid="audioSubmissionValid"
+					:requestPanelNavigation="requestPanelNavigation">
+				</soapbox-wave-surfer>
 			</component>
 		</transition>
-		<soapbox-wave-surfer
-			:url="audioUrl"
-			:active="audioPreviewActive"
-			:audioSubmissionValid="audioSubmissionValid"
-			:requestPanelNavigation="requestPanelNavigation"
-			v-on:resetPanel="resetPanel"
-			v-on:setAudioPreviewStatus="setAudioPreviewStatus">	
-		</soapbox-wave-surfer>
 	</section>
 </template>
 
 <script>
+	import Vue from 'vue';
 	import SoapboxBasePanel from './BasePanel.vue';
 	import WaveSurfer from '../audio/WaveSurfer.vue';
 	import RecordRTCAdapter from '../../adapters/RecordRTC';
@@ -42,12 +40,14 @@
 		extends: SoapboxBasePanel,
 		data: function () {
 
+			const audioEventHub = new Vue();
+
 			return {
+				audioEventHub: audioEventHub,
 				adapter: new RecordRTCAdapter,
 				submissionMethod: null,
 				selectedFile: null,
 				audioUrl: null,
-				audioPreviewActive: false,
 				audioSubmissionValid: false
 			};
 		},
@@ -61,14 +61,22 @@
 					: null;
 			}
 		},
+		mounted: function () {
+			this.audioEventHub.$on('requestAudioReset', this.resetAudioPanel);
+			this.audioEventHub.$on('recordingStatusChange', this.onRecordingStatusChange);
+		},
 		methods: {
-			resetPanel: function () {
+			onRecordingStatusChange: function (status) {
+				if (status === 'recording') this.audioUrl = null;
+			},
+			resetAudioPanel: function () {
 				if (!window.confirm('Are you sure you want to start over?')) return;
 				this.submissionMethod = null;
 				this.audioSubmissionValid = false;
 				this.audioUrl = null;
 				this.audioPreviewActive = null;
 				this.selectedFile = null;
+				if (this.adapter.initialized) this.adapter.restart();
 			},
 			setSubmissionMethod: function (method) {
 				this.submissionMethod = method;
@@ -76,10 +84,6 @@
 			setSelectedFile: function (file) {
 				this.selectedFile = file;
 				this.submissionMethod = 'upload';
-			},
-			setAudioPreviewStatus: function (status) {
-				this.audioPreviewActive = status;
-				if (!status) this.audioUrl = null;
 			},
 			uploadAudioFile: function (file) {
 				let formData = new FormData();
@@ -96,11 +100,12 @@
 			},
 			handleUploadSuccess: function (response) {
 				this.audioUrl = response.data.audioUrl;
-				this.setAudioPreviewStatus(true);
+				this.audioSubmissionValid = true;
 				return response;
 			},
 			handleUploadFailure: function (response) {
 				console.log(response);
+				this.audioUrl = null;
 			},
 			composePanelData: function () {
 				return {audioUrl: this.audioUrl};

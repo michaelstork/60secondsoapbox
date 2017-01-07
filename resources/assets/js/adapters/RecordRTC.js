@@ -71,6 +71,7 @@ export default class RecordRTCAdapter {
 		this.recordingStarted = false;
 		this.process(() => {
 			this.recorder.clearRecordedData();
+			this.initialized = false;
 		});
 	}
 }

@@ -19,46 +19,36 @@
 				</div>
 			</button>
 		</div>
-		<nav>
-			<button v-on:click="restart" :disabled="audioControlsDisabled" class="restart-audio-button round" tabIndex="-1">
-				<i class="mdi mdi-refresh"></i>
-				<span>Start Over</span>
-			</button>
-			<button v-on:click="previewAudio" :disabled="audioControlsDisabled" class="preview-audio-button round" tabIndex="-1">
-				<i class="mdi mdi-volume-high"></i>
-				<span>Preview</span>
-			</button>
-			<button v-on:click="requestPanelNavigation" :disabled="audioControlsDisabled || !audioSubmissionValid" class="save-audio-button round" tabIndex="-1">
-				<i class="mdi mdi-content-save"></i>
-				<span>Save</span>
-			</button>
-		</nav>
+		<slot></slot>
 	</div>
 </template>
 
 <script>
-	import RecordRTCAdapter from '../../adapters/RecordRTC';
 	import StatusIndicator from '../audio/StatusIndicator.vue';
 	import AudioTimer from '../audio/AudioTimer.vue';
 
 	export default {
-		props: ['uploadAudioFile', 'requestPanelNavigation', 'audioSubmissionValid'],
+		props: ['uploadAudioFile', 'audioEventHub', 'adapter'],
 		data: function () {
 			return {
-				status: 'paused',
-				adapter: new RecordRTCAdapter
+				status: 'paused'
 			};
 		},
 		computed: {
 			statusClassList: function () {
 				return 'status-' + this.status;
-			},
-			audioControlsDisabled: function () {
-				return (!this.adapter.recordingStarted || this.status === 'pending');
+			}
+		},
+		watch: {
+			status: function (status) {
+				this.audioEventHub.$emit('recordingStatusChange', status);
 			}
 		},
 		created: function () {
 			this.adapter.initialize();
+		},
+		mounted: function () {
+			this.audioEventHub.$on('requestAudioPreview', this.onRequestAudioPreview);
 		},
 		methods: {
 			toggleRecording: function () {
@@ -66,12 +56,11 @@
 					this.status = 'paused';
 					this.adapter.pause();
 				} else {
-					this.$emit('setAudioPreviewStatus', false);
 					this.adapter.resume();
 					this.status = 'recording';
 				}
 			},
-			previewAudio: function () {
+			onRequestAudioPreview: function () {
 				this.status = 'pending';
 				this.adapter.process(blob => {
 					this.uploadAudioFile(blob)
@@ -80,9 +69,6 @@
 							() => { this.status = 'error'; }
 						);
 				});
-			},
-			restart: function () {
-				this.$emit('resetPanel');
 			}
 		},
 		components: {
