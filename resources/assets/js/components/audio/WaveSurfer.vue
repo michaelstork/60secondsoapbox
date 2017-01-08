@@ -66,7 +66,10 @@
 		},
 		watch: {
 			url: function (url) {
-				if (!url) return;
+				if (!url) {
+					if (this.isPlaying) this.wavesurfer.pause();
+					return;
+				}
 				this.pending = true;
 				this.wavesurfer.load(url);
 			},
