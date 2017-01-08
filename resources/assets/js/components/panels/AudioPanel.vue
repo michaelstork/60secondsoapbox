@@ -44,7 +44,7 @@
 	import SoapboxBasePanel from './BasePanel.vue';
 	import WaveSurfer from '../audio/WaveSurfer.vue';
 	import RecordRTCAdapter from '../../adapters/RecordRTC';
-	import {URLS} from '../../config/index';
+	import {URLS, AUDIO} from '../../config/index';
 
 	import SubmissionMethodDialog from '../audio-submission/SubmissionMethodDialog.vue';
 	import SubmissionMethodUpload from '../audio-submission/SubmissionMethodUpload.vue';
@@ -78,7 +78,6 @@
 		mounted: function () {
 			this.audioEventHub.$on('requestAudioReset', this.resetAudioPanel);
 			this.audioEventHub.$on('recordingStatusChange', this.onRecordingStatusChange);
-			this.audioEventHub.$on('audioValidityChange', this.onAudioValidityChange);
 		},
 		methods: {
 			onRecordingStatusChange: function (status) {
@@ -86,9 +85,6 @@
 					this.audioUrl = null;
 					this.audioSubmissionValid = false;
 				}
-			},
-			onAudioValidityChange: function (status) {
-				this.audioSubmissionValid = status;
 			},
 			resetAudioPanel: function () {
 				if (!window.confirm('Are you sure you want to start over?')) return;
@@ -120,7 +116,7 @@
 			},
 			handleUploadSuccess: function (response) {
 				this.audioUrl = response.data.audioUrl;
-				this.audioSubmissionValid = true;
+				this.audioSubmissionValid = (response.data.audioDuration >= AUDIO.minDuration);
 				return response;
 			},
 			handleUploadFailure: function (response) {
