@@ -17,6 +17,7 @@ class CreateAudioTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->string('filename')->unique();
+            $table->integer('duration')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')
