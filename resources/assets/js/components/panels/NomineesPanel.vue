@@ -1,13 +1,15 @@
 
 <template>
 	<section class="nominees-panel content-panel">
-		<h3 v-if="submissionComplete">Thanks for participating!</h3>
-		<div v-else>
-			<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
+		<div class="panel-content">
+			<h3 v-if="submissionComplete">Thanks for participating!</h3>
+			<soapbox-form v-else :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
+		</div>
+		<nav>
 			<button type="submit" :disabled="!panel.valid" v-on:click="doSubmission">
 				<span>Submit</span>
 			</button>
-		</div>
+		</nav>
 	</section>
 </template>
 

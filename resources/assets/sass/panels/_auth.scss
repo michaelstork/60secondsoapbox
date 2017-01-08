@@ -1,14 +1,23 @@
 
-.auth-panel .input-container {
-	margin-left:auto;
-	margin-right:auto;
-	margin-top:14px;
-
+.auth-panel .form-input-container {
 	@include queryWidth(min, 649px) {
-		width:280px;
+		width:100%;
+		display:flex;
+		justify-content:space-between;
+		align-items:center;
 	}
 	@include queryWidth(max, 648px) {
 		width:100%;
+	}	
+}
+
+.auth-panel .input-container {
+	@include queryWidth(min, 649px) {
+		flex:0 0 48%;
+	}
+	@include queryWidth(max, 648px) {
+		width:100%;
+		margin:14px auto 0;
 	}
 }
 
@@ -16,13 +25,13 @@
 	color:$text1;
 }
 
-.auth-panel .intro {
-	text-align:justify;
-	margin-bottom:1.2em;
-}
-
-.auth-panel .form-header {
-	text-align:center;
+.auth-panel form {
+	@include queryWidth(min, 649px) {
+		padding-top:48px;
+	}
+	@include queryWidth(max, 648px) {
+		padding-bottom:48px;
+	}
 }
 
 @include queryWidth(max, 648px) {

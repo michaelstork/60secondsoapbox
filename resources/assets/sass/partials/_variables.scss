@@ -22,6 +22,10 @@ $panelBG: #F7F7F7;
 $audioHeight:280px;
 
 $contentPanelBorderRadius:5px;
+$navHeight:84px;
+$waveHeight:120px;
+$topGapDesktop:260px;
+$topGapMobile:68px;
 
 @mixin shadow_1 {
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 -1px 2px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.24);	
@@ -40,6 +44,9 @@ $contentPanelBorderRadius:5px;
 }
 @mixin shadow_3_inset {
 	box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), inset 0 -3px 4px rgba(0,0,0,0.02), inset 0 3px 6px rgba(0,0,0,0.23);
+}
+@mixin shadow_4 {
+	box-shadow: 0 5px 7px rgba(0,0,0,0.16), 0 -5px 6px rgba(0,0,0,0.02), 0 4px 7px rgba(0,0,0,0.23);
 }
 
 @mixin queryWidth ($minOrMax, $val) {

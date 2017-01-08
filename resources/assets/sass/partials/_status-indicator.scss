@@ -12,19 +12,33 @@
 	background-repeat:no-repeat;
 	background-position:center center;
 	background-size:cover;
-	box-shadow:0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28);
 	overflow:hidden;
 
-	@include queryWidth(min, 769px) {
+	@include shadow_3;
+
+	display:flex;
+	justify-content:space-around;
+	align-items:center;
+	flex-direction:column;
+
+	color:#FFF;
+	background-color:$accent;
+
+	@include queryWidth(min, 649px) {
 		top:-50px;
 	}
-	@include queryWidth(max, 768px) {
-		top:32px;
+	@include queryWidth(max, 648px) {
+		top:18px;
+	}
+
+	i {
+		text-shadow:2px 2px 0px rgba(0,0,0,0.15);
+		font-size:4rem;
 	}
 }
 
 .status-indicator {
-	border-radius:50px;
+	// border-radius:50px;
 	position:absolute;
 	top:-1px;
 	left:-1px;
@@ -36,7 +50,6 @@
 	align-items:center;
 	flex-direction:column;
 	color:#FFF;
-	font-size:4em;
 }
 
 .status-indicator-enter-active,
@@ -52,7 +65,7 @@
 	transform:translateX(-100%);
 }
 
-@keyframes pulse {
+@keyframes statusPendingPulse {
 	0% {
 		transform:scale(1);
 	}
@@ -71,8 +84,9 @@
 	background-color:$accent;
 
 	i {
+		font-size:3.8rem;
 		transform-origin:50% 50%;
-		animation:pulse 1s ease-out infinite;
+		animation:statusPendingPulse 1s ease-out infinite;
 	}
 }
 .status-indicator-complete {
@@ -87,24 +101,43 @@
 	}
 }
 
+@keyframes statusRecordingPulse {
+	0% {
+		transform:scale(1);
+	}
+	15% {
+		transform:scale(1.05);
+	}
+	85% {
+		transform:scale(0.95);
+	}
+	100% {
+		transform:scale(1);
+	}
+}
+
 .status-indicator-recording {
-	background-color:#DEDEDE;
+	background-color:#DDD;
 	transition:background-color 0.2s ease-out;
 	justify-content:flex-start;
 
 	i {
-		text-shadow:1px 1px 1px rgba(0,0,0,0.15);
 		position:relative;
 		top:-4px;
+		font-size:3.6rem;
 	}
 
 	span {
 		font-size:1.3rem;
 		position:relative;
-		top:-12px;
+		top:-16px;
+		text-shadow:1px 1px 0px rgba(0,0,0,0.15);
 	}
 
 	.status-recording & {
 		background-color:$red;
+		i {
+			animation:statusRecordingPulse 1s ease-out infinite;
+		}
 	}
 }

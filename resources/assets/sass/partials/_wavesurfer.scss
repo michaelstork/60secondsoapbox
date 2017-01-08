@@ -8,8 +8,9 @@
 	position:absolute;
 	z-index:1;
 	box-sizing:border-box;
-	height:205px;
-	padding-top:124px;
+	height:$navHeight + $waveHeight;
+
+	padding-top:$waveHeight;
 	bottom:0;
 	left:0;
 
@@ -54,10 +55,10 @@
 }
 
 .wavesurfer {
-	flex:0 0 80px;
+	flex:0 0 $waveHeight;
 	width:100%;
 	position:relative;
-	top:-124px;
+	top:$waveHeight * -1;
 	transition:opacity 0.15s ease-out;
 	z-index:1;
 	background-color:#F0F0F0;

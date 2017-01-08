@@ -1,25 +1,19 @@
 
 
-.submission-method-record {
-	box-sizing:border-box;
-	
-	@include queryWidth(min, 769px) {
-		padding-top:64px;
-	}
-	@include queryWidth(max, 768px) {
-		padding-top:156px;
-	}
+.submission-method-dialog,
+.submission-method-record,
+.submission-method-upload {
+	height:100%;
 }
 
-.audio-controls {
-	display:flex;
-	flex-direction:column;
-	align-items:center;
+.submission-method-dialog .panel-icon i {
+	font-size:3.6rem;
 }
 
 .record-button {
 	position:relative;
 	width:200px;
+	margin:0 auto;
 }
 
 .record-button div {
@@ -82,5 +76,23 @@
 			margin-left:25%;
 			transform:translateX(-50%);
 		}
+	}
+}
+
+
+.submission-method-dialog nav {
+	padding:0;
+}
+
+.submission-method-dialog .divider {
+	height:80%;
+	width:1px;
+	background-color:#DFDFDF;
+}
+
+.submission-method-dialog button {
+	&:first-of-type,
+	&:last-of-type {
+		margin:0 auto;
 	}
 }

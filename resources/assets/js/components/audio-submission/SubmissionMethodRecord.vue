@@ -1,13 +1,13 @@
 
 <template>
 	<div class="submission-method-record" :class="statusClassList">
-		<status-indicator :status="status">
-			<div class="status-indicator status-indicator-recording">
-				<i class="mdi mdi-microphone"></i>
-				<audio-timer :status="status" :reset="!adapter.recordingStarted"></audio-timer>
-			</div>
-		</status-indicator>		
-		<div class="audio-controls">
+		<div class="panel-content">
+			<status-indicator :status="status">
+				<div class="status-indicator status-indicator-recording">
+					<i class="mdi mdi-microphone"></i>
+					<audio-timer :status="status" :reset="!adapter.recordingStarted"></audio-timer>
+				</div>
+			</status-indicator>		
 			<button v-on:click="toggleRecording" class="record-button rect" :disabled="status === 'pending'" tabIndex="-1">
 				<div class="record-button-content">
 					<i class="mdi mdi-record"></i>

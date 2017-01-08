@@ -1,7 +1,12 @@
 
 <template>
 	<section class="info-panel content-panel" v-on:dblclick="fillForm">
-		<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange"></soapbox-form>
+		<div class="panel-content">
+			<div class="panel-icon">
+				<i class="mdi mdi-account"></i>
+			</div>
+			<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange"></soapbox-form>
+		</div>
 		<nav v-on:touchstart="fillForm">
 			<button class="round"
 				:disabled="!isValidPanel"

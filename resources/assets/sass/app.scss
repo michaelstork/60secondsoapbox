@@ -16,9 +16,7 @@
 @import 'partials/status-indicator';
 @import 'partials/wavesurfer';
 
-@import 'submission-method/submission-method-dialog';
-@import 'submission-method/submission-method-upload';
-@import 'submission-method/submission-method-record';
+@import 'submission-method/submission-method';
 
 
 
@@ -27,17 +25,7 @@ body {
 	position:relative;
 	z-index:1;
 	background-color:#F2F2F2;
-}
 
-body:before {
-	content:'';
-	position:absolute;
-	display:block;
-	top:0;
-	left:0;
-	right:0;
-	height:260px;
-	background-color:$dark;
 }
 
 .container {
@@ -48,19 +36,44 @@ body:before {
 	width:100%;
 	border-radius:4px;
 
-	@include queryWidth(min, 649px) {
-		&:after {
+	// dark gray top background on desktop
+	&:before {
+		content:'';
+		position:absolute;
+		display:block;
+		top:0;
+		left:0;
+		right:0;
+		background-color:$dark;
+
+		@include queryWidth(min, 649px) {
+			height:$topGapDesktop;
+		}
+		@include queryWidth(max, 648px) {
+			height:$topGapMobile;
+		}
+	}
+	
+
+	@include queryWidth(max, 648px) {
+		background-color:#FFF;
+	}
+
+	// panel shadow
+	&:after {
+		position:absolute;
+		top:72px;
+		z-index:0;
+		bottom:0;
+		left:0;
+		right:0;
+		margin:auto;
+		width:600px;
+		border-radius:$contentPanelBorderRadius;
+		@include shadow_1;
+		
+		@include queryWidth(min, 649px) {
 			content:'';
-			position:absolute;
-			top:72px;
-			z-index:0;
-			bottom:0;
-			left:0;
-			right:0;
-			margin:auto;
-			width:600px;
-			border-radius:$contentPanelBorderRadius;
-			@include shadow_1;
 		}
 	}
 }
