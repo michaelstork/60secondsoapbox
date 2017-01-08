@@ -82,7 +82,10 @@
 		},
 		methods: {
 			onRecordingStatusChange: function (status) {
-				if (status === 'recording') this.audioUrl = null;
+				if (status === 'recording') {
+					this.audioUrl = null;
+					this.audioSubmissionValid = false;
+				}
 			},
 			onAudioValidityChange: function (status) {
 				this.audioSubmissionValid = status;
@@ -117,6 +120,7 @@
 			},
 			handleUploadSuccess: function (response) {
 				this.audioUrl = response.data.audioUrl;
+				this.audioSubmissionValid = true;
 				return response;
 			},
 			handleUploadFailure: function (response) {
