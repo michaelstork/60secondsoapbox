@@ -12,4 +12,9 @@ URLS.web = {
 	submission: '/api/submission'
 };
 
-export { URLS };
+const AUDIO = {};
+
+AUDIO.minDuration = 5000;
+AUDIO.maxDuration = 75000;
+
+export { URLS, AUDIO };
