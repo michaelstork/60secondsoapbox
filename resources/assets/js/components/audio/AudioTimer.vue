@@ -10,7 +10,7 @@
 	}
 
 	export default {
-		props: ['status', 'reset'],
+		props: ['status', 'reset', 'update'],
 		data: function () {
 			return {
 				interval: null,
@@ -41,6 +41,7 @@
 		methods: {
 			stopTimer: function () {
 				this.total += this.getMillisecondsSince(this.timeStarted);
+				this.update(this.total);
 				clearInterval(this.interval);
 			},
 			startTimer: function () {
