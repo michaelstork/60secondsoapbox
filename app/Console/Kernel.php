@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\ConcatAudioFiles::class
+        Commands\ConcatAudioFiles::class,
+        Commands\GetAudioDuration::class
     ];
 
     /**

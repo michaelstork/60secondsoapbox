@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Illuminate\Filesystem\FilesystemAdapter;
+use Illuminate\Support\Facades\Artisan;
 use App\User;
 use App\Audio;
 
@@ -84,12 +85,13 @@ class ConcatAudioFiles extends Command
             }
 
             // get duration of resulting file
-            $durationSeconds = `{$ffprobe} -v quiet -print_format compact=print_section=0:nokey=1:escape=csv -show_entries format=duration {$result}`;
+            Artisan::call('getAudioDuration', ['path' => $result]);
+            $duration = Artisan::output();
 
             // assign new db record
             $audio = new Audio();
             $audio->filename = basename($result);
-            $audio->duration = $durationSeconds * 1000;
+            $audio->duration = $duration;
             $user->audio()->save($audio);
 
         } catch (ProcessFailedException $e) {

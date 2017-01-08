@@ -48,6 +48,9 @@
 		watch: {
 			status: function (status) {
 				this.audioEventHub.$emit('recordingStatusChange', status);
+			},
+			recordedDuration: function (duration) {
+				console.log(duration);
 			}
 		},
 		created: function () {
@@ -60,16 +63,15 @@
 		methods: {
 			setRecordedDuration: function (milliseconds) {
 				this.recordedDuration = milliseconds;
+
+				if (this.recordedDuration >= AUDIO.minDuration) {
+					this.onRequestAudioPreview();
+				}
 			},
 			toggleRecording: function () {
 				if (this.status === 'recording') {
 					this.status = 'paused';
 					this.adapter.pause();
-
-					if (this.recordedDuration >= AUDIO.minDuration) {
-						this.onRequestAudioPreview();
-					}
-
 				} else {
 					this.adapter.resume();
 					this.status = 'recording';

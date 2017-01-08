@@ -55,7 +55,6 @@
 			resetTimer: function () {
 				this.stopTimer();
 				this.total = 0;
-				console.log('renderin reset');
 				this.renderTimer(moment.duration(0));
 			},
 			getMillisecondsSince: function (since) {

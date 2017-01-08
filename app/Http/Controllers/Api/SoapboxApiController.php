@@ -38,13 +38,16 @@ class SoapboxApiController extends Controller
             $fullPath = $path . $filename;
 
             $disk->putFileAs('/', $request->file('audioUpload'), $filename);
-            $durationSeconds = `{$ffprobe} -v quiet -print_format compact=print_section=0:nokey=1:escape=csv -show_entries format=duration {$fullPath}`;
+            
+            Artisan::call('getAudioDuration', ['path' => $fullPath]);
+            $duration = Artisan::output();
 
             $audio = new Audio();
             $audio->filename = $filename;
-            $audio->duration = ($durationSeconds * 1000);
+            $audio->duration = $duration;
             $user->audio()->save($audio);
 
+            // combine this file with any others that already exist
             Artisan::call('concatAudioFiles', ['id' => $user->id]);
 
             $result = $user->audio()->firstOrFail();
