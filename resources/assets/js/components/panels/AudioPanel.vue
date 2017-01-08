@@ -17,9 +17,7 @@
 					slot="nav"
 					:audioEventHub="audioEventHub"
 					:url="audioUrl"
-					:adapter="adapter"
-					:audioSubmissionValid="audioSubmissionValid"
-					:requestPanelNavigation="requestPanelNavigation">
+					:adapter="adapter">
 					<button class="round reset-button"
 						slot="restart"
 						v-on:click="resetAudioPanel"

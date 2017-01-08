@@ -9,17 +9,17 @@
 		<nav>
 			<slot name="restart"></slot>
 			<transition name="scale" mode="out-in">
-				<button v-if="url || !adapter.initialized" v-on:click="wavesurfer.playPause()" title="Play/Pause" class="round play-pause-button" :disabled="pending || !url" tabIndex="-1" key="playPause">
+				<button v-if="!url" v-on:click="requestAudioPreview" :disabled="previewDisabled" class="preview-audio-button round" tabIndex="-1" key="requestPreview">
+					<i class="mdi mdi-volume-high"></i>
+					<span>Preview</span>
+				</button>
+				<button v-else v-on:click="wavesurfer.playPause()" title="Play/Pause" class="round play-pause-button" :disabled="pending || !url" tabIndex="-1" key="playPause">
 					<i class="mdi mdi-play"
 						:class="{
 							'mdi-pause': isPlaying
 						}">
 					</i>
 					<span>{{ isPlaying ? 'Pause' : 'Play' }}</span>
-				</button>
-				<button v-else v-on:click="requestAudioPreview" :disabled="previewDisabled" class="preview-audio-button round" tabIndex="-1" key="requestPreview">
-					<i class="mdi mdi-volume-high"></i>
-					<span>Preview</span>
 				</button>
 			</transition>
 			<slot name="continue"></slot>
@@ -31,7 +31,7 @@
 	import WaveSurfer from '../../vendor/wavesurfer';
 
 	export default {
-		props: ['url', 'audioSubmissionValid', 'requestPanelNavigation', 'audioEventHub', 'adapter'],
+		props: ['url', 'audioEventHub', 'adapter'],
 		data: function () {
 			return {
 				wavesurfer: null,

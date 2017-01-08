@@ -1,10 +1,10 @@
 
 <template>
 	<section class="nominees-panel content-panel">
-		<div class="panel-icon">
-			<i class="mdi mdi-account-multiple-plus"></i>
-		</div>
 		<div class="panel-content">
+			<div class="panel-icon">
+				<i class="mdi mdi-account-multiple-plus"></i>
+			</div>
 			<h3 v-if="submissionComplete">Thanks for participating!</h3>
 			<soapbox-form v-else :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
 		</div>
