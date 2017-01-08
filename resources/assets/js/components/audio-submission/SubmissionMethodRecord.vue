@@ -5,7 +5,11 @@
 			<status-indicator :status="status">
 				<div class="status-indicator status-indicator-recording">
 					<i class="mdi mdi-microphone"></i>
-					<audio-timer :status="status" :reset="!adapter.recordingStarted"></audio-timer>
+					<audio-timer
+						:status="status"
+						:reset="!adapter.recordingStarted"
+						:update="setRecordedDuration">
+					</audio-timer>
 				</div>
 			</status-indicator>
 			<button v-on:click="toggleRecording" class="record-button rect" :disabled="status === 'pending'" tabIndex="-1">
@@ -26,12 +30,14 @@
 <script>
 	import StatusIndicator from '../audio/StatusIndicator.vue';
 	import AudioTimer from '../audio/AudioTimer.vue';
+	import { AUDIO } from '../../config';
 
 	export default {
 		props: ['uploadAudioFile', 'audioEventHub', 'adapter'],
 		data: function () {
 			return {
-				status: 'paused'
+				status: 'paused',
+				recordedDuration: 0
 			};
 		},
 		computed: {
@@ -49,12 +55,21 @@
 		},
 		mounted: function () {
 			this.audioEventHub.$on('requestAudioPreview', this.onRequestAudioPreview);
+			this.audioEventHub.$on('setRecordedDuration', this.setRecordedDuration);
 		},
 		methods: {
+			setRecordedDuration: function (milliseconds) {
+				this.recordedDuration = milliseconds;
+			},
 			toggleRecording: function () {
 				if (this.status === 'recording') {
 					this.status = 'paused';
 					this.adapter.pause();
+
+					if (this.recordedDuration >= AUDIO.minDuration) {
+						this.onRequestAudioPreview();
+					}
+
 				} else {
 					this.adapter.resume();
 					this.status = 'recording';
