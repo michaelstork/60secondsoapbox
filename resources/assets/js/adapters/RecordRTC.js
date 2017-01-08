@@ -7,10 +7,6 @@ export default class RecordRTCAdapter {
 		this.initialized   = false;
 		this.mediaRecorder = null;
 		this.recordingStarted = false;
-		// this.status        = null;
-
-		// this.supported = this.isSupported();
-		// this.supported = this.isSupported();
 	}
 
 	static isSupported() {
@@ -36,13 +32,11 @@ export default class RecordRTCAdapter {
 	}
 
 	start() {
-		// this.status = 'recording';
 		this.recorder.startRecording();
 		this.recordingStarted = true;
 	}
 
 	pause() {
-		// this.status = 'paused';
 		this.recorder.pauseRecording();
 	}
 
@@ -51,12 +45,7 @@ export default class RecordRTCAdapter {
 			this.start();
 			return;
 		}
-		// if (this.status === null) {
-			// this.start();
-			// return;
-		// }
 
-		// this.status = 'recording';
 		this.recorder.resumeRecording();
 	}
 
@@ -67,7 +56,6 @@ export default class RecordRTCAdapter {
 	}
 
 	restart() {
-		// this.status = null;
 		this.recordingStarted = false;
 		this.process(() => {
 			this.recorder.clearRecordedData();
