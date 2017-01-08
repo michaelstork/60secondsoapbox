@@ -25,10 +25,7 @@
 					<span>Preview</span>
 				</button>
 			</transition>
-			<button v-on:click="requestPanelNavigation" :disabled="!audioSubmissionValid" class="save-button round" tabIndex="-1">
-				<i class="mdi mdi-content-save"></i>
-				<span>Save</span>
-			</button>
+			<slot name="continue"></slot>
 		</nav>
 	</div>
 </template>

@@ -19,6 +19,14 @@
 					:adapter="adapter"
 					:audioSubmissionValid="audioSubmissionValid"
 					:requestPanelNavigation="requestPanelNavigation">
+					<button class="save-button round"
+						slot="continue"
+						v-on:click="requestPanelNavigation"
+						:disabled="!audioSubmissionValid"
+						tabIndex="-1">
+						<i class="mdi mdi-keyboard-backspace mdi-flip-horizontal"></i>
+						<span>Continue</span>
+					</button>
 				</soapbox-wave-surfer>
 			</component>
 		</transition>
@@ -64,10 +72,14 @@
 		mounted: function () {
 			this.audioEventHub.$on('requestAudioReset', this.resetAudioPanel);
 			this.audioEventHub.$on('recordingStatusChange', this.onRecordingStatusChange);
+			this.audioEventHub.$on('audioValidityChange', this.onAudioValidityChange);
 		},
 		methods: {
 			onRecordingStatusChange: function (status) {
 				if (status === 'recording') this.audioUrl = null;
+			},
+			onAudioValidityChange: function (status) {
+				this.audioSubmissionValid = status;
 			},
 			resetAudioPanel: function () {
 				if (!window.confirm('Are you sure you want to start over?')) return;

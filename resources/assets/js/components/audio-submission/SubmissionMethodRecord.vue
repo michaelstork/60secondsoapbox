@@ -7,7 +7,7 @@
 					<i class="mdi mdi-microphone"></i>
 					<audio-timer :status="status" :reset="!adapter.recordingStarted"></audio-timer>
 				</div>
-			</status-indicator>		
+			</status-indicator>
 			<button v-on:click="toggleRecording" class="record-button rect" :disabled="status === 'pending'" tabIndex="-1">
 				<div class="record-button-content">
 					<i class="mdi mdi-record"></i>
