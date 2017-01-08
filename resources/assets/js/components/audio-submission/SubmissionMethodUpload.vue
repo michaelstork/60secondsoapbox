@@ -17,7 +17,7 @@
 				</h3>
 			</div>
 		</div>
-		<slot></slot>
+		<slot name="nav"></slot>
 	</div>
 </template>
 

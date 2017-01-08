@@ -14,11 +14,19 @@
 				:uploadAudioFile="uploadAudioFile"
 				:selectedFile="selectedFile">
 				<soapbox-wave-surfer
+					slot="nav"
 					:audioEventHub="audioEventHub"
 					:url="audioUrl"
 					:adapter="adapter"
 					:audioSubmissionValid="audioSubmissionValid"
 					:requestPanelNavigation="requestPanelNavigation">
+					<button class="round reset-button"
+						slot="restart"
+						v-on:click="resetAudioPanel"
+						tabIndex="-1">
+						<i class="mdi mdi-refresh"></i>
+						<span>Start Over</span>
+					</button>
 					<button class="save-button round"
 						slot="continue"
 						v-on:click="requestPanelNavigation"
@@ -87,7 +95,7 @@
 				this.audioSubmissionValid = false;
 				this.audioUrl = null;
 				this.selectedFile = null;
-				if (this.adapter.initialized) this.adapter.restart();
+				if (this.adapter.recordingStarted) this.adapter.restart();
 			},
 			setSubmissionMethod: function (method) {
 				this.submissionMethod = method;

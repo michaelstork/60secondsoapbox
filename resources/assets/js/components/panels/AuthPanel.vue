@@ -1,6 +1,6 @@
 
 <template>
-	<section class="auth-panel content-panel" v-on:dblclick="fillForm">
+	<section class="auth-panel content-panel">
 		<div class="panel-content">
 			<div class="panel-icon" style="background-image:url('/images/soapbox.jpg');"></div>
 			<h3 tabIndex="-1">You've been nominated to record an episode of <a href="https://www.aliem.com/category/clinical/60-second-soapbox/" target="_blank" tabIndex="-1">60 Second Soapbox!</a></h3>
@@ -8,7 +8,7 @@
 			<p>If you'd like to participate, enter your invitation code below!</p>
 			<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
 		</div>
-		<nav v-on:touchstart="fillForm">
+		<nav v-on:click="fillForm" v-on:touchstart="fillForm">
 			<button class="round"
 				:disabled="!isValidPanel"
 				v-on:click="requestPanelNavigation">
@@ -74,12 +74,16 @@
 			},
 
 
+
 			fillForm: function () {
 				this.getFieldByName('password').value = 'hockey11';
 				this.getFieldByName('email').value = 'michael@mstork.info';
 				this.onFormValidityChange(true);
 				this.validateCode();
 			}
+			
+
+
 		}
 	}
 </script>

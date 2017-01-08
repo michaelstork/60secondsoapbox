@@ -7,10 +7,7 @@
 			</svg>
 		</transition>
 		<nav>
-			<button v-on:click="requestAudioReset" :disabled="controlsDisabled" class="round reset-button" tabIndex="-1">
-				<i class="mdi mdi-refresh"></i>
-				<span>Start Over</span>
-			</button>
+			<slot name="restart"></slot>
 			<transition name="scale" mode="out-in">
 				<button v-if="url || !adapter.initialized" v-on:click="wavesurfer.playPause()" title="Play/Pause" class="round play-pause-button" :disabled="pending || !url" tabIndex="-1" key="playPause">
 					<i class="mdi mdi-play"
@@ -20,7 +17,7 @@
 					</i>
 					<span>{{ isPlaying ? 'Pause' : 'Play' }}</span>
 				</button>
-				<button v-else v-on:click="requestAudioPreview" :disabled="controlsDisabled" class="preview-audio-button round" tabIndex="-1" key="requestPreview">
+				<button v-else v-on:click="requestAudioPreview" :disabled="previewDisabled" class="preview-audio-button round" tabIndex="-1" key="requestPreview">
 					<i class="mdi mdi-volume-high"></i>
 					<span>Preview</span>
 				</button>
@@ -46,7 +43,7 @@
 			isPlaying: function () {
 				return this.wavesurfer && this.wavesurfer.isPlaying();
 			},
-			controlsDisabled: function () {
+			previewDisabled: function () {
 				return this.pending || (this.adapter.initialized && !this.adapter.recordingStarted);
 			}
 		},
@@ -77,9 +74,6 @@
 		methods: {
 			setZoom: function (amount) {
 				this.wavesurfer.zoom(50 * amount);
-			},
-			requestAudioReset: function () {
-				this.audioEventHub.$emit('requestAudioReset');
 			},
 			requestAudioPreview: function () {
 				this.audioEventHub.$emit('requestAudioPreview');

@@ -1,13 +1,13 @@
 
 <template>
-	<section class="info-panel content-panel" v-on:dblclick="fillForm">
+	<section class="info-panel content-panel">
 		<div class="panel-content">
 			<div class="panel-icon">
 				<i class="mdi mdi-account"></i>
 			</div>
 			<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange"></soapbox-form>
 		</div>
-		<nav v-on:touchstart="fillForm">
+		<nav v-on:click="fillForm" v-on:touchstart="fillForm">
 			<button class="round"
 				:disabled="!isValidPanel"
 				v-on:click="requestPanelNavigation">
@@ -29,6 +29,8 @@
 				form: infoForm
 			};
 		},
+
+
 		methods: {
 			fillForm: function () {
 				this.getFieldByName('name').value = 'NAME';
@@ -37,5 +39,7 @@
 				this.onFormValidityChange(true);
 			}
 		}
+
+
 	}
 </script>

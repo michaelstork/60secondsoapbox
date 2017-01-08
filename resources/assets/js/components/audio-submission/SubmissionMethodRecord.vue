@@ -19,7 +19,7 @@
 				</div>
 			</button>
 		</div>
-		<slot></slot>
+		<slot name="nav"></slot>
 	</div>
 </template>
 
