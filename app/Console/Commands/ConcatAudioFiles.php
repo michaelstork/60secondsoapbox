@@ -55,6 +55,7 @@ class ConcatAudioFiles extends Command
         $user  = User::findOrFail($this->argument('id'));
         $files = $user->audio()->orderBy('created_at', 'asc')->get();
         $path  = $this->disk->getDriver()->getAdapter()->getPathPrefix();
+        $ffprobe = env('FFPROBE_PATH', '/usr/bin/ffprobe');
 
         if ($files->count() <= 1) { return; }
         
@@ -74,6 +75,7 @@ class ConcatAudioFiles extends Command
             $concat = new Process(env('FFMPEG_PATH', '/usr/bin/ffmpeg') . " -f concat -i $index -c copy $result");
             $concat->mustRun();
             
+            
             // cleanup old audio files, db records, and tmp index file
             $user->audio()->delete();
             $this->disk->delete(basename($index));
@@ -81,9 +83,13 @@ class ConcatAudioFiles extends Command
                 $this->disk->delete($file->filename);
             }
 
+            // get duration of resulting file
+            $durationSeconds = `{$ffprobe} -v quiet -print_format compact=print_section=0:nokey=1:escape=csv -show_entries format=duration {$result}`;
+
             // assign new db record
             $audio = new Audio();
             $audio->filename = basename($result);
+            $audio->duration = $durationSeconds * 1000;
             $user->audio()->save($audio);
 
         } catch (ProcessFailedException $e) {

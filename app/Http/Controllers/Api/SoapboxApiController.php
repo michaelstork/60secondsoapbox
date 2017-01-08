@@ -30,11 +30,19 @@ class SoapboxApiController extends Controller
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()->all()[0]], 400);
         } else {
-            $disk = Storage::disk('audio');
             $user = Auth::user();
+            $ffprobe = env('FFPROBE_PATH', '/usr/bin/ffprobe');
+            $disk = Storage::disk('audio');
+            $path = $disk->getDriver()->getAdapter()->getPathPrefix();
+            $filename = str_random(12) . '.wav';
+            $fullPath = $path . $filename;
+
+            $disk->putFileAs('/', $request->file('audioUpload'), $filename);
+            $durationSeconds = `{$ffprobe} -v quiet -print_format compact=print_section=0:nokey=1:escape=csv -show_entries format=duration {$fullPath}`;
 
             $audio = new Audio();
-            $audio->filename = $disk->putFileAs('/', $request->file('audioUpload'), str_random(12) . '.wav');
+            $audio->filename = $filename;
+            $audio->duration = ($durationSeconds * 1000);
             $user->audio()->save($audio);
 
             Artisan::call('concatAudioFiles', ['id' => $user->id]);
@@ -44,6 +52,7 @@ class SoapboxApiController extends Controller
             return response()->json([
                 // 'audioUrl' => asset('audio/' . $result->filename),
                 'audioUrl' => 'https://localhost:3000/audio/' . $result->filename,
+                'audioDuration' => $result->duration,
                 'message' => 'Upload Complete'
             ]);
         }
