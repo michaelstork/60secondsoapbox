@@ -53,8 +53,7 @@ class SoapboxApiController extends Controller
             $result = $user->audio()->firstOrFail();
 
             return response()->json([
-                // 'audioUrl' => asset('audio/' . $result->filename),
-                'audioUrl' => 'https://localhost:3000/audio/' . $result->filename,
+                'audioUrl' => '/audio/' . $result->filename,
                 'audioDuration' => $result->duration,
                 'message' => 'Upload Complete'
             ]);
