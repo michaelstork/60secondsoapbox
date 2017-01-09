@@ -8,7 +8,7 @@
 					<audio-timer
 						:status="status"
 						:reset="!adapter.recordingStarted"
-						:update="setRecordedDuration">
+						:update="onUpdateRecordedDuration">
 					</audio-timer>
 				</div>
 			</status-indicator>
@@ -48,9 +48,6 @@
 		watch: {
 			status: function (status) {
 				this.audioEventHub.$emit('recordingStatusChange', status);
-			},
-			recordedDuration: function (duration) {
-				console.log(duration);
 			}
 		},
 		created: function () {
@@ -58,10 +55,10 @@
 		},
 		mounted: function () {
 			this.audioEventHub.$on('requestAudioPreview', this.onRequestAudioPreview);
-			this.audioEventHub.$on('setRecordedDuration', this.setRecordedDuration);
+			this.audioEventHub.$on('updateRecordedDuration', this.onUpdateRecordedDuration);
 		},
 		methods: {
-			setRecordedDuration: function (milliseconds) {
+			onUpdateRecordedDuration: function (milliseconds) {
 				this.recordedDuration = milliseconds;
 
 				if (this.recordedDuration >= AUDIO.minDuration) {
