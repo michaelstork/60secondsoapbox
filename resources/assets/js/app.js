@@ -56,7 +56,7 @@ if (window.cordova) {
 
 function init () {
     localStorage.removeItem('soapboxSubmission');
-    // localStorage.removeItem('soapboxToken');
+    localStorage.removeItem('soapboxToken');
 
     new Vue({
         el: '.vue-mount',

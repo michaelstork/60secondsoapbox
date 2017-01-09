@@ -1,6 +1,6 @@
 
 <template>
-	<div class="submission-method-upload">
+	<div class="submission-type-upload">
 		<div class="panel-content">
 			<status-indicator :status="status"></status-indicator>		
 		</div>
@@ -13,17 +13,17 @@
 	import StatusIndicator from '../audio/StatusIndicator.vue';
 
 	export default {
-		props: ['uploadAudioFile', 'selectedFile'],
+		props: ['uploadAudioFile', 'audio'],
 		data: function () {
 			return {
 				status: 'pending',
-				file: this.selectedFile
+				file: this.audio.file
 			};
 		},
 		mounted: function () {
 			setTimeout(() => {
 				this.doUpload();
-			}, 1000);
+			}, 250);
 		},
 		methods: {
 			doUpload: function () {

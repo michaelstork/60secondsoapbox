@@ -1,16 +1,16 @@
 
 
-.submission-method-dialog,
-.submission-method-record,
-.submission-method-upload {
+.submission-type-dialog,
+.submission-type-record,
+.submission-type-upload {
 	height:100%;
 }
 
-.submission-method-dialog .panel-icon i {
+.submission-type-dialog .panel-icon i {
 	font-size:3.6rem;
 }
 
-.submission-method-dialog p {
+.submission-type-dialog p {
 	@include queryWidth(max, 648px) {
 		text-align:center;
 	}
@@ -70,7 +70,7 @@
 	}
 }
 
-.submission-method-record nav {
+.submission-type-record nav {
 	justify-content:center;
 
 	button {
@@ -86,17 +86,17 @@
 }
 
 
-.submission-method-dialog nav {
+.submission-type-dialog nav {
 	padding:0;
 }
 
-.submission-method-dialog .divider {
+.submission-type-dialog .divider {
 	height:80%;
 	width:1px;
 	background-color:#DFDFDF;
 }
 
-.submission-method-dialog button {
+.submission-type-dialog button {
 	&:first-of-type,
 	&:last-of-type {
 		margin:0 auto;

@@ -1,6 +1,6 @@
 
 <template>
-	<div class="submission-method-dialog">
+	<div class="submission-type-dialog">
 		<div class="panel-icon">
 			<i class="mdi mdi-voice"></i>
 		</div>
@@ -9,12 +9,12 @@
 			<p>If your device has a microphone and supports audio capture, you can record your submission here. Alternatively, you may upload your own audio file in wav or mp3 format.</p>
 		</div>
 		<nav>
-			<button v-on:click="setSubmissionMethod('record')" class="submission-method-record-button round" :disabled="!canRecordAudio" tabIndex="-1">
+			<button v-on:click="setSubmissionType('record')" class="submission-type-record-button round" :disabled="!canRecordAudio" tabIndex="-1">
 				<i class="mdi mdi-microphone" :class="{'mdi-microphone-off':!canRecordAudio}"></i>
 				<span>Record my voice</span>
 			</button>
 			<i class="divider"></i>
-			<button v-file-upload-link:audioUpload="setSelectedFile" class="submission-method-upload-button round" tabIndex="-1">
+			<button v-file-upload-link:audioUpload="selectFile" class="submission-type-upload-button round" tabIndex="-1">
 				<i class="mdi mdi-cloud-upload"></i>
 				<span>Upload audio file</span>
 			</button>
@@ -23,22 +23,21 @@
 </template>
 
 <script>
-	import RecordRTCAdapter from '../../adapters/RecordRTC';
 	import FileUploadLink from '../../directives/fileUploadLink';
+	import RecordRTCAdapter from '../../adapters/RecordRTC';
 
 	export default {
-		props: ['selectedFile'],
 		computed: {
 			canRecordAudio: function () {
 				return RecordRTCAdapter.isSupported();
 			}
 		},
 		methods: {
-			setSubmissionMethod: function (method) {
-				this.$emit('setSubmissionMethod', method);
+			setSubmissionType: function (type, file = null) {
+				this.$emit('setSubmissionType', type, file);
 			},
-			setSelectedFile: function (file) {
-				this.$emit('setSelectedFile', file);
+			selectFile: function (file) {
+				this.setSubmissionType('upload', file);
 			}
 		},
 		directives: {

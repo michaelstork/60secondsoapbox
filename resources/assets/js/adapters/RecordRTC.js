@@ -3,9 +3,8 @@ import RecordRTC from 'recordrtc';
 export default class RecordRTCAdapter {
 
 	constructor() {
-		console.log('RecordRTCAdapter');
-		this.initialized   = false;
-		this.mediaRecorder = null;
+		this.initialized = false;
+		this.recorder = null;
 		this.recordingStarted = false;
 	}
 
@@ -24,7 +23,6 @@ export default class RecordRTCAdapter {
 				};
 				this.recorder = RecordRTC(stream, options);
 				this.initialized = true;
-				console.log('initialized recordRTC');
 			})
 			.catch(error => {
 				console.log(error);
@@ -59,7 +57,6 @@ export default class RecordRTCAdapter {
 		this.recordingStarted = false;
 		this.process(() => {
 			this.recorder.clearRecordedData();
-			this.initialized = false;
 		});
 	}
 }

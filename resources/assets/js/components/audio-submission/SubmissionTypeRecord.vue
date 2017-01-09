@@ -1,13 +1,13 @@
 
 <template>
-	<div class="submission-method-record" :class="statusClassList">
+	<div class="submission-type-record" :class="statusClassList">
 		<div class="panel-content">
 			<status-indicator :status="status">
 				<div class="status-indicator status-indicator-recording">
 					<i class="mdi mdi-microphone"></i>
 					<audio-timer
 						:status="status"
-						:reset="!adapter.recordingStarted"
+						:reset="!audio.adapter.recordingStarted"
 						:update="onUpdateRecordedDuration">
 					</audio-timer>
 				</div>
@@ -15,7 +15,7 @@
 			<button v-on:click="toggleRecording" class="record-button rect" :disabled="status === 'pending'" tabIndex="-1">
 				<div class="record-button-content">
 					<i class="mdi mdi-record"></i>
-					<span>{{ adapter.recordingStarted ? 'Resume Recording' : 'Start Recording' }}</span>
+					<span>{{ audio.adapter.recordingStarted ? 'Resume Recording' : 'Start Recording' }}</span>
 				</div>
 				<div class="pause-button-content">
 					<i class="mdi mdi-pause-circle"></i>
@@ -33,7 +33,7 @@
 	import { AUDIO } from '../../config';
 
 	export default {
-		props: ['uploadAudioFile', 'audioEventHub', 'adapter'],
+		props: ['uploadAudioFile', 'audioEventHub', 'audio'],
 		data: function () {
 			return {
 				status: 'paused',
@@ -50,10 +50,10 @@
 				this.audioEventHub.$emit('recordingStatusChange', status);
 			}
 		},
-		created: function () {
-			this.adapter.initialize();
-		},
 		mounted: function () {
+			if (!this.audio.adapter.initialized) {
+				this.audio.adapter.initialize();
+			}
 			this.audioEventHub.$on('requestAudioPreview', this.onRequestAudioPreview);
 			this.audioEventHub.$on('updateRecordedDuration', this.onUpdateRecordedDuration);
 		},
@@ -68,16 +68,16 @@
 			toggleRecording: function () {
 				if (this.status === 'recording') {
 					this.status = 'paused';
-					this.adapter.pause();
+					this.audio.adapter.pause();
 				} else {
-					this.adapter.resume();
+					this.audio.adapter.resume();
 					this.status = 'recording';
 				}
 			},
 			onRequestAudioPreview: function () {
 				this.status = 'pending';
 				setTimeout(() => {
-					this.adapter.process(blob => {
+					this.audio.adapter.process(blob => {
 						this.uploadAudioFile(blob)
 							.then(
 								() => { this.status = 'paused'; },
