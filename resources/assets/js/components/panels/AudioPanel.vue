@@ -7,17 +7,22 @@
 				v-on:setSubmissionMethod="setSubmissionMethod"
 				v-on:setSelectedFile="setSelectedFile">
 			</submission-method-dialog>
+
+			<!-- SubmissionMethodRecord/SubmissionMethodUpload -->
 			<component v-else
 				:is="subComponentId"
 				:audioEventHub="audioEventHub"
 				:adapter="adapter"
 				:uploadAudioFile="uploadAudioFile"
 				:selectedFile="selectedFile">
+				
 				<soapbox-wave-surfer
 					slot="nav"
 					:audioEventHub="audioEventHub"
 					:url="audioUrl"
 					:adapter="adapter">
+
+					<!-- start over / continue buttons -->
 					<button class="round reset-button"
 						slot="restart"
 						v-on:click="resetAudioPanel"
@@ -33,7 +38,8 @@
 						<i class="mdi mdi-keyboard-backspace mdi-flip-horizontal"></i>
 						<span>Continue</span>
 					</button>
-				</soapbox-wave-surfer>
+
+				</soapbox-wave-surfer>			
 			</component>
 		</transition>
 	</section>
