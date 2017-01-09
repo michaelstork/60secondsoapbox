@@ -26,3 +26,9 @@
 		padding-right:32px;
 	}
 }
+
+@include queryWidth(max, 648px) {
+	.nominees-panel .input-container {
+		margin-bottom:28px;
+	}
+}
