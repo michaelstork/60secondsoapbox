@@ -60,6 +60,23 @@ class SoapboxApiController extends Controller
         }
     }
 
+    public function deleteUserAudio(Request $request)
+    {
+        $user = Auth::user();
+        $disk = Storage::disk('audio');
+
+        $userAudio = $user->audio();
+
+        $userAudio->each(function ($audio) use ($disk) {
+            $disk->delete($audio->filename);
+            $audio->delete();
+        });
+
+        return response()->json([
+            'message' => 'Audio Deleted'
+        ]);
+    }
+
     public function validateNominee(Request $request)
     {
         $validator = Validator::make($request->input(), [

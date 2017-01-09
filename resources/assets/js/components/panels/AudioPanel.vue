@@ -99,6 +99,7 @@
 				this.audioUrl = null;
 				this.selectedFile = null;
 				if (this.adapter.recordingStarted) this.adapter.restart();
+				this.deleteAudioFile();
 			},
 			setSubmissionMethod: function (method) {
 				this.submissionMethod = method;
@@ -118,6 +119,19 @@
 				).then(
 					this.handleUploadSuccess,
 					this.handleUploadFailure
+				);
+			},
+			deleteAudioFile: function () {
+				return this.$http.post(
+					URLS[this.env].audioDelete,
+					{}
+				).then(
+					response => {
+						console.log(response);
+					},
+					response => {
+						console.log(response);
+					}
 				);
 			},
 			handleUploadSuccess: function (response) {

@@ -14,5 +14,6 @@ use Illuminate\Http\Request;
 */
 
 Route::post('/audio-upload', 'Api\SoapboxApiController@handleAudioUpload');
+Route::post('/audio-delete', 'Api\SoapboxApiController@deleteUserAudio');
 Route::post('/validate-nominee', 'Api\SoapboxApiController@validateNominee');
 Route::post('/submission', 'Api\SoapboxApiController@handleSubmission');

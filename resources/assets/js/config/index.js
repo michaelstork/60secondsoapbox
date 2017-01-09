@@ -9,6 +9,7 @@ URLS.web = {
 	authenticate: '/authenticate',
 	validateNominee: '/api/validate-nominee',
 	audioUpload: '/api/audio-upload',
+	audioDelete: '/api/audio-delete',
 	submission: '/api/submission'
 };
 
