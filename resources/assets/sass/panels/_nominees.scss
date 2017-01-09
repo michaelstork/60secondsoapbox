@@ -1,8 +1,3 @@
-.nominees-panel {
-	button {
-		margin:48px auto 0 auto;
-	}
-}
 
 @include queryWidth(min, 649px) {
 	.nominees-panel .form-input-container {
