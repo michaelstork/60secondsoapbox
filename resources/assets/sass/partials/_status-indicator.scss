@@ -3,9 +3,9 @@
 	left:0;
 	right:0;
 	margin:auto;
-	width:100px;
-	height:100px;
-	border-radius:50px;
+	width:$indicatorDiameter;
+	height:$indicatorDiameter;
+	border-radius:$indicatorDiameter / 2;
 	border:3px solid #FFF;
 	z-index:2;
 	box-sizing:border-box;
@@ -25,7 +25,7 @@
 	background-color:$accent;
 
 	@include queryWidth(min, 649px) {
-		top:-50px;
+		top:-$indicatorDiameter / 2;
 	}
 	@include queryWidth(max, 648px) {
 		top:18px;
@@ -38,7 +38,6 @@
 }
 
 .status-indicator {
-	// border-radius:50px;
 	position:absolute;
 	top:-1px;
 	left:-1px;
@@ -50,6 +49,7 @@
 	align-items:center;
 	flex-direction:column;
 	color:#FFF;
+	border-radius:$indicatorDiameter / 2;
 }
 
 .status-indicator-enter-active,
@@ -118,8 +118,8 @@
 
 .status-indicator-recording {
 	background-color:#DDD;
-	transition:background-color 0.25s ease-out;
 	justify-content:flex-start;
+	transition:background-color 0.15s ease-out;
 
 	i {
 		position:relative;
@@ -136,6 +136,7 @@
 
 	.status-recording & {
 		background-color:$red;
+
 		i {
 			animation:statusRecordingPulse 1s ease-out infinite;
 		}
