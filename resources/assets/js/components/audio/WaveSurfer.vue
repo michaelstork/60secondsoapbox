@@ -52,7 +52,7 @@
 				container: this.$refs.container,
 				progressColor: '#00BCD4',
 				cursorColor: '#DEDEDE',
-				height: 120,
+				height: 60,
 				normalize: true,
 				autoCenter: true,
 				scrollParent: true,
