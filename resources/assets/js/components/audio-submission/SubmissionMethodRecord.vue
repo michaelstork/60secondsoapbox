@@ -79,13 +79,15 @@
 			},
 			onRequestAudioPreview: function () {
 				this.status = 'pending';
-				this.adapter.process(blob => {
-					this.uploadAudioFile(blob)
-						.then(
-							() => { this.status = 'paused'; },
-							() => { this.status = 'error'; }
-						);
-				});
+				setTimeout(() => {
+					this.adapter.process(blob => {
+						this.uploadAudioFile(blob)
+							.then(
+								() => { this.status = 'paused'; },
+								() => { this.status = 'error'; }
+							);
+					});
+				}, 250);
 			}
 		},
 		components: {
