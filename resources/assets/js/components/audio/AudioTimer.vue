@@ -18,21 +18,17 @@
 				total: 0
 			};
 		},
-		computed: {
-			isRecording: function () {
-				return this.status === 'recording';
-			}
-		},
-		destroyed: function () {
+		beforeDestroy: function () {
 			clearInterval(this.interval);
 		},
 		watch: {
-			isRecording: function (recording) {
-				if (recording) {
+			status: function (status, previousStatus) {
+				if (status === 'recording') {
 					this.startTimer();
-				} else {
-					this.stopTimer();
+					return;
 				}
+
+				if (previousStatus === 'recording') this.stopTimer();
 			},
 			reset: function (reset) {
 				if (reset) this.resetTimer();
@@ -53,7 +49,7 @@
 				}, 200);
 			},
 			resetTimer: function () {
-				this.stopTimer();
+				clearInterval(this.interval);
 				this.total = 0;
 				this.renderTimer(moment.duration(0));
 			},

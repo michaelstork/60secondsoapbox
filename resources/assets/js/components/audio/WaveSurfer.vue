@@ -48,7 +48,6 @@
 			}
 		},
 		mounted: function () {
-			console.log('wavesurfer mounted');
 			this.wavesurfer = WaveSurfer.create({
 				container: this.$refs.container,
 				progressColor: '#00BCD4',
@@ -64,6 +63,9 @@
 			this.wavesurfer.on('ready', () => {
 				this.pending = false;
 			});
+		},
+		beforeDestroy: function () {
+			this.wavesurfer.destroy();
 		},
 		watch: {
 			'audio.url': function (url) {

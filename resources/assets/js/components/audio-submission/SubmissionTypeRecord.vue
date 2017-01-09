@@ -8,7 +8,7 @@
 					<audio-timer
 						:status="status"
 						:reset="!audio.adapter.recordingStarted"
-						:update="onUpdateRecordedDuration">
+						:update="updateRecordedDuration">
 					</audio-timer>
 				</div>
 			</status-indicator>
@@ -50,20 +50,20 @@
 				this.audioEventHub.$emit('recordingStatusChange', status);
 			}
 		},
-		mounted: function () {
+		created: function () {
 			if (!this.audio.adapter.initialized) {
 				this.audio.adapter.initialize();
+				this.audioEventHub.$on('requestAudioPreview', this.onRequestAudioPreview);
+				this.audioEventHub.$on('audioReset', this.onAudioReset);
 			}
-			this.audioEventHub.$on('requestAudioPreview', this.onRequestAudioPreview);
-			this.audioEventHub.$on('updateRecordedDuration', this.onUpdateRecordedDuration);
 		},
 		methods: {
-			onUpdateRecordedDuration: function (milliseconds) {
+			updateRecordedDuration: function (milliseconds) {
+				console.log('updateRecordedDuration', milliseconds);
 				this.recordedDuration = milliseconds;
-
-				if (this.recordedDuration >= AUDIO.minDuration) {
-					this.onRequestAudioPreview();
-				}
+				// if (this.recordedDuration >= AUDIO.minDuration) {
+				// 	this.onRequestAudioPreview();
+				// }
 			},
 			toggleRecording: function () {
 				if (this.status === 'recording') {
@@ -75,6 +75,7 @@
 				}
 			},
 			onRequestAudioPreview: function () {
+				console.log('onRequestAudioPreview');
 				this.status = 'pending';
 				setTimeout(() => {
 					this.audio.adapter.process(blob => {
@@ -85,6 +86,14 @@
 							);
 					});
 				}, 250);
+			},
+			onAudioReset: function () {
+				this.audio.adapter.pause();
+				this.status = 'paused';
+
+				if (this.audio.adapter.recordingStarted) {
+					this.audio.adapter.restart();
+				}
 			}
 		},
 		components: {

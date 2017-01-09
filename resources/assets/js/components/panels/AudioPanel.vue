@@ -2,42 +2,44 @@
 <template>
 	<section class="audio-panel content-panel">
 		<transition name="fade" mode="out-in">
-			<submission-type-dialog
-				v-if="!audio.submissionType"
-				v-on:setSubmissionType="setSubmissionType">
-			</submission-type-dialog>
+			<keep-alive>
+				<submission-type-dialog
+					v-if="!audio.submissionType"
+					v-on:setSubmissionType="setSubmissionType">
+				</submission-type-dialog>
 
-			<!-- SubmissionTypeRecord/SubmissionTypeUpload -->
-			<component v-else
-				:is="subComponentId"
-				:audio="audio"
-				:audioEventHub="audioEventHub"
-				:uploadAudioFile="uploadAudioFile">
-				
-				<soapbox-wave-surfer
-					slot="nav"
+				<!-- SubmissionTypeRecord/SubmissionTypeUpload -->
+				<component v-else
+					:is="subComponentId"
+					:audio="audio"
 					:audioEventHub="audioEventHub"
-					:audio="audio">
+					:uploadAudioFile="uploadAudioFile">
+					
+					<soapbox-wave-surfer
+						slot="nav"
+						:audioEventHub="audioEventHub"
+						:audio="audio">
 
-					<!-- start over / continue buttons -->
-					<button class="round reset-button"
-						slot="restart"
-						v-on:click="resetAudioPanel"
-						tabIndex="-1">
-						<i class="mdi mdi-refresh"></i>
-						<span>Start Over</span>
-					</button>
-					<button class="save-button round"
-						slot="continue"
-						v-on:click="requestPanelNavigation"
-						:disabled="!audio.valid"
-						tabIndex="-1">
-						<i class="mdi mdi-keyboard-backspace mdi-flip-horizontal"></i>
-						<span>Continue</span>
-					</button>
+						<!-- start over / continue buttons -->
+						<button class="round reset-button"
+							slot="restart"
+							v-on:click="resetAudioPanel"
+							tabIndex="-1">
+							<i class="mdi mdi-refresh"></i>
+							<span>Start Over</span>
+						</button>
+						<button class="save-button round"
+							slot="continue"
+							v-on:click="requestPanelNavigation"
+							:disabled="!audio.valid"
+							tabIndex="-1">
+							<i class="mdi mdi-keyboard-backspace mdi-flip-horizontal"></i>
+							<span>Continue</span>
+						</button>
 
-				</soapbox-wave-surfer>			
-			</component>
+					</soapbox-wave-surfer>			
+				</component>
+			</keep-alive>
 		</transition>
 	</section>
 </template>
@@ -93,13 +95,12 @@
 			},
 			resetAudioPanel: function () {
 				if (!window.confirm('Are you sure you want to start over?')) return;
-				this.deleteAudioFile().then(() => {
-					this.audio.submissionType = null;
-					this.audio.file = null;
-					this.audio.url = null;
-					this.audio.valid = false;
-					if (this.audio.adapter.recordingStarted) this.audio.adapter.restart();
-				});
+				this.audioEventHub.$emit('audioReset');
+				this.audio.submissionType = null;
+				this.audio.file = null;
+				this.audio.url = null;
+				this.audio.valid = false;
+				this.deleteAudioFile();
 			},
 			setSubmissionType: function (method, file) {
 				this.audio.submissionType = method;

@@ -21,8 +21,11 @@ export default class RecordRTCAdapter {
 					bitsPerSecond: 128000,
 					buffersize: 16384
 				};
-				this.recorder = RecordRTC(stream, options);
+				this.recorder = new RecordRTC(stream, options);
 				this.initialized = true;
+			}, error => {
+				console.log('error');
+				console.log(error);
 			})
 			.catch(error => {
 				console.log(error);
@@ -55,8 +58,7 @@ export default class RecordRTCAdapter {
 
 	restart() {
 		this.recordingStarted = false;
-		this.process(() => {
-			this.recorder.clearRecordedData();
-		});
+		this.pause();
+		this.recorder.clearRecordedData();
 	}
 }
