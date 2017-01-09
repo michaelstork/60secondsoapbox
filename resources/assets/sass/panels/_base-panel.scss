@@ -108,6 +108,10 @@
 .content-panel p {
 	line-height:1.8em;
 	color:$text1;
+
+	& + p {
+		margin-top:12px;
+	}
 }
 .content-panel a {
 	color:$accent;

@@ -10,6 +10,12 @@
 	font-size:3.6rem;
 }
 
+.submission-method-dialog p {
+	@include queryWidth(max, 648px) {
+		text-align:center;
+	}
+}
+
 .record-button {
 	position:relative;
 	width:200px;

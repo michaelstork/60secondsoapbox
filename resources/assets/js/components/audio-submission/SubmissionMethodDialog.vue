@@ -6,7 +6,7 @@
 		</div>
 		<div class="panel-content">
 			<h3>Choose how you'd like to submit your recording:</h3>
-			<p>If your device has a microphone and supports audio capture, you can record your submission here.<br>Alternatively, you may upload your own audio file in wav or mp3 format.</p>
+			<p>If your device has a microphone and supports audio capture, you can record your submission here. Alternatively, you may upload your own audio file in wav or mp3 format.</p>
 		</div>
 		<nav>
 			<button v-on:click="setSubmissionMethod('record')" class="submission-method-record-button round" :disabled="!canRecordAudio" tabIndex="-1">
