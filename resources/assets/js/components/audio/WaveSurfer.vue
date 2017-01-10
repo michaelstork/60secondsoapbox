@@ -68,8 +68,10 @@
 			'audio.url': function (url) {
 				if (!url) {
 					if (this.isPlaying) this.wavesurfer.pause();
+					this.wavesurfer.empty();
 					return;
 				}
+
 				this.pending = true;
 				this.wavesurfer.load(url);
 			},
