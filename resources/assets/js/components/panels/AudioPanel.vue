@@ -94,7 +94,7 @@
 				}
 			},
 			resetAudioPanel: function () {
-				if (!window.confirm('Are you sure you want to start over?')) return;
+				if (!window.confirm('Are you sure you want to start over? You will lose any audio you have submitted so far!')) return;
 				this.audioEventHub.$emit('audioReset');
 				this.setSubmissionType(null);
 				this.audio.file = null;
