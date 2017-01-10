@@ -1,45 +1,45 @@
 
 <template>
 	<section class="audio-panel content-panel">
-		<transition name="fade" mode="out-in">
-			<keep-alive>
-				<submission-type-dialog
-					v-if="!audio.submissionType"
-					v-on:setSubmissionType="setSubmissionType">
-				</submission-type-dialog>
-
-				<!-- SubmissionTypeRecord/SubmissionTypeUpload -->
-				<component v-else
-					:is="subComponentId"
-					:audio="audio"
-					:audioEventHub="audioEventHub"
-					:uploadAudioFile="uploadAudioFile">
-					
-					<soapbox-wave-surfer
-						slot="nav"
+		<transition name="fade" mode="out-in">			
+			<submission-type-dialog
+				v-if="!audio.submissionType"
+				v-on:setSubmissionType="setSubmissionType">
+			</submission-type-dialog>
+			<div v-else>
+				<keep-alive>
+					<!-- SubmissionTypeRecord/SubmissionTypeUpload -->
+					<component :is="subComponentId"
+						:audio="audio"
 						:audioEventHub="audioEventHub"
-						:audio="audio">
+						:uploadAudioFile="uploadAudioFile">
+						
+						<soapbox-wave-surfer
+							slot="nav"
+							:audioEventHub="audioEventHub"
+							:audio="audio">
 
-						<!-- start over / continue buttons -->
-						<button class="round reset-button"
-							slot="restart"
-							v-on:click="resetAudioPanel"
-							tabIndex="-1">
-							<i class="mdi mdi-refresh"></i>
-							<span>Start Over</span>
-						</button>
-						<button class="save-button round"
-							slot="continue"
-							v-on:click="requestPanelNavigation"
-							:disabled="!isValidPanel"
-							tabIndex="-1">
-							<i class="mdi mdi-keyboard-backspace mdi-flip-horizontal"></i>
-							<span>Continue</span>
-						</button>
+							<!-- start over / continue buttons -->
+							<button class="round reset-button"
+								slot="restart"
+								v-on:click="resetAudioPanel"
+								tabIndex="-1">
+								<i class="mdi mdi-refresh"></i>
+								<span>Start Over</span>
+							</button>
+							<button class="save-button round"
+								slot="continue"
+								v-on:click="requestPanelNavigation"
+								:disabled="!isValidPanel"
+								tabIndex="-1">
+								<i class="mdi mdi-keyboard-backspace mdi-flip-horizontal"></i>
+								<span>Continue</span>
+							</button>
 
-					</soapbox-wave-surfer>			
-				</component>
-			</keep-alive>
+						</soapbox-wave-surfer>			
+					</component>
+				</keep-alive>
+			</div>
 		</transition>
 	</section>
 </template>
@@ -96,13 +96,13 @@
 			resetAudioPanel: function () {
 				if (!window.confirm('Are you sure you want to start over?')) return;
 				this.audioEventHub.$emit('audioReset');
-				this.audio.submissionType = null;
+				this.setSubmissionType(null);
 				this.audio.file = null;
 				this.audio.url = null;
 				this.audio.valid = false;
 				this.deleteAudioFile();
 			},
-			setSubmissionType: function (method, file) {
+			setSubmissionType: function (method, file = null) {
 				this.audio.submissionType = method;
 				this.audio.file = file;
 			},

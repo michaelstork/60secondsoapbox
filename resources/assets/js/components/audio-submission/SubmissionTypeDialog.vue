@@ -27,17 +27,21 @@
 	import RecordRTCAdapter from '../../adapters/RecordRTC';
 
 	export default {
+		data: function () {
+			return {file: null};
+		},
 		computed: {
 			canRecordAudio: function () {
 				return RecordRTCAdapter.isSupported();
 			}
 		},
 		methods: {
-			setSubmissionType: function (type, file = null) {
-				this.$emit('setSubmissionType', type, file);
+			setSubmissionType: function (type) {
+				this.$emit('setSubmissionType', type, this.file);
 			},
 			selectFile: function (file) {
-				this.setSubmissionType('upload', file);
+				this.file = file;
+				this.setSubmissionType('upload');
 			}
 		},
 		directives: {
