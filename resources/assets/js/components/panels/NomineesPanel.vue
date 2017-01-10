@@ -19,6 +19,7 @@
 	import SoapboxBasePanel from './BasePanel.vue';
 	import {URLS} from '../../config/index';
 	import debounce from 'lodash/debounce';
+	import some from 'lodash/some';
 	import {nomineesForm} from '../../forms/index';
 
 	export default {
@@ -51,29 +52,38 @@
 			onFormInput: function (target) {
 				const field = this.getFieldByName(target.name);
 
-				if (!field.async) return;
+				if (!target.checkValidity()) {
+					this.handleInvalidNominee(field);
+					return;
+				}
 
-				if (target.checkValidity()) {
+				if (field.async) {
 					field.asyncPending = true;
 					this.validateNominee(field);
-				} else {
-					this.handleInvalidNominee(field);
 				}
 			},
+			validateUnique: function (uniqueField) {
+				let others = this.form.fields.filter(field => field.name !== uniqueField.name);
+				return !some(others, {value: uniqueField.value});
+			},
 			validateNominee: debounce(function (field) {
-				return this.$http.post(
-					URLS[this.env].validateNominee,
-					{email: field.value}
-				).then(
-					response => {
-						this.handleValidNominee(field, response.data.message);
-					},
-					response => {
-						this.handleInvalidNominee(field, response.data.message);
-					}
-				).finally(() => {
-					field.asyncPending = false;
-				});
+				if (!this.validateUnique(field)) {
+					this.handleInvalidNominee(field, 'Duplicate!');
+				} else {
+					return this.$http.post(
+						URLS[this.env].validateNominee,
+						{email: field.value}
+					).then(
+						response => {
+							this.handleValidNominee(field, response.data.message);
+						},
+						response => {
+							this.handleInvalidNominee(field, response.data.message);
+						}
+					).finally(() => {
+						field.asyncPending = false;
+					});
+				}
 			}, 200),
 			handleValidNominee: function (field) {
 				field.asyncValid = true;
@@ -81,6 +91,7 @@
 			},
 			handleInvalidNominee: function (field, message) {
 				field.asyncValid = false;
+				field.asyncPending = false;
 				if (message) field.asyncError = message;
 			}
 		}
