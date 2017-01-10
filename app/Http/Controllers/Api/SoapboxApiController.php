@@ -155,7 +155,7 @@ class SoapboxApiController extends Controller
         $user = new User();
         $user->email = $email;
 
-        $code = $this->str_random(8);
+        $code = str_random(8);
         $user->password = bcrypt($code);
 
         $user->save();
