@@ -6,68 +6,62 @@
 	height:100%;
 }
 
-.submission-type-dialog .panel-icon i {
-	font-size:3.6rem;
-}
 
-.submission-type-dialog p {
-	@include queryWidth(max, 648px) {
-		text-align:center;
-	}
-}
+/**
+ *  Submission Type Record
+ */
 
-.record-button {
+.submission-type-record .record-button {
 	position:relative;
 	width:200px;
-	margin:0 auto;
-}
-
-.record-button div {
-	width:160px;
-	height:100%;
-	display:flex;
-	position:absolute;
-	top:0;
-	left:0;
-	right:0;
-	margin:auto;
-}
-
-.record-button i {
-	flex:0 0 30px;
-	text-align:center;
-	line-height:36px;
-}
-
-.record-button span {
-	flex:1 0 auto;
-	text-align:center;
-	line-height:36px;
-}
-
-.record-button .pause-button-content {
-	display:none;
-	color:$text2;
+	margin:24px auto;
 	
-	i {
-		font-size:1.4em;
+	div {
+		width:160px;
+		height:100%;
+		display:flex;
+		position:absolute;
+		top:0;
+		left:0;
+		right:0;
+		margin:auto;
 	}
 
-	.status-recording & {
-		display:flex;
+	i {
+		flex:0 0 30px;
+		text-align:center;
+		line-height:36px;
+	}
+
+	span {
+		flex:1 0 auto;
+		text-align:center;
+		line-height:36px;
+	}
+
+	.pause-button-content {
+		display:none;
+		color:$text2;
+		
+		i {
+			font-size:1.4em;
+		}
+	}
+
+	.record-button-content {
+		color:$red;
+
+		i {
+			font-size:1.8em;
+		}
 	}
 }
 
-.record-button .record-button-content {
-	color:$red;
-
-	i {
-		font-size:1.8em;
-	}
-
-	.status-recording & {
-		display:none;
-	}
+.submission-type-record.status-recording .pause-button-content {
+	display:flex;
+}
+.submission-type-record.status-recording .record-button-content {
+	display:none;
 }
 
 .submission-type-record nav {
@@ -85,6 +79,20 @@
 	}
 }
 
+
+/**
+ *  Submission Type Dialog
+ */
+
+.submission-type-dialog .panel-icon i {
+	font-size:3.6rem;
+}
+
+.submission-type-dialog p {
+	@include queryWidth(max, 648px) {
+		text-align:center;
+	}
+}
 
 .submission-type-dialog nav {
 	padding:0;
