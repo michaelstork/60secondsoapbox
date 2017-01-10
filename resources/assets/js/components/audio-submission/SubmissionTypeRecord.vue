@@ -59,11 +59,11 @@
 		},
 		methods: {
 			updateRecordedDuration: function (milliseconds) {
-				console.log('updateRecordedDuration', milliseconds);
 				this.recordedDuration = milliseconds;
-				// if (this.recordedDuration >= AUDIO.minDuration) {
-				// 	this.onRequestAudioPreview();
-				// }
+				if (this.recordedDuration >= AUDIO.minDuration
+					&& this.status !== 'pending') {
+					this.onRequestAudioPreview();
+				}
 			},
 			toggleRecording: function () {
 				if (this.status === 'recording') {
@@ -75,9 +75,8 @@
 				}
 			},
 			onRequestAudioPreview: function () {
-				console.log('onRequestAudioPreview');
 				this.status = 'pending';
-				setTimeout(() => {
+				this.$nextTick(() => {
 					this.audio.adapter.process(blob => {
 						this.uploadAudioFile(blob)
 							.then(
@@ -85,7 +84,7 @@
 								() => { this.status = 'error'; }
 							);
 					});
-				}, 250);
+				});
 			},
 			onAudioReset: function () {
 				this.audio.adapter.pause();
