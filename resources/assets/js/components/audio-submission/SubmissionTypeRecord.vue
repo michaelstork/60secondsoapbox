@@ -51,13 +51,23 @@
 			}
 		},
 		created: function () {
-			if (!this.audio.adapter.initialized) {
-				this.audio.adapter.initialize();
-				this.audioEventHub.$on('requestAudioPreview', this.onRequestAudioPreview);
-				this.audioEventHub.$on('audioReset', this.onAudioReset);
-			}
+			this.audio.adapter.initialize();
+		},
+		activated: function () {
+			this.subscribeAudioEvents();
+		},
+		deactivated: function () {
+			this.unsubscribeAudioEvents();
 		},
 		methods: {
+			subscribeAudioEvents: function () {
+				this.audioEventHub.$on('requestAudioPreview', this.onRequestAudioPreview);
+				this.audioEventHub.$on('audioReset', this.onAudioReset);
+			},
+			unsubscribeAudioEvents: function () {
+				this.audioEventHub.$off('requestAudioPreview', this.onRequestAudioPreview);
+				this.audioEventHub.$off('audioReset', this.onAudioReset);
+			},
 			updateRecordedDuration: function (milliseconds) {
 				this.recordedDuration = milliseconds;
 				if (this.recordedDuration >= AUDIO.minDuration
@@ -76,6 +86,7 @@
 			},
 			onRequestAudioPreview: function () {
 				this.status = 'pending';
+				this.audio.adapter.pause();
 				this.$nextTick(() => {
 					this.audio.adapter.process(blob => {
 						this.uploadAudioFile(blob)
