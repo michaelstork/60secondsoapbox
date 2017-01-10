@@ -37,7 +37,7 @@
 }
 
 .wavesurfer-container button {
-	width:60px;
+	width:70px;
 
 	&:first-of-type {
 		margin-right:25%;
@@ -46,11 +46,6 @@
 	&:last-of-type {
 		margin-left:25%;
 		transform:translateX(-50%);
-	}
-
-	&.preview-audio-button,
-	&.play-pause-button {
-		width:46px;
 	}
 }
 
