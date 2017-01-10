@@ -118,19 +118,28 @@
 
 .status-indicator-recording {
 	background-color:#DDD;
-	justify-content:flex-start;
+	justify-content:space-around;
 	transition:background-color 0.15s ease-out;
 
 	i {
-		position:relative;
-		top:-4px;
+		position:absolute;
+		top:-3px;
+		left:0;
+		right:0;
+		margin:auto;
+		text-align:center;
 		font-size:3.6rem;
 	}
 
 	span {
 		font-size:1.3rem;
-		position:relative;
-		top:-16px;
+		position:absolute;
+		bottom:8px;
+		left:0;
+		right:0;
+		margin:auto;
+		text-align:center;
+		height:28px;
 		text-shadow:1px 1px 0px rgba(0,0,0,0.15);
 	}
 

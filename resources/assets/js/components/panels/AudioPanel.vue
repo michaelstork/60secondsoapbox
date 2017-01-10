@@ -31,7 +31,7 @@
 						<button class="save-button round"
 							slot="continue"
 							v-on:click="requestPanelNavigation"
-							:disabled="!audio.valid"
+							:disabled="!isValidPanel"
 							tabIndex="-1">
 							<i class="mdi mdi-keyboard-backspace mdi-flip-horizontal"></i>
 							<span>Continue</span>
