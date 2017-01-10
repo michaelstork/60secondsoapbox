@@ -14,26 +14,20 @@
 	bottom:0;
 	left:0;
 
+	&.active {
+		background-color:#F0F0F0;
+	}
+
 	&.active .wavesurfer {
 		opacity:1;
 	}
 	&.pending .wavesurfer {
-		opacity:0;
-	}
-}
 
-.wavesurfer-container .async-pending-indicator {
-	position:absolute;
-	height:24px;
-	top:-76px;
-	left:0;
-	right:0;
-	margin:auto;
-	transition:opacity 0.3s $standardCurve;
-	opacity:0;
-}
-.wavesurfer-container.pending .async-pending-indicator {
-	opacity:1;
+	}
+	&.pending .loading-text {
+		opacity:1;
+		transition-duration:0.1s;
+	}
 }
 
 .wavesurfer-container button {
@@ -54,8 +48,24 @@
 	width:100%;
 	position:relative;
 	top:$waveHeight * -1;
-	transition:opacity 0.15s ease-out;
+	transition:opacity 0.25s ease-out;
 	z-index:1;
 	background-color:#F0F0F0;
 	opacity:0;
+}
+
+.wavesurfer-container .loading-text {
+	width:100%;
+	height:$waveHeight;
+	background-color:#F0F0F0;
+	font-size:0.8rem;
+	line-height:$waveHeight;
+	text-align:center;
+	position:absolute;
+	z-index:2;
+	top:0;
+	left:0;
+	color:$text2;
+	opacity:0;
+	transition:opacity 0.25s ease-out;
 }

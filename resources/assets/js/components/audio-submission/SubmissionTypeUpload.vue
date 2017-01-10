@@ -21,16 +21,7 @@
 			};
 		},
 		mounted: function () {
-			console.log('mounted upload');
-			// setTimeout(() => {
-				this.doUpload();
-			// }, 250);
-		},
-		activated: function () {
-			console.log('activated upload');
-		},
-		deactivated: function () {
-			console.log('deactivated upload');
+			setTimeout(this.doUpload, 250);
 		},
 		methods: {
 			doUpload: function () {

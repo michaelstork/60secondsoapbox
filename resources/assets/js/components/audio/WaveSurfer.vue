@@ -1,11 +1,7 @@
 <template>
 	<div class="wavesurfer-container" :class="{pending:pending, active: audio.url}">
 		<div ref="container" class="wavesurfer"></div>
-		<transition name="fade">
-			<svg v-if="pending" class="async-pending-indicator" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-				<circle fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-			</svg>
-		</transition>
+		<p class="loading-text">Loading Audio...</p>
 		<nav>
 			<slot name="restart"></slot>
 			<transition name="scale" mode="out-in">
@@ -65,6 +61,7 @@
 			});
 		},
 		beforeDestroy: function () {
+			this.wavesurfer.unAll();
 			this.wavesurfer.destroy();
 		},
 		watch: {
