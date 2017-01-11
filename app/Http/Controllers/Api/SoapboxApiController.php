@@ -23,12 +23,20 @@ class SoapboxApiController extends Controller
 
     public function handleAudioUpload(Request $request)
     {
-        $validator = Validator::make($request->file(), [
-            'audioUpload' => 'bail|required|mimetypes:audio/mp4,audio/mpeg,audio/ogg,audio/x-aac,audio/x-mpegurl,audio/x-wav'
-        ]);
+        $validator = Validator::make(
+            $request->file(),
+            [
+                'audio' => 'bail|required|mimetypes:audio/mp4,audio/mpeg,audio/ogg,audio/x-aac,audio/x-mpegurl,audio/x-wav'
+            ],
+            [
+                'audio.mimetypes' => "Please submit your audio as a <br> <span>wav</span> or <span>mp3</span> file."
+            ]
+        );
 
         if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()->all()[0]], 400);
+            return response()->json(
+                ['message' => $validator->errors()->first()], 400
+            );
         } else {
             $user = Auth::user();
             $ffprobe = env('FFPROBE_PATH', '/usr/bin/ffprobe');
@@ -37,7 +45,7 @@ class SoapboxApiController extends Controller
             $filename = str_random(12) . '.wav';
             $fullPath = $path . $filename;
 
-            $disk->putFileAs('/', $request->file('audioUpload'), $filename);
+            $disk->putFileAs('/', $request->file('audio'), $filename);
             
             Artisan::call('getAudioDuration', ['path' => $fullPath]);
             $duration = Artisan::output();
