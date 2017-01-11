@@ -33,15 +33,13 @@
 	import AudioTimer from '../audio/AudioTimer.vue';
 	import { AUDIO } from '../../config';
 
-	const defaultMessage = `Use the button below to start recording.<br>You'll want to record somewhere between <span>${AUDIO.minDuration / 1000} and ${AUDIO.maxDuration / 1000} seconds</span> of audio.`;
-
 	export default {
 		props: ['uploadAudioFile', 'audioEventHub', 'audio'],
 		data: function () {
 			return {
 				status: 'paused',
 				recordedDuration: 0,
-				message: defaultMessage
+				message: null
 			};
 		},
 		computed: {

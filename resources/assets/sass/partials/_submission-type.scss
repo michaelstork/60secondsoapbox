@@ -5,6 +5,11 @@
 	height:100%;
 }
 
+.submission-type-record .panel-icon,
+.submission-type-upload .panel-icon {
+	background-color:#FFF;
+}
+
 [class^='submission-type-'] p.message {
 	text-align:center;
 	font-size:0.8rem;

@@ -1,9 +1,17 @@
 <template>
-	<span ref="timer" class="audio-timer">00:00</span>
+	<div>
+		<svg class="radial-progress" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+			<circle :style="radialProgressStyle" cx="50" cy="50" r="50" />
+		</svg>
+		<span ref="timer" class="audio-timer">00:00</span>
+	</div>
 </template>
 
 <script>
 	import moment from 'moment';
+	import {AUDIO} from '../../config';
+
+	const radialProgressDashArray = 314;
 
 	function padString (str) {
 		return ('00' + str).substr(-2, 2);
@@ -15,8 +23,16 @@
 			return {
 				interval: null,
 				timeStarted: null,
-				total: 0
+				total: 0,
+				progress: 0
 			};
+		},
+		computed: {
+			radialProgressStyle: function () {
+				return {
+					'stroke-dashoffset': Math.max(0, radialProgressDashArray * (1 - this.progress))
+				};
+			}
 		},
 		beforeDestroy: function () {
 			clearInterval(this.interval);
@@ -59,8 +75,8 @@
 			renderTimer: function (duration) {
 				let minutes = Math.floor(duration.as('minutes'));
 				let seconds = Math.floor(duration.as('seconds')) - (minutes * 60);
-
-				this.$refs.timer.innerText = padString(minutes) + ':' + padString(seconds);
+				this.$refs.timer.innerText = padString(minutes) + ':' + padString(seconds);				
+				this.progress = duration.as('milliseconds') / AUDIO.minDuration;
 			}
 		}
 	}

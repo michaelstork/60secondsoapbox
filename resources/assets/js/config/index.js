@@ -15,7 +15,7 @@ URLS.web = {
 
 const AUDIO = {};
 
-AUDIO.minDuration = 5000;
+AUDIO.minDuration = 45000;
 AUDIO.maxDuration = 75000;
 
 export { URLS, AUDIO };
