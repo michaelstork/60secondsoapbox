@@ -14,7 +14,7 @@
 				<span>Record my voice</span>
 			</button>
 			<i class="divider"></i>
-			<button v-file-upload-link:audioUpload="selectFile" class="submission-type-upload-button round" tabIndex="-1">
+			<button v-file-upload-link:audio="selectFile" class="submission-type-upload-button round" tabIndex="-1">
 				<i class="mdi mdi-cloud-upload"></i>
 				<span>Upload audio file</span>
 			</button>

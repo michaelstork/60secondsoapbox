@@ -94,10 +94,10 @@
 }
 
 .status-indicator-error {
-	background-color:#EEE;
+	background-color:$red;
 
 	i {
-		color:$red;
+		color:#FFF;
 	}
 }
 

@@ -79,6 +79,26 @@
 	}
 }
 
+/**
+ *  Submission Type Upload
+ */
+
+.submission-type-upload p.message {
+	text-align:center;
+	font-size:0.9rem;
+	margin:0 auto 32px auto;
+
+	span {
+		color:$accent;
+	}
+	span.error {
+		color:$red;
+	}
+}
+
+.submission-type-upload button {
+	margin:0 auto;
+}
 
 /**
  *  Submission Type Dialog

@@ -8,8 +8,8 @@ URLS.cordova = {
 URLS.web = {
 	authenticate: '/authenticate',
 	validateNominee: '/api/validate-nominee',
-	audioUpload: '/api/audio-upload',
-	audioDelete: '/api/audio-delete',
+	audioUpload: '/api/user-audio',
+	audioDelete: '/api/user-audio',
 	submission: '/api/submission'
 };
 

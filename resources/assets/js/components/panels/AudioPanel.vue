@@ -108,7 +108,7 @@
 			},
 			uploadAudioFile: function (file) {
 				let formData = new FormData();
-				formData.append('audioUpload', file);
+				formData.append('audio', file);
 
 				return this.$http.post(
 					URLS[this.env].audioUpload,
@@ -120,26 +120,16 @@
 				);
 			},
 			deleteAudioFile: function () {
-				return this.$http.post(
-					URLS[this.env].audioDelete,
-					{}
-				).then(
-					response => {
-						console.log(response);
-					},
-					response => {
-						console.log(response);
-					}
-				);
+				return this.$http.delete(URLS[this.env].audioDelete);
 			},
 			handleUploadSuccess: function (response) {
 				this.audio.url = response.data.url;
 				this.audio.valid = (response.data.duration >= AUDIO.minDuration);
-				return response;
+				return response.data;
 			},
 			handleUploadFailure: function (response) {
-				console.log(response);
 				this.audio.url = null;
+				return Promise.reject(response.data.message);
 			},
 			composePanelData: function () {
 				return {

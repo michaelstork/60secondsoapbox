@@ -6,8 +6,8 @@ $mdi-icons: (
 	"microphone": F36C,
 	"microphone-off": F36D,
 	"cloud-upload": F167,
-	"check": F12C,
-	"alert": F026,
+	"thumb-up": F513,
+	"thumb-down": F511,
 	"exclamation": F205,
 	"volume-high": F57E,
 	"voice": F5CB,
@@ -17,7 +17,8 @@ $mdi-icons: (
 	"record": F44A,
 	"content-save": F193,
 	"keyboard-backspace": F30D,
-	"account": F004
+	"account": F004,
+	"redo": F44E
 );
 
 @import '../../../../node_modules/mdi/scss/functions';

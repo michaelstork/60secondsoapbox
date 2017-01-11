@@ -90,10 +90,12 @@
 				this.$nextTick(() => {
 					this.audio.adapter.process(blob => {
 						this.uploadAudioFile(blob)
-							.then(
-								() => { this.status = 'paused'; },
-								() => { this.status = 'error'; }
-							);
+							.then(() => {
+								this.status = 'paused';
+							}, error => {
+								this.status = 'error';
+								this.message = error;
+							});
 					});
 				});
 			},
