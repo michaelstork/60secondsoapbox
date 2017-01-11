@@ -148,6 +148,7 @@
 
 		i {
 			animation:statusRecordingPulse 1s ease-out infinite;
+			animation-fill-mode:both;
 		}
 	}
 }
@@ -161,8 +162,8 @@ $radialProgressDashArray:314;
 	width:$indicatorDiameter;
 	height:$indicatorDiameter;
 	z-index:1;
-
 	fill:rgba(255,255,255,0);
+
 
 	circle {
 		transform-origin:50% 50%;
