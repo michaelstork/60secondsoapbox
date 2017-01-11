@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<svg class="radial-progress" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-			<circle :style="radialProgressStyle" cx="50" cy="50" r="50" />
+			<circle ref="progress" stroke-dashoffset="314" cx="50" cy="50" r="50" />
 		</svg>
 		<span ref="timer" class="audio-timer">00:00</span>
 	</div>
@@ -23,16 +23,8 @@
 			return {
 				interval: null,
 				timeStarted: null,
-				total: 0,
-				progress: 0
+				total: 0
 			};
-		},
-		computed: {
-			radialProgressStyle: function () {
-				return {
-					'stroke-dashoffset': Math.max(0, radialProgressDashArray * (1 - this.progress))
-				};
-			}
 		},
 		beforeDestroy: function () {
 			clearInterval(this.interval);
@@ -73,10 +65,12 @@
 				return moment.duration(moment().diff(since));
 			},
 			renderTimer: function (duration) {
-				let minutes = Math.floor(duration.as('minutes'));
-				let seconds = Math.floor(duration.as('seconds')) - (minutes * 60);
-				this.$refs.timer.innerText = padString(minutes) + ':' + padString(seconds);				
-				this.progress = duration.as('milliseconds') / AUDIO.minDuration;
+				const minutes = Math.floor(duration.as('minutes'));
+				const seconds = Math.floor(duration.as('seconds')) - (minutes * 60);
+				const progress = 1 - (duration.as('milliseconds') / AUDIO.minDuration);
+
+				this.$refs.timer.innerText = padString(minutes) + ':' + padString(seconds);
+				this.$refs.progress.style.strokeDashoffset = radialProgressDashArray * Math.max(0, progress);
 			}
 		}
 	}

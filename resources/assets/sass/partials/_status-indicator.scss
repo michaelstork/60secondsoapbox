@@ -102,21 +102,6 @@
 	}
 }
 
-@keyframes statusRecordingPulse {
-	0% {
-		transform:scale(1);
-	}
-	15% {
-		transform:scale(1.05);
-	}
-	85% {
-		transform:scale(0.95);
-	}
-	100% {
-		transform:scale(1);
-	}
-}
-
 .status-indicator-recording {
 	background-color:#D2D2D2;
 	justify-content:space-around;
@@ -145,11 +130,6 @@
 
 	.status-recording & {
 		background-color:lighten(#D32F2F, 2%);
-
-		i {
-			animation:statusRecordingPulse 1s ease-out infinite;
-			animation-fill-mode:both;
-		}
 	}
 }
 
@@ -171,7 +151,7 @@ $radialProgressDashArray:314;
 		transition:stroke 0.15s ease-out, stroke-dashoffset 0.2s ease-out;
 		stroke-width:$indicatorDiameter;
 		stroke-dasharray:$radialProgressDashArray;
-		stroke-dashoffset:$radialProgressDashArray / 4.4;
+		stroke-dashoffset:$radialProgressDashArray;
 		stroke:rgba(255,255,255,0.35);
 	}
 
