@@ -56,6 +56,7 @@
 				renderer: 'MultiCanvas',
 				maxCanvasWidth: 600
 			});
+			
 			this.wavesurfer.on('ready', () => {
 				this.pending = false;
 			});

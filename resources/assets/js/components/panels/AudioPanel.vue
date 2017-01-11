@@ -85,6 +85,11 @@
 		},
 		mounted: function () {
 			this.audioEventHub.$on('recordingStatusChange', this.onRecordingStatusChange);
+			
+			// stop all playback when panel is inactive
+			this.eventHub.$on('requestPanelNavigation', () => {
+				this.audio.url = null;
+			});
 		},
 		methods: {
 			onRecordingStatusChange: function (status) {
