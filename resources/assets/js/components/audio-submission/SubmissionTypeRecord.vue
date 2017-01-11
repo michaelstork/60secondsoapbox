@@ -12,6 +12,7 @@
 					</audio-timer>
 				</div>
 			</status-indicator>
+			<p v-if="message" v-html="message" class="message"></p>
 			<button v-on:click="toggleRecording" class="record-button rect" :disabled="status === 'pending'" tabIndex="-1">
 				<div class="record-button-content">
 					<i class="mdi mdi-record"></i>
@@ -32,12 +33,15 @@
 	import AudioTimer from '../audio/AudioTimer.vue';
 	import { AUDIO } from '../../config';
 
+	const defaultMessage = `Use the button below to start recording.<br>You'll want to record somewhere between <span>${AUDIO.minDuration / 1000} and ${AUDIO.maxDuration / 1000} seconds</span> of audio.`;
+
 	export default {
 		props: ['uploadAudioFile', 'audioEventHub', 'audio'],
 		data: function () {
 			return {
 				status: 'paused',
-				recordedDuration: 0
+				recordedDuration: 0,
+				message: defaultMessage
 			};
 		},
 		computed: {
@@ -91,10 +95,14 @@
 					this.audio.adapter.process(blob => {
 						this.uploadAudioFile(blob)
 							.then(() => {
-								this.status = 'paused';
+								if (this.audio.valid) {
+									this.status = 'complete';
+								} else {
+									this.status = 'paused';
+								}
 							}, error => {
 								this.status = 'error';
-								this.message = error;
+								this.message = 'Uh oh, something went wrong: '+error;
 							});
 					});
 				});

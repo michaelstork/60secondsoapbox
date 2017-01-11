@@ -1,9 +1,22 @@
 
-
 .submission-type-dialog,
 .submission-type-record,
 .submission-type-upload {
 	height:100%;
+}
+
+[class^='submission-type-'] p.message {
+	text-align:center;
+	font-size:0.8rem;
+	margin-bottom:48px;
+
+	span {
+		color:$accent;
+		white-space:nowrap;
+	}
+	span.error {
+		color:$red;
+	}
 }
 
 
@@ -82,19 +95,6 @@
 /**
  *  Submission Type Upload
  */
-
-.submission-type-upload p.message {
-	text-align:center;
-	font-size:0.9rem;
-	margin:0 auto 32px auto;
-
-	span {
-		color:$accent;
-	}
-	span.error {
-		color:$red;
-	}
-}
 
 .submission-type-upload button {
 	margin:0 auto;
