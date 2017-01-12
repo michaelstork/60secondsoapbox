@@ -21,8 +21,15 @@
 	align-items:center;
 	flex-direction:column;
 
+
 	color:#FFF;
 	background-color:$accent;
+
+	&:empty {
+		background-image:url('/images/60secondsoapbox.png');
+		background-size:auto 74%;
+		background-color:#000;
+	}
 
 	@include queryWidth(min, 649px) {
 		top:-$indicatorDiameter / 2;

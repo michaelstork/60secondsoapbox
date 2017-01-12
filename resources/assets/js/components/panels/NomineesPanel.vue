@@ -2,7 +2,7 @@
 <template>
 	<section class="nominees-panel content-panel">
 		<div class="panel-content">
-			<div class="panel-icon status-indicator-complete" style="background-image:url('images/soapbox.jpg');"></div>
+			<div class="panel-icon status-indicator-complete"></div>
 			<h3 v-if="submissionComplete">Thanks for participating!</h3>
 			<soapbox-form v-else :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
 		</div>
