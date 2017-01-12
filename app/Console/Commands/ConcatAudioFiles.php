@@ -73,7 +73,7 @@ class ConcatAudioFiles extends Command
 
         try {
             // concatenate the audio files
-            $concat = new Process(env('FFMPEG_PATH', '/usr/bin/ffmpeg') . " -f -safe 0 concat -i $index -c copy $result");
+            $concat = new Process(env('FFMPEG_PATH', '/usr/bin/ffmpeg') . " -f concat -safe 0 -i $index -c copy $result");
             $concat->mustRun();
             
             
