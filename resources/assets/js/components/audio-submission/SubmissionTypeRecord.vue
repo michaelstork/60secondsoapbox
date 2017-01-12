@@ -100,7 +100,8 @@
 								}
 							}, error => {
 								this.status = 'error';
-								this.message = 'Uh oh, something went wrong: '+error;
+								this.message = 'Uh oh, something went wrong';
+								console.log(error);
 							});
 					});
 				});
