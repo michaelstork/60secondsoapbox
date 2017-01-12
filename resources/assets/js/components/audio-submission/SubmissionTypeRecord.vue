@@ -33,13 +33,19 @@
 	import AudioTimer from '../audio/AudioTimer.vue';
 	import { AUDIO } from '../../config';
 
+	const defaultMessage = `
+		Use the button below to record <span>${AUDIO.minDuration / 1000} - ${AUDIO.maxDuration / 1000} seconds</span> of audio.
+		<br>
+		When you're finished, click continue to proceed.
+	`;
+
 	export default {
 		props: ['uploadAudioFile', 'audioEventHub', 'audio'],
 		data: function () {
 			return {
 				status: 'paused',
 				recordedDuration: 0,
-				message: null
+				message: defaultMessage
 			};
 		},
 		computed: {
@@ -57,6 +63,7 @@
 		},
 		activated: function () {
 			this.subscribeAudioEvents();
+			this.message = defaultMessage;
 		},
 		deactivated: function () {
 			this.unsubscribeAudioEvents();
@@ -95,6 +102,7 @@
 							.then(() => {
 								if (this.audio.valid) {
 									this.status = 'complete';
+									this.message = 'That\'s good, thanks! Click continue to proceed.';
 								} else {
 									this.status = 'paused';
 								}
