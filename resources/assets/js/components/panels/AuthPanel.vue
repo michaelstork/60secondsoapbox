@@ -8,7 +8,7 @@
 			<p>If you'd like to participate, enter your invitation code below!</p>
 			<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
 		</div>
-		<nav v-on:click="fillForm" v-on:touchstart="fillForm">
+		<nav>
 			<button class="round"
 				:disabled="!isValidPanel"
 				v-on:click="requestPanelNavigation">
@@ -71,19 +71,7 @@
 			handleInvalidCode: function () {
 				this.getFieldByName('password').asyncValid = false;
 				localStorage.removeItem('soapboxToken');
-			},
-
-
-
-			fillForm: function () {
-				this.getFieldByName('password').value = 'hockey11';
-				this.getFieldByName('email').value = 'michael@mstork.info';
-				this.onFormValidityChange(true);
-				this.validateCode();
 			}
-			
-
-
 		}
 	}
 </script>

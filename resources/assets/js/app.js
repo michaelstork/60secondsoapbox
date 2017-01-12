@@ -8,7 +8,7 @@ import NomineesPanel from './components/panels/NomineesPanel.vue';
 
 import {URLS} from './config/index';
 
-Vue.config.devtools = true
+// Vue.config.devtools = true
 
 Vue.use(Resource);
 
