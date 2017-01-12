@@ -153,8 +153,6 @@ $radialProgressDashArray:314;
 
 
 	circle {
-		transform-origin:50% 50%;
-		transform:rotate(270deg);
 		transition:stroke 0.15s ease-out, stroke-dashoffset 0.2s ease-out;
 		stroke-width:$indicatorDiameter;
 		stroke-dasharray:$radialProgressDashArray;

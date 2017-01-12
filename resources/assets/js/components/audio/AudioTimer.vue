@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<svg class="radial-progress" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-			<circle ref="progress" stroke-dashoffset="314" cx="50" cy="50" r="50" />
+			<circle ref="progress" transform="rotate(270 50 50)" stroke-dashoffset="314" cx="50" cy="50" r="50" />
 		</svg>
 		<span ref="timer" class="audio-timer">00:00</span>
 	</div>
