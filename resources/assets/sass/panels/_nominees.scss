@@ -1,3 +1,7 @@
+.nominees-panel .submit-button i:before {
+	// might be crazy, but I swear this glyph (mdi-content-save) isn't totally centered
+	text-indent:2px;
+}
 
 @include queryWidth(min, 649px) {
 	.nominees-panel .form-input-container {
