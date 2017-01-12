@@ -7,7 +7,7 @@
 			<soapbox-form v-else :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
 		</div>
 		<nav>
-			<button type="submit" :disabled="!panel.valid" v-on:click="doSubmission" class="round">
+			<button type="submit" :disabled="!panel.valid || submissionComplete" v-on:click="doSubmission" class="round">
 				<i class="mdi mdi-content-save"></i>
 				<span>Submit</span>
 			</button>
