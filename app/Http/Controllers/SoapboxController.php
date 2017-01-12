@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class SoapboxController extends Controller
 {
@@ -27,6 +29,16 @@ class SoapboxController extends Controller
 		} catch (JWTException $e) {
 			return $this->authFailed('Could not create token');
 		}
+
+        $user = Auth::user();
+        $disk = Storage::disk('audio');
+
+        $userAudio = $user->audio();
+
+        $userAudio->each(function ($audio) use ($disk) {
+            $disk->delete($audio->filename);
+            $audio->delete();
+        });
 
 		return response()->json(compact('token'));
     }
