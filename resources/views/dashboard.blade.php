@@ -1,17 +1,21 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    You are logged in!
-                </div>
+    <div class="container admin-container vue-mount">
+        <div class="panel-container dashboard-panel-container">
+            <div class="panel-track">            
+                <section class="content-panel dashboard-panel">
+                    <div class="panel-content">            
+                        <div class="panel-header">
+                            <h1>Dashboard</h1>
+                            @if (Auth::user())
+                                <a href="{{ url('/logout') }}">Logout</a> 
+                            @endif
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
-</div>
+    <script src="js/login.js"></script>
 @endsection

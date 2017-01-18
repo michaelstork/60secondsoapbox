@@ -1,6 +1,6 @@
 
 <template>
-	<form ref="form" v-on:input="onReceivedInput" v-on:submit.prevent>
+	<form ref="form" v-on:input="onReceivedInput" v-on:submit="onSubmit" method="POST">
 		<fieldset :disabled="disabled">
 			<div class="form-input-container">
 				<slot name="form-top"></slot>
@@ -58,6 +58,9 @@
 				if (this.form.valid !== this.isValidForm) {
 					this.$emit('formValidityChange', this.isValidForm);
 				}
+			},
+			onSubmit: function (e) {
+				if (this.form.preventSubmit) e.preventDefault();
 			}
 		},
 		components: {

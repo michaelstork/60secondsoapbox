@@ -1,0 +1,86 @@
+@import '../partials/variables';
+
+.container.admin-container {
+	// panel shadow
+	&:after {
+		position:absolute;
+		top:72px;
+		z-index:0;
+		bottom:0;
+		left:0;
+		right:0;
+		margin:auto;
+		width:80%;
+		border-radius:$contentPanelBorderRadius;
+		@include shadow_1;
+		
+		@include queryWidth(min, 1025px) {
+			content:'';
+		}
+	}
+}
+
+.content-panel .panel-content {
+	padding:0;
+
+	&:before {
+		display:none;
+	}
+}
+
+.panel-content .panel-header {
+	padding:18px 24px;
+	border-bottom:1px solid #EAEAEA;
+	background-color:#F9F9F9;
+	color:$text2;
+	letter-spacing:1px;
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+
+	@include queryWidth(min, 1025px) {
+		border-top-left-radius:$contentPanelBorderRadius;
+		border-top-right-radius:$contentPanelBorderRadius;
+	}
+}
+
+.panel-content form {
+	width:280px;
+	margin:48px auto;
+}
+
+
+.panel-container.dashboard-panel-container {
+	@include queryWidth(min, 1024px) {
+		width:80%;
+		margin:0 auto;
+	}
+	@include queryWidth(max, 1024px) {
+		width:100%;
+	}
+}
+
+
+.dashboard-panel-container .panel-track {
+	@include queryWidth(min, 1025px) {
+		padding-top:72px;
+	}
+	@include queryWidth(max, 1024px) {
+		padding-top:0;
+		height:100vh;
+	}
+}
+
+.content-panel.dashboard-panel {
+	
+	@include queryWidth(min, 1025px) {
+		min-height:700px;
+	}
+	@include queryWidth(max, 1024px) {
+		height:100%;
+	}
+}
+
+.dashboard-panel {
+
+}

@@ -1,5 +1,6 @@
 {
 	"name": "info",
+	"preventSubmit": true,
 	"fields": [
 	    {
 	        "name": "name",

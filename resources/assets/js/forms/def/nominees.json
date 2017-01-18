@@ -1,5 +1,6 @@
 {
 	"name": "nominees",
+	"preventSubmit": true,
 	"fields": [
 	    {
 	        "name": "submissionTitle",

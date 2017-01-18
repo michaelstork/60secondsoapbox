@@ -8,6 +8,7 @@ require('laravel-elixir-vue-2');
 
 elixir(mix => {
     mix.sass('app.scss', 'public/css')
+    .sass('admin/admin.scss', 'public/css')
     .webpack(
         'app.js',					// entry point
         './public/js',				// output directory
