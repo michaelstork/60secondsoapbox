@@ -1,6 +1,7 @@
 process.env.DISABLE_NOTIFIER = true;
 
 const elixir = require('laravel-elixir');
+const inProduction = elixir.config.production;
 
 require('laravel-elixir-vue-2');
 
@@ -17,9 +18,11 @@ elixir(mix => {
         './resources/assets/js/'    // base directory
     );
 
-    mix.browserSync({
-        proxy: {
-            target: 'https://soapbox.localhost/dashboard'
-        }
-    });
+    if (!inProduction) {
+        mix.browserSync({
+            proxy: {
+                target: 'https://soapbox.localhost/dashboard'
+            }
+        });
+    }
 });
