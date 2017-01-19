@@ -11,7 +11,7 @@
                                 {{ csrf_field() }}
                                 <i class="mdi mdi-account-plus"></i>
                                 <input type="email" name="email" placeholder="Email" spellcheck="false" />
-                                <button type="submit" class="rect"><span>Invite User</span></button>
+                                <button type="submit" class="rect"><span>Send Invite</span></button>
                             </form>
                             @if (Auth::user())
                                 <a href="{{ url('/logout') }}">Logout</a> 
