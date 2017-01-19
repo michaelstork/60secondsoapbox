@@ -54,7 +54,7 @@
 .panel-container.dashboard-panel-container {
 	@include queryWidth(min, 1024px) {
 		width:80%;
-		margin:0 auto;
+		margin:0 auto 64px auto;
 	}
 	@include queryWidth(max, 1024px) {
 		width:100%;

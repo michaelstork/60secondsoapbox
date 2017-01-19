@@ -3,76 +3,100 @@
 	width:100%;
 	margin:24px auto;
 	position:relative;
+	font-weight:300;
 }
 
 .users-list li {
 	background-color:#F9F9F9;
 	box-sizing:border-box;
 	border-bottom:1px solid #EAEAEA;
+	border-top:1px solid transparent;
 	padding:6px 24px;
 	display:flex;
-	align-items:center;
 	justify-content:space-between;
 	position:relative;
 }
 
-.users-list li > span {
-	font-size:0.7rem;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	white-space:nowrap;
-	display:block;
-
-	&.info {
-		flex:0 0 54%;
-	}
-	&.email {
-		flex:0 0 20%;
-	}
-	&.created-at {
-		flex:0 0 20%;
-	}
-	&.more-info {
-		flex:0 0 6%;
-	}
-}
-
-.users-list li.user-row span {
-
-	&.more-info {
-
-		i {
-			margin-left:8px;
-			font-size:1.4rem;
-			cursor:pointer;
-			color:$text2;
-		}
-	}
-}
-
-.users-list li:first-of-type {
+.users-list .users-list-header {
 	background-color:#FFF;
 	align-items:flex-end;
 
 	span {
 		line-height:1em;
 		height:1em;
+		font-weight:700;
 	}
 }
 
-.users-list li.show-details {
-	padding-bottom:120px;
+.users-list li > span {
+	font-size:0.75rem;
+	font-weight:300;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	display:block;
+
+	&.info {
+		flex:0 0 80%;
+	}
+	&.created-at {
+		flex:0 0 20%;
+	}
 }
 
-.users-list li .user-details {
-	font-size:0.7rem;
+.user-row {
+	cursor:pointer;
+	transition:background-color 0.15s ease-out, transform 0.25s $standardCurve;
+
+	&:hover {
+		background-color:#F0F0F0;
+	}
+
+	&.show-details ~ .user-row {
+		transform:translateY(120px);
+	}
+
+	&.show-details + .user-row {
+		border-top-color:#EAEAEA;
+	}
+}
+
+.user-row span {
+
+	&.info {
+		i {
+			font-size:0.65rem;
+			font-style:italic;
+		}
+	}
+	&.created-at {
+		font-size:0.65rem;
+	}
+}
+
+.user-row .user-details {
+	font-size:0.75rem;
+	cursor:default;
 	height:120px;
 	position:absolute;
-	bottom:0;
+	top:100%;
 	left:0;
 	width:100%;
 	padding:18px 48px;
 	box-sizing:border-box;
+}
+
+.user-row .user-details {
+	p + a,
+	p + p {
+		margin:0;
+		line-height:1.8em;
+	}
+
+	a {
+		display:inline-block;
+		text-decoration:none;
+	}
 }
 
 .user-details-children {
