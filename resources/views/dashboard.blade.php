@@ -12,10 +12,14 @@
                                 <a href="{{ url('/logout') }}">Logout</a> 
                             @endif
                         </div>
+                        <soapbox-dashboard :data="users"></soapbox-dashboard>
                     </div>
                 </section>
             </div>
         </div>
     </div>
-    <script src="js/login.js"></script>
+    <script>
+        window.soapboxUsers = <?php echo json_encode($users); ?>;
+    </script>
+    <script src="js/admin/dashboard.js"></script>
 @endsection

@@ -20,6 +20,8 @@ Route::post('/authenticate', 'SoapboxController@authenticate');
 Route::get('/{admin}', 'AdminController@index')
 	->where('admin', '(dashboard|admin)');
 
+Route::post('/user-info', 'AdminController@userInfo');
+
 Auth::routes();
 
 // allow logout on get request

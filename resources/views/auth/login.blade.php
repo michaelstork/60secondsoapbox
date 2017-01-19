@@ -35,5 +35,5 @@
         </div>
     </div>
 </div>
-<script src="js/login.js"></script>
+<script src="js/admin/login.js"></script>
 @endsection

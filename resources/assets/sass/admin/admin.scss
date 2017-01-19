@@ -1,4 +1,5 @@
 @import '../partials/variables';
+@import 'partials/users-list';
 
 .container.admin-container {
 	// panel shadow
@@ -71,16 +72,11 @@
 	}
 }
 
-.content-panel.dashboard-panel {
-	
+.content-panel.dashboard-panel {	
 	@include queryWidth(min, 1025px) {
 		min-height:700px;
 	}
 	@include queryWidth(max, 1024px) {
 		height:100%;
 	}
-}
-
-.dashboard-panel {
-
 }

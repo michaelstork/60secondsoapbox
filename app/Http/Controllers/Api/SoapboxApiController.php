@@ -139,7 +139,7 @@ class SoapboxApiController extends Controller
         unset($data['nominees']['submissionTitle']);
 
         foreach ($data['nominees'] as $email) {
-            $this->createUser($email);
+            $this->createUser($email, $user->id);
         }
     }
 
@@ -158,10 +158,11 @@ class SoapboxApiController extends Controller
         ]);
     }
 
-    protected function createUser($email)
+    protected function createUser($email, $parentId)
     {
         $user = new User();
         $user->email = $email;
+        $user->parent_id = $parentId;
 
         $code = str_random(8);
         $user->password = bcrypt($code);

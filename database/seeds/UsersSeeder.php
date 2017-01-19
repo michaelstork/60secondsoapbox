@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Role;
 use App\Permission;
 use App\User;
+use App\Audio;
 
 // php artisan migrate:refresh && php artisan db:seed
 
@@ -45,5 +46,43 @@ class UsersSeeder extends Seeder
         $user->institution = 'MStork';
     	$user->save();
     	$user->attachRole($admin);
+
+        $user = new User();
+        $user->parent_id = 1;
+        $user->name = 'Other Guy';
+        $user->email = 'michael@mstork.com';
+        $user->password = bcrypt('hockey11');
+        $user->title = 'Other Guy Title';
+        $user->institution = 'Other Guy Institution';
+        $user->save();
+        $user->attachRole($normalUser);
+
+        $user = new User();
+        $user->parent_id = 1;
+        $user->name = 'Another Guy';
+        $user->email = 'mstork11@gmail.com';
+        $user->password = bcrypt('hockey11');
+        $user->title = 'Another Guy Title';
+        $user->institution = 'Another Guy Institution';
+        $user->save();
+        $user->attachRole($normalUser);
+
+        $audio = new Audio();
+        $audio->filename = 'hkOfhpfMsq7n.wav';
+        $audio->duration = 47264;
+        $audio->user_id = 1;
+        $audio->save();
+
+        $audio = new Audio();
+        $audio->filename = '1hkOfhpfMsq7n.wav';
+        $audio->duration = 47264;
+        $audio->user_id = 2;
+        $audio->save();
+
+        $audio = new Audio();
+        $audio->filename = '2hkOfhpfMsq7n.wav';
+        $audio->duration = 47264;
+        $audio->user_id = 3;
+        $audio->save();
     }
 }

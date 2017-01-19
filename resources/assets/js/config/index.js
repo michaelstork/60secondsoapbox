@@ -10,7 +10,8 @@ URLS.web = {
 	validateNominee: '/api/validate-nominee',
 	audioUpload: '/api/user-audio',
 	audioDelete: '/api/user-audio',
-	submission: '/api/submission'
+	submission: '/api/submission',
+	userInfo: '/user-info'
 };
 
 const AUDIO = {};
