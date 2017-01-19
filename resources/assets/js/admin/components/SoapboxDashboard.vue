@@ -25,7 +25,6 @@
 						<span>Originally Nominated <b>{{ formatCreatedAt(user.details.days_since_invited) }}</b></span>
 						<span v-if="user.details.parent">by <b>{{ user.details.parent.name }} ({{ user.details.parent.email }})</b></span>
 					</p>
-					<!-- <template v-if="!user.submission &amp;&amp; user.details.days_since_invited !== user.details.days_since_last_invited"> -->
 					<template v-if="!user.submission">
 						<p>
 							<span v-if="user.details.days_since_invited !== user.details.days_since_last_invited">Last Invitation Sent <b>{{ formatCreatedAt(user.details.days_since_last_invited) }}</b></span>
@@ -70,10 +69,10 @@
 				let str = '';
 				if (days > 1) {
 					str += days + ' Days Ago';
-				} else if (days == 0) {
+				} else if (days < 1) {
 					str += 'Today';
 				} else {
-					str +=  days + ' Day Ago';
+					str +=  'Yesterday';
 				}
 
 				return str;

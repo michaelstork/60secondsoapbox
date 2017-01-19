@@ -5,6 +5,7 @@ use App\Role;
 use App\Permission;
 use App\User;
 use App\Audio;
+use App\Submission;
 
 // php artisan migrate:refresh && php artisan db:seed
 
@@ -45,48 +46,66 @@ class UsersSeeder extends Seeder
     	$user->password = bcrypt('hockey11');
         $user->title = 'Web Developer';
         $user->institution = 'MStork';
-        $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
+        $user->created_at = date('Y-m-d H:i:s', strtotime('-3 days'));
+        $user->last_invited = date('Y-m-d H:i:s', strtotime('-3 days'));
     	$user->save();
     	$user->attachRole($admin);
 
+        $submission = new Submission();
+        $submission->user_id = 1;
+        $submission->title = 'Some Clever Title';
+        $submission->save();
+
         $user = new User();
         $user->parent_id = 1;
-        $user->name = 'Other Guy';
+        $user->name = 'John Smith';
         $user->email = 'michael@mstork.com';
         $user->code = 'hockey11';
         $user->password = bcrypt('hockey11');
-        $user->title = 'Other Guy Title';
-        $user->institution = 'Other Guy Institution';
+        $user->title = 'Butt Doctor';
+        $user->institution = 'Some Hospital';
+        $user->created_at = date('Y-m-d H:i:s', strtotime('-1 day'));
         $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
+        $user->save();
+        $user->attachRole($normalUser);
+
+        $submission = new Submission();
+        $submission->user_id = 2;
+        $submission->title = 'Another Title';
+        $submission->save();
+
+        $user = new User();
+        $user->parent_id = 1;
+        $user->email = 'mstork11@gmail.com';
+        $user->code = 'hockey11';
+        $user->password = bcrypt('hockey11');
+        $user->created_at = date('Y-m-d H:i:s', strtotime('-1 week'));
+        $user->last_invited = date('Y-m-d H:i:s', strtotime('-3 days'));
         $user->save();
         $user->attachRole($normalUser);
 
         $user = new User();
-        $user->parent_id = 1;
-        $user->name = 'Another Guy';
-        $user->email = 'mstork11@gmail.com';
-        $user->code = 'hockey11';
-        $user->password = bcrypt('hockey11');
-        $user->title = 'Another Guy Title';
-        $user->institution = 'Another Guy Institution';
+        $user->email = 'samshaikh@gmail.com';
+        $user->code = 'samshaikhsoapbox';
+        $user->password = bcrypt('samshaikhsoapbox');
         $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
         $user->save();
-        $user->attachRole($normalUser);
+        $user->attachRole($admin);
 
         $audio = new Audio();
-        $audio->filename = 'hkOfhpfMsq7n.wav';
+        $audio->filename = 'test.wav';
         $audio->duration = 47264;
         $audio->user_id = 1;
         $audio->save();
 
         $audio = new Audio();
-        $audio->filename = '1hkOfhpfMsq7n.wav';
+        $audio->filename = 'test1.wav';
         $audio->duration = 47264;
         $audio->user_id = 2;
         $audio->save();
 
         $audio = new Audio();
-        $audio->filename = '2hkOfhpfMsq7n.wav';
+        $audio->filename = 'test2.wav';
         $audio->duration = 47264;
         $audio->user_id = 3;
         $audio->save();
