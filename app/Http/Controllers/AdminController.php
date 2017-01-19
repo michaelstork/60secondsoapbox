@@ -91,7 +91,7 @@ class AdminController extends Controller
             $recipient->parent_id = $nominator->id;
         }
 
-        // $this->sendInvitationEmail($nominator, $recipient);
+        $this->sendInvitationEmail($nominator, $recipient);
         
         $recipient->last_invited = date('Y-m-d H:i:s', strtotime('now'));
         $recipient->save();
@@ -107,9 +107,31 @@ class AdminController extends Controller
         return response()->json($data);
     }
 
-    protected function sendInvitationEmail($nominator, $recipient)
+    protected function sendInvitationEmail ($nominator, $recipient)
     {
-        $invitation = new Invitation($nominator, $recipient, $recipient->code);
-        Mail::to($recipient)->send($invitation);
+        // $invitation = new Invitation($nominator, $recipient, $recipient->code);
+        // Mail::to($recipient)->send($invitation);
+    }
+
+    public function createUser (Request $request)
+    {
+        $user = User::where('email', $request->input('email'))->first();
+
+        if (!$user) {
+            $user = new User();
+            $user->email = $request->input('email');
+            $user->parent_id = Auth::user()->id;
+
+            $user->code = str_random(8);
+            $user->password = bcrypt($user->code);
+            $user->attachRole(env('ROLE_ID_NORMALUSER'));
+        }
+
+        $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
+        $user->save();
+
+        $this->sendInvitationEmail(Auth::user(), $user);
+
+        return $this->index();
     }
 }

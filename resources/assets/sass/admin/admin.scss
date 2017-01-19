@@ -18,6 +18,9 @@
 		@include queryWidth(min, 1025px) {
 			content:'';
 		}
+		@include queryWidth(max, 1024px) {
+			display:none;
+		}
 	}
 }
 

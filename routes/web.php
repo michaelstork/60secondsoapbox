@@ -22,6 +22,7 @@ Route::get('/{admin}', 'AdminController@index')
 
 Route::post('/user-info', 'AdminController@userInfo');
 Route::post('/resend-invitation', 'AdminController@resendInvitation');
+Route::post('/create-user', 'AdminController@createUser');
 
 Auth::routes();
 
