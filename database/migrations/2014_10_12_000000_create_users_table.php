@@ -19,9 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('code');
             $table->string('title')->nullable();
             $table->string('institution')->nullable();
             $table->rememberToken();
+            $table->timestamp('last_invited')->nullable();
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('users')

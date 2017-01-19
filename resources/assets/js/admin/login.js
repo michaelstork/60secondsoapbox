@@ -15,8 +15,9 @@ const appData = {
 			},
 			{
 				"name": "password",
+				"type": "password",
 				"value": "",
-				"label": "Invitation Code",
+				"label": "Password",
 				"required": true,
 				"pattern": ".{8,}",
 				"async": true,

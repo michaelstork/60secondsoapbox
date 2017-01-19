@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Submission;
 use App\Audio;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Invitation;
 
 class AdminController extends Controller
 {
@@ -42,11 +44,16 @@ class AdminController extends Controller
 
         $user = User::where('id', $request->input('id'))->firstOrFail();
 
-        // days since invited
+        // days since nominated
         $datetime1 = new \DateTime($user->created_at);
         $datetime2 = new \DateTime('now');
         $interval = $datetime1->diff($datetime2);
-        $data['days_since_invited'] = $interval->format('%a day(s)');
+        $data['days_since_invited'] = $interval->format('%a');
+
+        // days since last invited
+        $datetime3 = new \DateTime($user->last_invited);
+        $interval2 = $datetime3->diff($datetime2);
+        $data['days_since_last_invited'] = $interval2->format('%a');
 
         // invited by
         $parent = User::where('id', $user->parent_id)->first();
@@ -71,18 +78,38 @@ class AdminController extends Controller
             ];
         }
 
-        // user submission
-        $submission = $user->submission()->first();
-        $audio = $user->audio()->first();
-        if ($submission && $audio) {
-            $submissionData = [
-                'title' => $submission->title,
-                'filename' => $audio->filename
-            ];
+        return response()->json($data);
+    }
 
-            $data['submission'] = $submissionData;
+    public function resendInvitation (Request $request)
+    {
+        $recipient = User::where('id', $request->input('id'))->firstOrFail();
+
+        $nominator = User::where('id', $recipient->parent_id)->first();
+        if (!$nominator) {
+            $nominator = Auth::user();
+            $recipient->parent_id = $nominator->id;
         }
 
+        // $this->sendInvitationEmail($nominator, $recipient);
+        
+        $recipient->last_invited = date('Y-m-d H:i:s', strtotime('now'));
+        $recipient->save();
+
+        $data = [];
+        $data['last_invited'] = $recipient->last_invited;
+
+        $lastInvitedDatetime = new \DateTime($recipient->last_invited);
+        $nowDatetime = new \DateTime('now');
+        $interval = $lastInvitedDatetime->diff($nowDatetime);
+        $data['days_since_last_invited'] = $interval->format('%a');
+
         return response()->json($data);
+    }
+
+    protected function sendInvitationEmail($nominator, $recipient)
+    {
+        $invitation = new Invitation($nominator, $recipient, $recipient->code);
+        Mail::to($recipient)->send($invitation);
     }
 }

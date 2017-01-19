@@ -21,6 +21,7 @@ Route::get('/{admin}', 'AdminController@index')
 	->where('admin', '(dashboard|admin)');
 
 Route::post('/user-info', 'AdminController@userInfo');
+Route::post('/resend-invitation', 'AdminController@resendInvitation');
 
 Auth::routes();
 

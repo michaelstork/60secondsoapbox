@@ -37,10 +37,14 @@
 	display:block;
 
 	&.info {
-		flex:0 0 80%;
+		flex:0 0 45%;
 	}
 	&.created-at {
 		flex:0 0 20%;
+	}
+	&.submission {
+		flex:0 0 35%;
+		text-align:center;
 	}
 }
 
@@ -48,7 +52,8 @@
 	cursor:pointer;
 	transition:background-color 0.15s ease-out, transform 0.25s $standardCurve;
 
-	&:hover {
+	&:hover,
+	&.show-details {
 		background-color:#F0F0F0;
 	}
 
@@ -72,6 +77,20 @@
 	&.created-at {
 		font-size:0.65rem;
 	}
+	&.submission {
+		font-size:0.65rem;
+
+		a {
+			line-height:1.6rem;
+			display:block;
+			overflow:hidden;
+			text-overflow:ellipsis;
+		}
+
+		i {
+			font-size:1.6rem;
+		}
+	}
 }
 
 .user-row .user-details {
@@ -86,22 +105,37 @@
 	box-sizing:border-box;
 }
 
-.user-row .user-details {
-	p + a,
-	p + p {
-		margin:0;
-		line-height:1.8em;
+.user-row .user-details p {
+	margin:4px 0 0 0;
+	line-height:1.8em;
+	display:block;
+
+	a:not(:first-child) {
+		margin-left:8px;
 	}
 
-	a {
-		display:inline-block;
-		text-decoration:none;
+	&:first-child {
+		margin-top:0;
 	}
 }
 
+.user-row a {
+	display:inline-block;
+	text-decoration:none;
+}
+
 .user-details-children {
-	
-	span:not(:first-of-type) + span:before {
-		content: ', ';
+	display:block;
+
+	.nominee {
+		font-size:0.65rem;
+		background-color:#F9F9F9;
+		border:1px solid #F0F0F0;
+		border-radius:3px;
+		display:inline-block;
+		padding:2px 6px;
+		margin-left:8px;
+		height:16px;
+		line-height:16px;
 	}
 }

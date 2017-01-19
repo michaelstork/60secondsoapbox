@@ -11,7 +11,8 @@ URLS.web = {
 	audioUpload: '/api/user-audio',
 	audioDelete: '/api/user-audio',
 	submission: '/api/submission',
-	userInfo: '/user-info'
+	userInfo: '/user-info',
+	resendInvitation: '/resend-invitation'
 };
 
 const AUDIO = {};

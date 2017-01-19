@@ -163,19 +163,20 @@ class SoapboxApiController extends Controller
         $user = new User();
         $user->email = $email;
         $user->parent_id = $parentId;
+        $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
 
-        $code = str_random(8);
-        $user->password = bcrypt($code);
+        $user->code = str_random(8);
+        $user->password = bcrypt($user->code);
 
         $user->save();
         $user->attachRole(env('ROLE_ID_NORMALUSER'));
 
-        $this->sendInvitationEmail($user, $code);
+        $this->sendInvitationEmail($user, $user->code);
     }
 
-    protected function sendInvitationEmail($nominee, $code)
+    protected function sendInvitationEmail($nominee)
     {
-        $invitation = new Invitation(Auth::user(), $nominee, $code);
+        $invitation = new Invitation(Auth::user(), $nominee, $nominee->code);
         Mail::to($nominee)->send($invitation);
     }
 }

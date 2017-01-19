@@ -41,9 +41,11 @@ class UsersSeeder extends Seeder
     	$user = new User();
     	$user->name = 'Michael Stork';
     	$user->email = 'michael@mstork.info';
+        $user->code = 'hockey11';
     	$user->password = bcrypt('hockey11');
         $user->title = 'Web Developer';
         $user->institution = 'MStork';
+        $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
     	$user->save();
     	$user->attachRole($admin);
 
@@ -51,9 +53,11 @@ class UsersSeeder extends Seeder
         $user->parent_id = 1;
         $user->name = 'Other Guy';
         $user->email = 'michael@mstork.com';
+        $user->code = 'hockey11';
         $user->password = bcrypt('hockey11');
         $user->title = 'Other Guy Title';
         $user->institution = 'Other Guy Institution';
+        $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
         $user->save();
         $user->attachRole($normalUser);
 
@@ -61,9 +65,11 @@ class UsersSeeder extends Seeder
         $user->parent_id = 1;
         $user->name = 'Another Guy';
         $user->email = 'mstork11@gmail.com';
+        $user->code = 'hockey11';
         $user->password = bcrypt('hockey11');
         $user->title = 'Another Guy Title';
         $user->institution = 'Another Guy Institution';
+        $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
         $user->save();
         $user->attachRole($normalUser);
 
