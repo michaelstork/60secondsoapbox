@@ -10,7 +10,7 @@
                     <div class="panel-header">
                         <h1>Login</h1>
                     </div>
-                    <soapbox-form :form="loginForm">
+                    <soapbox-form :form="loginForm" class="login-form">
                         <div slot="form-top">
                             @if ($errors->has('email'))
                                 <span class="help-block">

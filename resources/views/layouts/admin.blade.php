@@ -18,10 +18,5 @@
     </head>
     <body>
         @yield('content')
-        <form method="POST" action="/create-user">
-            {{ csrf_field() }}
-            <input type="email" name="email" placeholder="Email" />
-            <button type="submit">Invite User</button>
-        </form>
     </body>
 </html>

@@ -18,7 +18,8 @@ Route::get('/', 'SoapboxController@index')
 Route::post('/authenticate', 'SoapboxController@authenticate');
 
 Route::get('/{admin}', 'AdminController@index')
-	->where('admin', '(dashboard|admin)');
+	->where('admin', '(dashboard|admin)')
+	->name('dashboard');
 
 Route::post('/user-info', 'AdminController@userInfo');
 Route::post('/resend-invitation', 'AdminController@resendInvitation');

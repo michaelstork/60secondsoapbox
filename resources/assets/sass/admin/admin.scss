@@ -1,6 +1,7 @@
 @import '../partials/variables';
 @import 'partials/users-list';
 
+
 .container.admin-container {
 	// panel shadow
 	&:after {
@@ -48,11 +49,41 @@
 	}
 }
 
-.panel-content form {
+.panel-content .login-form {
 	width:280px;
 	margin:48px auto;
 }
 
+.panel-header > form {
+	display:flex;
+	flex:0 0 400px;
+	align-items:center;
+	padding:4px 8px;
+	box-sizing:border-box;
+
+	input[type="email"] {
+		flex:0 0 180px;
+		font-size:0.7rem;
+		color:$text2;
+		padding:0 8px;
+		margin:0 12px;
+		box-shadow: inset 0 1px 3px rgba(0,0,0,0.08), inset 0 -1px 2px rgba(0,0,0,0.02), inset 0 1px 2px rgba(0,0,0,0.14);
+	}
+
+	button {
+		flex:0 0 auto;
+		
+		&, span {
+			height:28px;
+			line-height:28px;
+		}
+	}
+
+	i {
+		color:$text2;
+		font-size:1.5rem;
+	}
+}
 
 .panel-container.dashboard-panel-container {
 	@include queryWidth(min, 1024px) {

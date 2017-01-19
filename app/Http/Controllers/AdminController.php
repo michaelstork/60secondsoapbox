@@ -124,14 +124,17 @@ class AdminController extends Controller
 
             $user->code = str_random(8);
             $user->password = bcrypt($user->code);
+            $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
+            $user->save();
             $user->attachRole(env('ROLE_ID_NORMALUSER'));
-        }
 
-        $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
-        $user->save();
+        } else {
+            $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
+            $user->save();
+        }
 
         $this->sendInvitationEmail(Auth::user(), $user);
 
-        return $this->index();
+        return redirect()->route('dashboard', ['admin' => 'dashboard']);
     }
 }
