@@ -18,7 +18,7 @@ export default class RecordRTCAdapter {
 			.then(stream => {
 				let options = {
 					mimeType: 'audio/x-wav', 
-					bitsPerSecond: 128000,
+					bitsPerSecond: 48000,
 					buffersize: 16384
 				};
 				this.recorder = new RecordRTC(stream, options);
