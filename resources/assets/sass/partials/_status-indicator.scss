@@ -110,7 +110,7 @@
 }
 
 .status-indicator-recording {
-	background-color:#D2D2D2;
+	background-color:darken(#D2D2D2, 2%);
 	justify-content:space-around;
 	transition:background-color 0.15s ease-out;
 
@@ -136,7 +136,7 @@
 	}
 
 	.status-recording & {
-		background-color:lighten(#D32F2F, 2%);
+		background-color:darken(#D32F2F, 2%);
 	}
 }
 
@@ -161,6 +161,6 @@ $radialProgressDashArray:314;
 	}
 
 	.status-recording & circle {
-		stroke:#EF5350;
+		stroke:lighten(#EF5350, 1%);
 	}
 }
