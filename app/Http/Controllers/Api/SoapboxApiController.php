@@ -33,19 +33,22 @@ class SoapboxApiController extends Controller
             ]
         );
 
-        if ($validator->fails()) {
+        if (false) {
+        // if ($validator->fails()) {
             return response()->json(
                 ['message' => $validator->errors()->first()], 400
             );
         } else {
+            $file = $request->file('audio');
+            $ext = $request->input('extension');
+            
             $user = Auth::user();
             $ffprobe = env('FFPROBE_PATH', '/usr/bin/ffprobe');
             $disk = Storage::disk('audio');
-            $path = $disk->getDriver()->getAdapter()->getPathPrefix();
-            $filename = str_random(12) . '.wav';
-            $fullPath = $path . $filename;
+            $filename = str_random(12) . '.' . $ext;
+            $fullPath = $disk->getDriver()->getAdapter()->getPathPrefix() . $filename;
 
-            $disk->putFileAs('/', $request->file('audio'), $filename);
+            $disk->putFileAs('/', $file, $filename);
             
             Artisan::call('getAudioDuration', ['path' => $fullPath]);
             $duration = Artisan::output();

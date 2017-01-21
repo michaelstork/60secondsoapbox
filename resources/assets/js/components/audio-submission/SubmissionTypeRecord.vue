@@ -95,8 +95,8 @@
 			},
 			onRequestAudioPreview: function () {
 				this.status = 'pending';
-				this.audio.adapter.pause();
-				this.$nextTick(() => {
+				// this.audio.adapter.pause();
+				// this.$nextTick(() => {
 					this.audio.adapter.process(blob => {
 						this.uploadAudioFile(blob)
 							.then(() => {
@@ -112,7 +112,7 @@
 								console.log(error);
 							});
 					});
-				});
+				// });
 			},
 			onAudioReset: function () {
 				this.audio.adapter.pause();

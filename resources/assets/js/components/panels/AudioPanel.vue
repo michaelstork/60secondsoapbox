@@ -113,6 +113,8 @@
 			},
 			uploadAudioFile: function (file) {
 				let formData = new FormData();
+				let extension = file.type.indexOf('ogg') >= 0 ? 'ogg' : 'wav';
+				formData.append('extension', extension);
 				formData.append('audio', file);
 
 				return this.$http.post(

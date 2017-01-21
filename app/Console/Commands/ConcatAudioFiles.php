@@ -59,9 +59,13 @@ class ConcatAudioFiles extends Command
         $ffprobe = env('FFPROBE_PATH', '/usr/bin/ffprobe');
 
         if ($files->count() <= 1) { return; }
-        
+
+        $last = $files->first()->filename;
+        $split = explode('.', $last);
+        $extension = array_pop($split);
+
         $index  = $path . str_random(10) . '.txt';
-        $result = $path . str_random(10) . '.wav';
+        $result = $path . str_random(10) . '.' . $extension;
 
         // generate txt index of audio filenames to pass to ffmpeg concat
         file_put_contents(

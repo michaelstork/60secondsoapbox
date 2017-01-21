@@ -3,9 +3,10 @@ import RecordRTC from 'recordrtc';
 export default class RecordRTCAdapter {
 
 	constructor() {
-		this.initialized = false;
 		this.recorder = null;
 		this.recordingStarted = false;
+		this.recorderReset = true;
+		this.stream = null;
 	}
 
 	static isSupported() {
@@ -16,26 +17,26 @@ export default class RecordRTCAdapter {
 	initialize() {
 		navigator.mediaDevices.getUserMedia({audio:true})
 			.then(stream => {
-				let options = {
-					mimeType: 'audio/x-wav', 
-					bitsPerSecond: 128000,
-					buffersize: 16384,
-					sampleRate: 44100
-				};
-				this.recorder = new RecordRTC(stream, options);
-				this.initialized = true;
+				this.stream = stream;
+				this.initializeRecorder();
 			}, error => {
 				console.log('error');
 				console.log(error);
 			})
 			.catch(error => {
 				console.log(error);
-			});
+			}); 
+	}
+
+	initializeRecorder() {
+		this.recorder = new RecordRTC(this.stream, {type: 'audio'});
+		this.recorderReset = true;
 	}
 
 	start() {
 		this.recorder.startRecording();
 		this.recordingStarted = true;
+		this.recorderReset = false;
 	}
 
 	pause() {
@@ -43,17 +44,20 @@ export default class RecordRTCAdapter {
 	}
 
 	resume() {
-		if (!this.recordingStarted) {
+		if (!this.recordingStarted || this.recorderReset) {
 			this.start();
-			return;
+			return; 
 		}
 
 		this.recorder.resumeRecording();
 	}
 
 	process(cb) {
+		this.recorder.resumeRecording();
 		this.recorder.stopRecording(() => {
 			cb(this.recorder.getBlob());
+			this.recorder.clearRecordedData();
+			this.initializeRecorder();
 		});
 	}
 
@@ -61,5 +65,6 @@ export default class RecordRTCAdapter {
 		this.recordingStarted = false;
 		this.pause();
 		this.recorder.clearRecordedData();
+		this.initializeRecorder();
 	}
 }

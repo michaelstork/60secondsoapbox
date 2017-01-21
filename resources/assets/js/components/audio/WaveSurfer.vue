@@ -40,7 +40,7 @@
 				return this.wavesurfer && this.wavesurfer.isPlaying();
 			},
 			previewDisabled: function () {
-				return this.pending || (this.audio.adapter.initialized && !this.audio.adapter.recordingStarted);
+				return this.pending || (this.audio.adapter.stream && !this.audio.adapter.recordingStarted);
 			}
 		},
 		mounted: function () {
