@@ -79,10 +79,10 @@
 			 */
 			
 			fillForm: function () {
-				this.getFieldByName('password').value = 'hockey11';
-				this.getFieldByName('email').value = 'michael@mstork.info';
-				this.onFormValidityChange(true);
-				this.validateCode();
+				// this.getFieldByName('password').value = 'hockey11';
+				// this.getFieldByName('email').value = 'michael@mstork.info';
+				// this.onFormValidityChange(true);
+				// this.validateCode();
 			}
 		}
 	}
