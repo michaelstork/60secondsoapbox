@@ -95,24 +95,21 @@
 			},
 			onRequestAudioPreview: function () {
 				this.status = 'pending';
-				// this.audio.adapter.pause();
-				// this.$nextTick(() => {
-					this.audio.adapter.process(blob => {
-						this.uploadAudioFile(blob)
-							.then(() => {
-								if (this.audio.valid) {
-									this.status = 'complete';
-									this.message = 'That\'s good, thanks! Click continue to proceed.';
-								} else {
-									this.status = 'paused';
-								}
-							}, error => {
-								this.status = 'error';
-								this.message = 'Uh oh, something went wrong';
-								console.log(error);
-							});
-					});
-				// });
+				this.audio.adapter.process(blob => {
+					this.uploadAudioFile(blob)
+						.then(() => {
+							if (this.audio.valid) {
+								this.status = 'complete';
+								this.message = 'That\'s good, thanks! Click continue to proceed.';
+							} else {
+								this.status = 'paused';
+							}
+						}, error => {
+							this.status = 'error';
+							this.message = 'Uh oh, something went wrong';
+							console.log(error);
+						});
+				});
 			},
 			onAudioReset: function () {
 				this.audio.adapter.pause();

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Submission;
 use App\Audio;
 use App\User;
+use App\Content;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Invitation;
 
