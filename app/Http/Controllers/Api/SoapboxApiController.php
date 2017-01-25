@@ -34,20 +34,23 @@ class SoapboxApiController extends Controller
         );
 
 
-        if ($validator->fails() && $request->file('extension') !== 'ogg') {
+        if ($validator->fails() && $request->input('extension') !== 'ogg') {
             return response()->json(
                 ['message' => $validator->errors()->first()], 400
             );
         } else {
             $file = $request->file('audio');
             $ext = $request->input('extension');
-            
             $user = Auth::user();
-            $ffprobe = env('FFPROBE_PATH', '/usr/bin/ffprobe');
             $disk = Storage::disk('audio');
+            $ffprobe = env('FFPROBE_PATH', '/usr/bin/ffprobe');
             $filename = str_random(12) . '.' . $ext;
             $fullPath = $disk->getDriver()->getAdapter()->getPathPrefix() . $filename;
-
+            
+            if ($request->input('removePrevious')) {
+                $this->deleteUserAudio();
+            }
+            
             $disk->putFileAs('/', $file, $filename);
             
             Artisan::call('getAudioDuration', ['path' => $fullPath]);
@@ -71,7 +74,7 @@ class SoapboxApiController extends Controller
         }
     }
 
-    public function deleteUserAudio(Request $request)
+    public function deleteUserAudio()
     {
         $user = Auth::user();
         $disk = Storage::disk('audio');

@@ -38,7 +38,7 @@
 			doUpload: function () {
 				this.status = 'pending';
 				this.message = 'Uploading...';
-				return this.uploadAudioFile(this.file)
+				return this.uploadAudioFile(this.file, true)
 					.then(data => {
 						if (this.audio.valid) {
 							this.status = 'complete';

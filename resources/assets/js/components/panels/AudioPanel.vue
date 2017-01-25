@@ -112,11 +112,12 @@
 				this.audio.submissionType = method;
 				this.audio.file = file;
 			},
-			uploadAudioFile: function (file) {
+			uploadAudioFile: function (file, removePrevious = false) {
 				let formData = new FormData();
 				let extension = file.type.indexOf('ogg') >= 0 ? 'ogg' : 'wav';
 				formData.append('extension', extension);
 				formData.append('audio', file);
+				formData.append('removePrevious', removePrevious);
 
 				return this.$http.post(
 					URLS[this.env].audioUpload,
