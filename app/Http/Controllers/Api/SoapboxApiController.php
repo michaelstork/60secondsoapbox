@@ -33,8 +33,8 @@ class SoapboxApiController extends Controller
             ]
         );
 
-        if (false) {
-        // if ($validator->fails()) {
+
+        if ($validator->fails() && $request->file('extension') !== 'ogg') {
             return response()->json(
                 ['message' => $validator->errors()->first()], 400
             );
