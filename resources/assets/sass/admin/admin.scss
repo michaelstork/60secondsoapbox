@@ -1,27 +1,10 @@
 @import '../partials/variables';
 @import 'partials/users-list';
-
+@import 'partials/content-editor';
 
 .container.admin-container {
-	// panel shadow
 	&:after {
-		position:absolute;
-		top:72px;
-		z-index:0;
-		bottom:0;
-		left:0;
-		right:0;
-		margin:auto;
-		width:80%;
-		border-radius:$contentPanelBorderRadius;
-		@include shadow_1;
-		
-		@include queryWidth(min, 1025px) {
-			content:'';
-		}
-		@include queryWidth(max, 1024px) {
-			display:none;
-		}
+		display:none;
 	}
 }
 
@@ -30,6 +13,10 @@
 
 	&:before {
 		display:none;
+	}
+
+	h2 {
+		color:$text1;
 	}
 }
 
@@ -97,8 +84,12 @@
 
 
 .dashboard-panel-container .panel-track {
+	flex-direction:column;
+	min-height:0;
+
 	@include queryWidth(min, 1025px) {
-		padding-top:72px;
+		padding:72px 8px 24px 8px;
+		// padding-top:72px;
 	}
 	@include queryWidth(max, 1024px) {
 		padding-top:0;
@@ -107,8 +98,15 @@
 }
 
 .content-panel.dashboard-panel {	
+	padding-bottom:120px;
+
 	@include queryWidth(min, 1025px) {
-		min-height:700px;
+		// min-height:700px;
+		@include shadow_1;
+
+		& + .content-panel {
+			margin-top:24px;
+		}
 	}
 	@include queryWidth(max, 1024px) {
 		height:100%;

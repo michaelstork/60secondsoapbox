@@ -32,8 +32,12 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::with('audio', 'submission')->get();
+        $content = Content::all();
 
-        $data = ['users' => $users];
+        $data = [
+            'users' => $users,
+            'content' => $content,
+        ];
         return view('dashboard')->with($data);
     }
 

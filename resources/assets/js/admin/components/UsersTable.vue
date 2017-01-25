@@ -13,7 +13,7 @@
 			</span>
 			<span class="created-at">{{ formatDate(user.created_at) }}</span>
 			<span class="submission">
-				<a v-if="user.submission" v-on:click.stop :href="'/audio/' + user.audio[0].filename" target="_blank">
+				<a v-if="user.submission &amp;&amp; user.audio.length" v-on:click.stop :href="'/audio/' + user.audio[0].filename" target="_blank">
 					<i class="mdi mdi-volume-high"></i>
 					<br>
 					<b>{{ user.submission.title }}</b>
@@ -50,9 +50,9 @@
 	import moment from 'moment';
 
 	export default {
-		props: ['data'],
+		props: ['userData'],
 		data: function () {
-			const users = this.data.reduce((result, user) => {
+			const users = this.userData.reduce((result, user) => {
 				const item = Vue.util.extend({}, user);
 				item.details = null;
 				result.push(item);
