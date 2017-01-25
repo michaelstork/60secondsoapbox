@@ -2,10 +2,11 @@
 <template>
 	<section class="audio-panel content-panel">
 		<transition name="fade" mode="out-in">			
-			<submission-type-dialog
-				v-if="!audio.submissionType"
-				v-on:setSubmissionType="setSubmissionType">
-			</submission-type-dialog>
+			<template v-if="!audio.submissionType">
+				<submission-type-dialog v-on:setSubmissionType="setSubmissionType">
+					<slot name="audio-content"></slot>
+				</submission-type-dialog>
+			</template>
 			<div v-else>
 				<keep-alive>
 					<!-- SubmissionTypeRecord/SubmissionTypeUpload -->

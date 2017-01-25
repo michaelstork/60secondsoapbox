@@ -9,6 +9,9 @@
 					:panel="panel"
 					:is="layout.panels[p].id"
 					:is-active-panel="layout.activePanelIndex === p">
+					@foreach ($panelContent as $content)
+						<div slot="{{ $content->name }}-content">{!! nl2br($content->content) !!}</div>
+					@endforeach
 				</component>
 			</div>
 		</div>

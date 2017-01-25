@@ -7,6 +7,7 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Content;
 
 class SoapboxController extends Controller
 {
@@ -15,7 +16,12 @@ class SoapboxController extends Controller
 
     public function index()
     {
-        return view('soapbox')->with('cordova', false);
+        $panelContent = Content::whereIn('name', ['auth', 'audio'])->get();
+
+        return view('soapbox')->with([
+            'cordova' => false,
+            'panelContent' => $panelContent
+        ]);
     }
 
     public function authenticate(Request $request)

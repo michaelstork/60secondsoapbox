@@ -4,8 +4,7 @@
 		<div class="panel-content">
 			<div class="panel-icon"></div>
 			<h3 tabIndex="-1">You've been nominated to record an episode of <a href="https://www.aliem.com/category/clinical/60-second-soapbox/" target="_blank" tabIndex="-1">60 Second Soapbox!</a></h3>
-			<p class="intro">Any topic is on the table – clinical, academic, economic, or whatever else may interest an EM-centric audience. We carefully remix your audio to add an extra splash of drama and excitement. Even more exciting, you'll get to challenge 3 of your peers to stand on a soapbox of their own!</p>
-			<p>If you'd like to participate, enter your invitation code below!</p>
+			<slot name="auth-content"></slot>
 			<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
 		</div>
 		<nav v-on:click="fillForm">
@@ -79,10 +78,10 @@
 			 */
 			
 			fillForm: function () {
-				// this.getFieldByName('password').value = 'hockey11';
-				// this.getFieldByName('email').value = 'michael@mstork.info';
-				// this.onFormValidityChange(true);
-				// this.validateCode();
+				this.getFieldByName('password').value = 'hockey11';
+				this.getFieldByName('email').value = 'michael@mstork.info';
+				this.onFormValidityChange(true);
+				this.validateCode();
 			}
 		}
 	}
