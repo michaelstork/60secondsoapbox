@@ -89,7 +89,6 @@
 
 	@include queryWidth(min, 1025px) {
 		padding:72px 8px 24px 8px;
-		// padding-top:72px;
 	}
 	@include queryWidth(max, 1024px) {
 		padding-top:0;
@@ -101,7 +100,6 @@
 	padding-bottom:120px;
 
 	@include queryWidth(min, 1025px) {
-		// min-height:700px;
 		@include shadow_1;
 
 		& + .content-panel {
@@ -110,5 +108,34 @@
 	}
 	@include queryWidth(max, 1024px) {
 		height:100%;
+	}
+}
+
+.dashboard-panel .content-form {
+	display:flex;
+	flex-direction:column;
+	box-sizing:border-box;
+	padding:12px;
+
+	label {
+		font-weight:700;
+	}
+
+	textarea {
+		padding:12px;
+		box-sizing:border-box;
+		width:100%;
+		flex:0 0 auto;
+		min-height:200px;
+		border:none;
+		outline:none;
+		background-color:#F0F0F0;
+		margin-bottom:18px;
+		resize:vertical;
+	}
+
+	button {
+		width:120px;
+		margin:24px auto;
 	}
 }

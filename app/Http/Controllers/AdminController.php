@@ -41,6 +41,22 @@ class AdminController extends Controller
         return view('dashboard')->with($data);
     }
 
+    public function saveContent(Request $request)
+    {
+        foreach ($request->input() as $field => $value) {
+            $content = Content::where('name', $field)->first();
+
+            if (!$content) {
+                continue;
+            }
+
+            $content->content = trim($value);
+            $content->save();
+        }
+
+        return redirect()->route('dashboard', ['admin' => 'dashboard']);
+    }
+
     public function userInfo(Request $request)
     {
         $data = [

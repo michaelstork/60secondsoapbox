@@ -1,6 +1,6 @@
 <template>
 	<div class="content-editor-container">
-
+		
 	</div>
 </template>
 

@@ -25,7 +25,17 @@
                         <div class="panel-header">
                             <h2>Content</h2>
                         </div>
-                        <soapbox-content-editor :content="content"></soapbox-content-editor>
+                        <!-- <soapbox-content-editor :content="content"></soapbox-content-editor> -->
+                        <form method="POST" action="/save-content" class="content-form">
+                            {{ csrf_field() }}
+                            @foreach ($content as $item)
+                                <label>{{ $item->title }}</label>
+                                <textarea name="{{ $item->name }}">{!! $item->content !!}</textarea>
+                            @endforeach
+                            <button type="submit" class="rect">
+                                <span>Save</span>
+                            </button>
+                        </form>
                     </div>
                 </section>
             </div>
