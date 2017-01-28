@@ -130,8 +130,8 @@ class AdminController extends Controller
 
     protected function sendInvitationEmail ($nominator, $recipient)
     {
-        // $invitation = new Invitation($nominator, $recipient, $recipient->code);
-        // Mail::to($recipient)->send($invitation);
+        $invitation = new Invitation($nominator, $recipient, $recipient->code);
+        Mail::to($recipient)->send($invitation);
     }
 
     public function createUser (Request $request)

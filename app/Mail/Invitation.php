@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
+use App\Content;
 
 class Invitation extends Mailable
 {
@@ -35,13 +36,17 @@ class Invitation extends Mailable
      */
     public function build()
     {
-        return $this->subject("You've been nominated to record an episode of 60 Second Soapbox!")
+        $subject = Content::where('name', 'email-subject')->firstOrFail();
+        $body = Content::where('name', 'email-body')->firstOrFail();
+
+        return $this->subject($subject->content)
             ->view('mail.invitation')
             ->text('mail.invitation-plain')
             ->with([
                 'nominee' => $this->nominee,
                 'nominator' => $this->nominator,
-                'code' => $this->code
+                'code' => $this->code,
+                'content' => $body->content
             ]);
     }
 }

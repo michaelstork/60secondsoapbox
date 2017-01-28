@@ -21,7 +21,13 @@ If you'd like to participate, enter your invitation code below!";
         $intro->save();
 
         $email = new Content();
-        $email->name = 'email';
+        $email->name = 'email-subject';
+        $email->title = 'Email Subject';
+        $email->content = "You've been invited to record an episode of 60 Second Soapbox!";
+        $email->save();
+
+        $email = new Content();
+        $email->name = 'email-body';
         $email->title = 'Email Text';
         $email->content = "Any topic is on the table – clinical, academic, economic, or whatever else may interest an EM-centric audience. We carefully remix your audio to add an extra splash of drama and excitement. Even more exciting, you'll get to challenge 3 of your peers to stand on a soapbox of their own!";
         $email->save();
