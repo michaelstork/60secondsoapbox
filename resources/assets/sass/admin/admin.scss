@@ -29,11 +29,8 @@
 	display:flex;
 	justify-content:space-between;
 	align-items:center;
-
-	@include queryWidth(min, 1025px) {
-		border-top-left-radius:$contentPanelBorderRadius;
-		border-top-right-radius:$contentPanelBorderRadius;
-	}
+	border-top-left-radius:$contentPanelBorderRadius;
+	border-top-right-radius:$contentPanelBorderRadius;
 }
 
 .panel-content .login-form {
@@ -78,7 +75,8 @@
 		margin:0 auto 64px auto;
 	}
 	@include queryWidth(max, 1024px) {
-		width:100%;
+		width:95%;
+		margin:0 auto 48px auto;
 	}
 }
 
@@ -86,28 +84,16 @@
 .dashboard-panel-container .panel-track {
 	flex-direction:column;
 	min-height:0;
-
-	@include queryWidth(min, 1025px) {
-		padding:72px 8px 24px 8px;
-	}
-	@include queryWidth(max, 1024px) {
-		padding-top:0;
-		height:100vh;
-	}
+	height:auto;
+	padding:72px 8px 24px 8px;
 }
 
 .content-panel.dashboard-panel {	
 	padding-bottom:120px;
+	@include shadow_1;
 
-	@include queryWidth(min, 1025px) {
-		@include shadow_1;
-
-		& + .content-panel {
-			margin-top:24px;
-		}
-	}
-	@include queryWidth(max, 1024px) {
-		height:100%;
+	& + .content-panel {
+		margin-top:24px;
 	}
 }
 
