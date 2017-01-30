@@ -38,10 +38,10 @@
 			 */
 
 			fillForm: function () {
-				this.getFieldByName('name').value = 'NAME';
-				this.getFieldByName('title').value = 'TITLE';
-				this.getFieldByName('institution').value = 'INSTITUTION';
-				this.onFormValidityChange(true);
+				// this.getFieldByName('name').value = 'NAME';
+				// this.getFieldByName('title').value = 'TITLE';
+				// this.getFieldByName('institution').value = 'INSTITUTION';
+				// this.onFormValidityChange(true);
 			}
 		}
 	}
