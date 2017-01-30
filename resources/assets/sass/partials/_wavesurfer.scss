@@ -21,7 +21,8 @@
 	&.active:not(.pending) .wavesurfer {
 		opacity:1;
 	}
-	&.pending .loading-text {
+	&.pending .loading-text,
+	&.failed .error-text {
 		opacity:1;
 		transition-duration:0.1s;
 		transition-delay:0.5s;
@@ -51,17 +52,25 @@
 	opacity:0;
 }
 
+.wavesurfer-container .error-text,
 .wavesurfer-container .loading-text {
 	width:100%;
+	margin:0;
 	height:$waveHeight;
 	font-size:0.8rem;
 	line-height:$waveHeight;
 	text-align:center;
 	position:absolute;
-	z-index:1;
 	top:0;
 	left:0;
 	color:$text2;
 	opacity:0;
 	transition:opacity 0.15s ease-out 0s;
+}
+
+.wavesurfer-container .error-text {
+	z-index:2;
+}
+.wavesurfer-container .loading-text {
+	z-index:1;
 }

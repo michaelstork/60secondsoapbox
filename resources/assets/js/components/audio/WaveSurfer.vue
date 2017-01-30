@@ -1,7 +1,11 @@
 <template>
-	<div class="wavesurfer-container" :class="{pending:pending, active: audio.url}">
+	<div class="wavesurfer-container" :class="{pending:pending, failed: failed, active: audio.url}">
 		<div ref="container" class="wavesurfer"></div>
 		<p class="loading-text">Loading Audio...</p>
+		<p class="error-text">
+			<span>Playback Failed!</span>
+			<a :href="audio.url" target="_blank">Click here to access the file directly</a>
+		</p>
 		<nav>
 			<slot name="restart"></slot>
 			<transition name="scale" mode="out-in">
@@ -9,7 +13,7 @@
 					<i class="mdi mdi-volume-high"></i>
 					<span>Preview</span>
 				</button>
-				<button v-else v-on:click="wavesurfer.playPause()" title="Play/Pause" class="round play-pause-button" :disabled="pending || !audio.url" tabIndex="-1" key="playPause">
+				<button v-else v-on:click="wavesurfer.playPause()" title="Play/Pause" class="round play-pause-button" :disabled="failed || pending || !audio.url" tabIndex="-1" key="playPause">
 					<i class="mdi mdi-play"
 						:class="{
 							'mdi-pause': isPlaying
@@ -32,7 +36,8 @@
 			return {
 				wavesurfer: null,
 				zoom: 1,
-				pending: false
+				pending: false,
+				failed: false
 			}
 		},
 		computed: {
@@ -40,7 +45,7 @@
 				return this.wavesurfer && this.wavesurfer.isPlaying();
 			},
 			previewDisabled: function () {
-				return this.pending || (this.audio.adapter.stream && !this.audio.adapter.recordingStarted);
+				return this.failed || this.pending || (this.audio.adapter.stream && !this.audio.adapter.recordingStarted);
 			}
 		},
 		mounted: function () {
@@ -59,9 +64,12 @@
 			
 			this.wavesurfer.on('ready', () => {
 				this.pending = false;
+				this.failed = false;
 			});
-			this.wavesurfer.on('error', (error) => {
+			this.wavesurfer.on('error', error => {
 				console.log(error);
+				this.failed = true;
+				this.pending = false;
 			});
 		},
 		beforeDestroy: function () {
@@ -70,6 +78,8 @@
 		},
 		watch: {
 			'audio.url': function (url) {
+				this.failed = false;
+				
 				if (!url) {
 					if (this.isPlaying) this.wavesurfer.pause();
 					this.wavesurfer.empty();
