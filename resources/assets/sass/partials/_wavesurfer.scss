@@ -21,12 +21,6 @@
 	&.active:not(.pending) .wavesurfer {
 		opacity:1;
 	}
-	&.pending .loading-text,
-	&.failed .error-text {
-		// opacity:1;
-		// transition-duration:0.1s;
-		// transition-delay:0.5s;
-	}
 }
 
 .wavesurfer-container button {
@@ -64,8 +58,6 @@
 	top:0;
 	left:0;
 	color:$text2;
-	// opacity:0;
-	// transition:opacity 0.15s ease-out 0s;
 }
 
 .wavesurfer-container .error-text {
