@@ -4,7 +4,7 @@
 			<span class="info">User Info</span>
 			<span class="created-at">Originally Nominated</span>
 			<span class="submission">Submission</span>
-			<span class="delete">Delete User</span>
+			<span class="delete"></span>
 		</li>
 		<li v-for="user in users" v-on:click="toggleUserDetails(user)" class="user-row" :class="{'show-details': activeUserId === user.id}">
 			<span class="info">
@@ -20,8 +20,10 @@
 					<b>{{ user.submission.title }}</b>
 				</a>
 			</span>
-			<span class="delete">
-				<a v-on:click.prevent.stop="deleteUser(user)">Delete User</a>
+			<span v-on:click="deleteUser(user)" class="delete">
+				<i class="mdi mdi-delete-circle"></i>
+				<br>
+				<b>Delete User</b>
 			</span>
 			<transition name="fade">
 				<div v-if="user.details &amp;&amp; activeUserId === user.id" v-on:click.stop class="user-details">

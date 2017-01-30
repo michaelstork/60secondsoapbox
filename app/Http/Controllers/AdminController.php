@@ -30,14 +30,17 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::with('audio', 'submission')->get();
         $content = Content::all();
 
+        $createUserMessage = $request->session()->get('createUserMessage');
+
         $data = [
             'users' => $users,
             'content' => $content,
+            'createUserMessage' => $createUserMessage
         ];
         return view('dashboard')->with($data);
     }
@@ -150,12 +153,14 @@ class AdminController extends Controller
             $user->save();
             $user->attachRole(env('ROLE_ID_NORMALUSER'));
 
+            $this->sendInvitationEmail(Auth::user(), $user);
+
+            $request->session()->flash('createUserMessage', 'User Invited');
+
         } else {
-            $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
-            $user->save();
+            $request->session()->flash('createUserMessage', 'User already exists');
         }
 
-        $this->sendInvitationEmail(Auth::user(), $user);
 
         return redirect()->route('dashboard', ['admin' => 'dashboard']);
     }

@@ -12,6 +12,9 @@
                                 <i class="mdi mdi-account-plus"></i>
                                 <input type="email" name="email" placeholder="Email" spellcheck="false" />
                                 <button type="submit" class="rect"><span>Send Invite</span></button>
+                                @if ($createUserMessage)
+                                    <span>{{ $createUserMessage }}</span>
+                                @endif
                             </form>
                             @if (Auth::user())
                                 <a href="{{ url('/logout') }}">Logout</a> 
@@ -25,7 +28,6 @@
                         <div class="panel-header">
                             <h2>Content</h2>
                         </div>
-                        <!-- <soapbox-content-editor :content="content"></soapbox-content-editor> -->
                         <form method="POST" action="/save-content" class="content-form">
                             {{ csrf_field() }}
                             @foreach ($content as $item)

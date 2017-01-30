@@ -98,6 +98,11 @@
 			font-size:1.6rem;
 		}
 	}
+
+	&.delete {
+		line-height:1.6rem;
+		color:$red;
+	}
 }
 
 .user-row .user-details {
