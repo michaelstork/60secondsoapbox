@@ -1,11 +1,13 @@
 <template>
 	<div class="wavesurfer-container" :class="{pending:pending, failed: failed, active: audio.url}">
 		<div ref="container" class="wavesurfer"></div>
-		<p class="loading-text">Loading Audio...</p>
-		<p class="error-text">
-			<span>Playback Failed!</span>
-			<a :href="audio.url" target="_blank">Click here to access the file directly</a>
-		</p>
+		<transition name="fade" mode="out-in">
+			<p v-if="pending" class="loading-text">Loading Audio...</p>
+			<p v-else-if="failed" class="error-text">
+				<span>Playback Failed!</span>
+				<a :href="audio.url" target="_blank">Click here to access the file directly</a>
+			</p>
+		</transition>
 		<nav>
 			<slot name="restart"></slot>
 			<transition name="scale" mode="out-in">
