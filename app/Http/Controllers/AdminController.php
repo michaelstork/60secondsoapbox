@@ -32,7 +32,7 @@ class AdminController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::with('audio', 'submission')->get();
+        $users = User::with('audio', 'submission')->where('email', '<>', 'admin@60secondsoapbox.io')->get();
         $content = Content::all();
 
         $createUserMessage = $request->session()->get('createUserMessage');

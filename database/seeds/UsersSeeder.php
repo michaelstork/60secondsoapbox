@@ -39,6 +39,27 @@ class UsersSeeder extends Seeder
 
     	$admin->attachPermission($adminAccess);
 
+
+        /**
+         * Guest admin account
+         */
+
+        $user = new User();
+        $user->name = 'Administrator';
+        $user->email = 'admin@60secondsoapbox.io';
+        $user->code = 'AgyJtknub4zb';
+        $user->password = bcrypt('AgyJtknub4zb');
+        $user->title = 'Guest Admin Account';
+        $user->institution = '60 Second Soapbox';
+        $user->created_at = date('Y-m-d H:i:s', strtotime('-3 days'));
+        $user->last_invited = date('Y-m-d H:i:s', strtotime('-3 days'));
+        $user->save();
+        $user->attachRole($admin);
+
+        /**
+         * Michael Stork (developer)
+         */
+
     	$user = new User();
     	$user->name = 'Michael Stork';
     	$user->email = 'michael@mstork.info';
@@ -52,30 +73,22 @@ class UsersSeeder extends Seeder
     	$user->attachRole($admin);
 
         $submission = new Submission();
-        $submission->user_id = 1;
+        $submission->user_id = 2;
         $submission->title = 'Some Clever Title';
         $submission->save();
 
-        $user = new User();
-        $user->parent_id = 1;
-        $user->name = 'John Smith';
-        $user->email = 'michael@mstork.com';
-        $user->code = 'hockey11';
-        $user->password = bcrypt('hockey11');
-        $user->title = 'Butt Doctor';
-        $user->institution = 'Some Hospital';
-        $user->created_at = date('Y-m-d H:i:s', strtotime('-1 day'));
-        $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
-        $user->save();
-        $user->attachRole($normalUser);
+        $audio = new Audio();
+        $audio->filename = 'test.wav';
+        $audio->duration = 47264;
+        $audio->user_id = 2;
+        $audio->save();
 
-        $submission = new Submission();
-        $submission->user_id = 2;
-        $submission->title = 'Another Title';
-        $submission->save();
+        /**
+         * Dummy User
+         */
 
         $user = new User();
-        $user->parent_id = 1;
+        $user->parent_id = 2;
         $user->email = 'mstork11@gmail.com';
         $user->code = 'hockey11';
         $user->password = bcrypt('hockey11');
@@ -91,23 +104,5 @@ class UsersSeeder extends Seeder
         $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
         $user->save();
         $user->attachRole($admin);
-
-        $audio = new Audio();
-        $audio->filename = 'test.wav';
-        $audio->duration = 47264;
-        $audio->user_id = 1;
-        $audio->save();
-
-        $audio = new Audio();
-        $audio->filename = 'test1.wav';
-        $audio->duration = 47264;
-        $audio->user_id = 2;
-        $audio->save();
-
-        $audio = new Audio();
-        $audio->filename = 'test2.wav';
-        $audio->duration = 47264;
-        $audio->user_id = 3;
-        $audio->save();
     }
 }
