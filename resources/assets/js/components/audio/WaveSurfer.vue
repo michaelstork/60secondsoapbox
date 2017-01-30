@@ -60,6 +60,9 @@
 			this.wavesurfer.on('ready', () => {
 				this.pending = false;
 			});
+			this.wavesurfer.on('error', (error) => {
+				console.log(error);
+			});
 		},
 		beforeDestroy: function () {
 			this.wavesurfer.unAll();
