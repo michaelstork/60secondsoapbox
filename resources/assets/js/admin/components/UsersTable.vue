@@ -4,6 +4,7 @@
 			<span class="info">User Info</span>
 			<span class="created-at">Originally Nominated</span>
 			<span class="submission">Submission</span>
+			<span class="delete">Delete User</span>
 		</li>
 		<li v-for="user in users" v-on:click="toggleUserDetails(user)" class="user-row" :class="{'show-details': activeUserId === user.id}">
 			<span class="info">
@@ -18,6 +19,9 @@
 					<br>
 					<b>{{ user.submission.title }}</b>
 				</a>
+			</span>
+			<span class="delete">
+				<a v-on:click.prevent.stop="deleteUser(user)">Delete User</a>
 			</span>
 			<transition name="fade">
 				<div v-if="user.details &amp;&amp; activeUserId === user.id" v-on:click.stop class="user-details">
@@ -102,6 +106,21 @@
 				).then(
 					response => {
 						user.details = response.data;
+					},
+					errorResponse => {
+						console.log(errorResponse);
+					}
+				);
+			},
+			deleteUser: function (user) {
+				if (!window.confirm('Are you sure you want to delete this user?')) return;
+				return this.$http.post(
+					URLS['web'].deleteUser,
+					{id: user.id}
+				).then(
+					response => {
+						console.log(response);
+						this.users.splice(this.users.indexOf(user), 1);
 					},
 					errorResponse => {
 						console.log(errorResponse);

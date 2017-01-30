@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Invitation;
 use App\Submission;
 use App\Audio;
 use App\User;
 use App\Content;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\Invitation;
 
 class AdminController extends Controller
 {
@@ -157,5 +158,24 @@ class AdminController extends Controller
         $this->sendInvitationEmail(Auth::user(), $user);
 
         return redirect()->route('dashboard', ['admin' => 'dashboard']);
+    }
+
+    public function deleteUser (Request $request)
+    {
+        $user = User::where('id', $request->input('id'))->first();
+        $disk = Storage::disk('audio');
+
+        $userAudio = $user->audio();
+
+        $userAudio->each(function ($audio) use ($disk) {
+            $disk->delete($audio->filename);
+            $audio->delete();
+        });
+
+        $user->delete();
+
+        return response()->json([
+            'message' => 'User Deleted'
+        ]);
     }
 }

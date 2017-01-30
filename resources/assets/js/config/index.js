@@ -12,6 +12,7 @@ URLS.web = {
 	audioDelete: '/api/user-audio',
 	submission: '/api/submission',
 	userInfo: '/user-info',
+	deleteUser: '/delete-user',
 	resendInvitation: '/resend-invitation'
 };
 
