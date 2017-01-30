@@ -32,7 +32,11 @@
                             {{ csrf_field() }}
                             @foreach ($content as $item)
                                 <label>{{ $item->title }}</label>
-                                <textarea name="{{ $item->name }}">{!! $item->content !!}</textarea>
+                                @if ($item->type === 'text')
+                                    <input type="text" name="{{ $item->name }}" value="{{ $item->content }}" />
+                                @elseif ($item->type === 'textarea')
+                                    <textarea name="{{ $item->name }}">{!! $item->content !!}</textarea>
+                                @endif
                             @endforeach
                             <button type="submit" class="rect">
                                 <span>Save</span>

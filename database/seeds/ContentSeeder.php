@@ -18,24 +18,28 @@ class ContentSeeder extends Seeder
         $intro->content = "Any topic is on the table – clinical, academic, economic, or whatever else may interest an EM-centric audience. We carefully remix your audio to add an extra splash of drama and excitement. Even more exciting, you'll get to challenge 3 of your peers to stand on a soapbox of their own!
 
 If you'd like to participate, enter your invitation code below!";
+        $intro->type = 'textarea';
         $intro->save();
 
-        $email = new Content();
-        $email->name = 'email-subject';
-        $email->title = 'Email Subject';
-        $email->content = "You've been invited to record an episode of 60 Second Soapbox!";
-        $email->save();
+        $subject = new Content();
+        $subject->name = 'email-subject';
+        $subject->title = 'Email Subject';
+        $subject->content = "You've been invited to record an episode of 60 Second Soapbox!";
+        $subject->type = 'text';
+        $subject->save();
 
         $email = new Content();
         $email->name = 'email-body';
         $email->title = 'Email Text';
         $email->content = "Any topic is on the table – clinical, academic, economic, or whatever else may interest an EM-centric audience. We carefully remix your audio to add an extra splash of drama and excitement. Even more exciting, you'll get to challenge 3 of your peers to stand on a soapbox of their own!";
+        $email->type = 'textarea';
         $email->save();
 
-        $email = new Content();
-        $email->name = 'audio';
-        $email->title = 'Audio Submission Instructions';
-        $email->content = "If your device has a microphone and supports audio capture, you can record your submission here. Alternatively, you may upload your own audio file in wav or mp3 format.";
-        $email->save();
+        $audio = new Content();
+        $audio->name = 'audio';
+        $audio->title = 'Audio Submission Instructions';
+        $audio->content = "If your device has a microphone and supports audio capture, you can record your submission here. Alternatively, you may upload your own audio file in wav or mp3 format.";
+        $audio->type = 'textarea';
+        $audio->save();
     }
 }

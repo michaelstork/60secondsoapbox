@@ -111,16 +111,19 @@
 		font-weight:700;
 	}
 
-	textarea {
+	input, textarea {
 		padding:12px;
 		box-sizing:border-box;
 		width:100%;
 		flex:0 0 auto;
-		min-height:200px;
 		border:none;
 		outline:none;
 		background-color:#F0F0F0;
 		margin-bottom:18px;
+	}
+
+	textarea {
+		min-height:160px;
 		resize:vertical;
 	}
 
