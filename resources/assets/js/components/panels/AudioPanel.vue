@@ -117,7 +117,8 @@
 				let extension = file.type.indexOf('ogg') >= 0 ? 'ogg' : 'wav';
 				formData.append('extension', extension);
 				formData.append('audio', file);
-				formData.append('removePrevious', removePrevious);
+				
+				if (removePrevious) formData.append('removePrevious', true);
 
 				return this.$http.post(
 					URLS[this.env].audioUpload,
