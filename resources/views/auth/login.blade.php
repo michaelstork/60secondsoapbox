@@ -10,7 +10,7 @@
                     <div class="panel-header">
                         <h1>Login</h1>
                     </div>
-                    <soapbox-form :form="loginForm" class="login-form">
+                    <soapbox-form :form="loginForm" class="auth-form">
                         <div slot="form-top">
                             @if ($errors->has('email'))
                                 <span class="help-block">
@@ -22,18 +22,21 @@
                                 </span>
                             @endif
                         </div>
-                        <nav slot="form-bottom">
-                            {{ csrf_field() }}
-                            <button class="round" type="submit">
-                                <i class="mdi mdi-keyboard-backspace mdi-flip-horizontal"></i>
-                                <span>Continue</span>
-                            </button>
-                        </nav>                        
+                        <div slot="form-bottom" class="form-bottom">
+                            <a href="/password/reset">Forgot Password?</a>
+                            <nav>
+                                {{ csrf_field() }}
+                                <button class="round" type="submit">
+                                    <i class="mdi mdi-keyboard-backspace mdi-flip-horizontal"></i>
+                                    <span>Continue</span>
+                                </button>
+                            </nav>
+                        </div>
                     </soapbox-form>
                 </div>
             </section>
         </div>
     </div>
 </div>
-<script src="js/admin/login.js"></script>
+<script src="/js/admin/auth.js"></script>
 @endsection

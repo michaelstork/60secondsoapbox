@@ -8,7 +8,7 @@ require('laravel-elixir-vue-2');
 elixir(mix => {
     mix.sass('admin/admin.scss', 'public/css')
     .webpack(
-        'admin/login.js',			// entry point
+        'admin/auth.js',			// entry point
         './public/js/admin',    	// output directory
         './resources/assets/js/' 	// base directory
     )

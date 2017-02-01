@@ -33,9 +33,13 @@
 	border-top-right-radius:$contentPanelBorderRadius;
 }
 
-.panel-content .login-form {
+.panel-content .auth-form {
 	width:280px;
 	margin:48px auto;
+}
+
+.panel-content .form-bottom {
+	text-align:center;
 }
 
 .panel-header > form {

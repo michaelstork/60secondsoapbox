@@ -7,8 +7,8 @@
 
         <title>{{ 'Admin | ' . config('app.name', 'Admin | 60 Second Soapbox') }}</title>
 
-        <link href="css/app.css" rel="stylesheet">
-        <link href="css/admin.css" rel="stylesheet">
+        <link href="/css/app.css" rel="stylesheet">
+        <link href="/css/admin.css" rel="stylesheet">
 
         <script>
             window.Laravel = <?php echo json_encode([
