@@ -7,7 +7,7 @@
 			</div>
 			<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange"></soapbox-form>
 		</div>
-		<nav v-on:click="fillForm">
+		<nav>
 			<button class="round"
 				:disabled="!isValidPanel"
 				v-on:click="requestPanelNavigation">
@@ -28,21 +28,6 @@
 			return {
 				form: infoForm
 			};
-		},
-
-		methods: {
-
-
-			/**
-			 * DEBUG STUFF
-			 */
-
-			fillForm: function () {
-				// this.getFieldByName('name').value = 'NAME';
-				// this.getFieldByName('title').value = 'TITLE';
-				// this.getFieldByName('institution').value = 'INSTITUTION';
-				// this.onFormValidityChange(true);
-			}
 		}
 	}
 </script>
