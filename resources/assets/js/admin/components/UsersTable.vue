@@ -103,7 +103,7 @@
 			},
 			getUserDetails: function (user) {
 				return this.$http.post(
-					URLS['web'].userInfo,
+					URLS.userInfo,
 					{id: user.id}
 				).then(
 					response => {
@@ -117,7 +117,7 @@
 			deleteUser: function (user) {
 				if (!window.confirm('Are you sure you want to delete this user?')) return;
 				return this.$http.post(
-					URLS['web'].deleteUser,
+					URLS.deleteUser,
 					{id: user.id}
 				).then(
 					response => {
@@ -131,7 +131,7 @@
 			},
 			resendInvitation: function (user) {
 				return this.$http.post(
-					URLS['web'].resendInvitation,
+					URLS.resendInvitation,
 					{id: user.id}
 				).then(
 					response => {
