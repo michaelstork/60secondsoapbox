@@ -40,7 +40,7 @@ class Invitation extends Mailable
         $body = Content::where('name', 'email-body')->firstOrFail();
 
         return $this->subject($subject->content)
-            ->view('mail.invitation-plain')
+            ->view('mail.invitation')
             ->text('mail.invitation-plain')
             ->with([
                 'nominee' => $this->nominee,
