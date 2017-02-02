@@ -18,7 +18,7 @@ class ContentSeeder extends Seeder
         $intro->content = "Any topic is on the table – clinical, academic, economic, or whatever else may interest an EM-centric audience. We carefully remix your audio to add an extra splash of drama and excitement. Even more exciting, you'll get to challenge 3 of your peers to stand on a soapbox of their own!
 
 If you'd like to participate, enter your invitation code below!";
-        $intro->type = 'textarea';
+        $intro->type = 'html';
         $intro->save();
 
         $subject = new Content();
@@ -32,14 +32,14 @@ If you'd like to participate, enter your invitation code below!";
         $email->name = 'email-body';
         $email->title = 'Invitation Email Body';
         $email->content = "Any topic is on the table – clinical, academic, economic, or whatever else may interest an EM-centric audience. We carefully remix your audio to add an extra splash of drama and excitement. Even more exciting, you'll get to challenge 3 of your peers to stand on a soapbox of their own!";
-        $email->type = 'textarea';
+        $email->type = 'html';
         $email->save();
 
         $audio = new Content();
         $audio->name = 'audio';
         $audio->title = 'Audio Submission Instructions';
         $audio->content = "If your device has a microphone and supports audio capture, you can record your submission here. Alternatively, you may upload your own audio file in wav or mp3 format.";
-        $audio->type = 'textarea';
+        $audio->type = 'html';
         $audio->save();
     }
 }

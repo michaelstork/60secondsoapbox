@@ -31,10 +31,17 @@
                         <form method="POST" action="/save-content" class="content-form">
                             {{ csrf_field() }}
                             @foreach ($content as $item)
-                                <soapbox-content-editor>
-                                    <label slot="label">{{ $item->title }}</label>
-                                    <div slot="editable-content" name="{{ $item->name }}" class="editable-content">{!! $item->content !!}</div>
-                                </soapbox-content-editor>
+                                @if ($item->type === 'text')
+                                    <div class="content-editor-container">
+                                        <label>{{ $item->title }}</label>
+                                        <input type="text" name="{{ $item->name }}" value="{{ $item->content }}" />
+                                    </div>
+                                @elseif ($item->type === 'html')
+                                    <soapbox-content-editor>
+                                        <label slot="label">{{ $item->title }}</label>
+                                        <div slot="editable-content" name="{{ $item->name }}" class="editable-content">{!! $item->content !!}</div>
+                                    </soapbox-content-editor>
+                                @endif
                             @endforeach
                             <button type="submit" class="rect">
                                 <span>Save</span>
