@@ -7,7 +7,7 @@
         
         <title>{{ config('app.name', '60 Second Soapbox') }}</title>
 
-        <link href="css/app.css" rel="stylesheet">
+        <link href="/css/app.css" rel="stylesheet">
 
         @if ($cordova)
             <script type="text/javascript" src="cordova.js"></script>
@@ -21,6 +21,8 @@
     </head>
     <body>
         @yield('content')
-        <script src="js/app.js"></script>
+        @if (!$noApp)
+            <script src="/js/app.js"></script>
+        @endif
     </body>
 </html>

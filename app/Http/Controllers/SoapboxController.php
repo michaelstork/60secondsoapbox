@@ -7,6 +7,7 @@ use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 use App\Content;
 
 class SoapboxController extends Controller
@@ -49,11 +50,23 @@ class SoapboxController extends Controller
 		return response()->json(compact('token'));
     }
 
-    public function authFailed($message = 'Invalid email or invitation code')
+    protected function authFailed($message = 'Invalid email or invitation code')
     {
         return response()->json([
             'authenticated' => false,
             'message' => $message
         ], 401);
+    }
+
+    public function noThanks (Request $request, $id)
+    {
+        $user = User::where('id', $id)->firstOrFail();
+        $user->declined = 1;
+        $user->save();
+
+        return view('removed')->with([
+            'cordova' => false,
+            'noApp' => true
+        ]);
     }
 }

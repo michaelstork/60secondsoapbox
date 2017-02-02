@@ -51,6 +51,7 @@ class UsersSeeder extends Seeder
         $user->password = bcrypt('AgyJtknub4zb');
         $user->title = 'Guest Admin Account';
         $user->institution = '60 Second Soapbox';
+        $user->declined = 0;
         $user->created_at = date('Y-m-d H:i:s', strtotime('-3 days'));
         $user->last_invited = date('Y-m-d H:i:s', strtotime('-3 days'));
         $user->save();
@@ -67,6 +68,7 @@ class UsersSeeder extends Seeder
     	$user->password = bcrypt('hockey11');
         $user->title = 'Web Developer';
         $user->institution = 'MStork';
+        $user->declined = 0;
         $user->created_at = date('Y-m-d H:i:s', strtotime('-3 days'));
         $user->last_invited = date('Y-m-d H:i:s', strtotime('-3 days'));
     	$user->save();
@@ -94,6 +96,7 @@ class UsersSeeder extends Seeder
         $user->password = bcrypt('hockey11');
         $user->created_at = date('Y-m-d H:i:s', strtotime('-1 week'));
         $user->last_invited = date('Y-m-d H:i:s', strtotime('-3 days'));
+        $user->declined = 0;
         $user->save();
         $user->attachRole($normalUser);
 
@@ -102,6 +105,7 @@ class UsersSeeder extends Seeder
         $user->code = 'samshaikhsoapbox';
         $user->password = bcrypt('samshaikhsoapbox');
         $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
+        $user->declined = 0;
         $user->save();
         $user->attachRole($admin);
     }

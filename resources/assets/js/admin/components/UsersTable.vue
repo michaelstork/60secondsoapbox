@@ -10,7 +10,8 @@
 			<span class="info">
 				<b>{{ formatUserInfo(user.name, user.email) }}</b>
 				<br>
-				<i v-if="user.title">{{ user.title }}, {{ user.institution }}</i>
+				<span class="declined" v-if="user.declined">Declined to participate</span>
+				<i v-else-if="user.title">{{ user.title }}, {{ user.institution }}</i>
 			</span>
 			<span class="created-at">{{ formatDate(user.created_at) }}</span>
 			<span class="submission">
@@ -34,7 +35,7 @@
 					<template v-if="!user.submission">
 						<p>
 							<span v-if="user.details.days_since_invited !== user.details.days_since_last_invited">Last Invitation Sent <b>{{ formatCreatedAt(user.details.days_since_last_invited) }}</b></span>
-							<a v-if="user.details.days_since_last_invited >= 2" v-on:click.prevent="resendInvitation(user)">
+							<a v-if="!user.declined &amp;&amp; (user.details.days_since_last_invited >= 2)" v-on:click.prevent="resendInvitation(user)">
 								<i class="mdi mdi-email"></i>
 								<b>Resend Invitation</b>
 							</a>

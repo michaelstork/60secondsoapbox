@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('code');
             $table->string('title')->nullable();
             $table->string('institution')->nullable();
+            $table->boolean('declined')->default(0);
             $table->rememberToken();
             $table->timestamp('last_invited')->nullable();
             $table->timestamps();

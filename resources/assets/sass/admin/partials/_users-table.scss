@@ -131,6 +131,10 @@
 	}
 }
 
+.user-row .declined {
+	color:$red;
+}
+
 .user-row a {
 	display:inline-block;
 	text-decoration:none;
