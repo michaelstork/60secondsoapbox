@@ -49,4 +49,5 @@
         window.soapboxUsers = <?php echo json_encode($users); ?>;
         window.soapboxContent = <?php echo json_encode($content); ?>;
     </script>
+    <script src="js/admin/dashboard.js"></script>
 @endsection
