@@ -18,9 +18,7 @@ const appData = {
 window.soapboxAdmin = new Vue({
 	el: '.vue-mount',
 	data: appData,
-	methods: {
-
-	},
+	methods: {},
 	components: {
 		'soapbox-users-table': UsersTable,
 		'soapbox-content-editor': ContentEditor

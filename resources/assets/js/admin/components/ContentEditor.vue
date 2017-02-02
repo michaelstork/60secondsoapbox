@@ -19,16 +19,15 @@
 			this.quill = new window.Quill(
 				this.$el.querySelector('.editable-content'),
 				{
-					modules: {
-						clipboard: {}
-					},
+					modules: {},
 					theme: 'snow'
 				}
 			);
-
-			this.quill.on('text-change', this.updateValue);
+			
 			this.name = this.quill.root.parentNode.getAttribute('name');
+
 			this.updateValue();
+			this.quill.on('text-change', this.updateValue);
 		},
 		methods: {
 			updateValue: function () {

@@ -79,6 +79,7 @@
 
 .panel-container.dashboard-panel-container {
 	@include queryWidth(min, 1024px) {
+		overflow:visible;
 		width:80%;
 		margin:0 auto 64px auto;
 	}
@@ -110,6 +111,7 @@
 	flex-direction:column;
 	box-sizing:border-box;
 	padding:12px;
+	overflow:visible;
 
 	label {
 		font-weight:700;

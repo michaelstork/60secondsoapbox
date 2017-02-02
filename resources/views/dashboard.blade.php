@@ -49,6 +49,4 @@
         window.soapboxUsers = <?php echo json_encode($users); ?>;
         window.soapboxContent = <?php echo json_encode($content); ?>;
     </script>
-    <script src="//cdn.quilljs.com/1.0.0/quill.min.js" type="text/javascript"></script>
-    <script src="js/admin/dashboard.js"></script>
 @endsection

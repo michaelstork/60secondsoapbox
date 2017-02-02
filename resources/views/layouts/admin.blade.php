@@ -9,6 +9,7 @@
 
         <link href="/css/app.css" rel="stylesheet">
         <link href="/css/admin.css" rel="stylesheet">
+        
         <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
 
         <script>
@@ -20,4 +21,6 @@
     <body>
         @yield('content')
     </body>
+    <script src="//cdn.quilljs.com/1.0.0/quill.min.js" type="text/javascript"></script>
+    <script src="js/admin/dashboard.js"></script>
 </html>
