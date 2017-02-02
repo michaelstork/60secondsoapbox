@@ -21,5 +21,8 @@
     "recordrtc": "^5.4.0",
     "vue": "^2.1.4",
     "vue-resource": "^1.0.3"
+  },
+  "dependencies": {
+    "quill": "^1.2.0"
   }
 }

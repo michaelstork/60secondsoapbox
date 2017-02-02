@@ -31,12 +31,10 @@
                         <form method="POST" action="/save-content" class="content-form">
                             {{ csrf_field() }}
                             @foreach ($content as $item)
-                                <label>{{ $item->title }}</label>
-                                @if ($item->type === 'text')
-                                    <input type="text" name="{{ $item->name }}" value="{{ $item->content }}" />
-                                @elseif ($item->type === 'textarea')
-                                    <textarea name="{{ $item->name }}">{!! $item->content !!}</textarea>
-                                @endif
+                                <soapbox-content-editor>
+                                    <label slot="label">{{ $item->title }}</label>
+                                    <div slot="editable-content" name="{{ $item->name }}" class="editable-content">{!! $item->content !!}</div>
+                                </soapbox-content-editor>
                             @endforeach
                             <button type="submit" class="rect">
                                 <span>Save</span>
@@ -51,5 +49,6 @@
         window.soapboxUsers = <?php echo json_encode($users); ?>;
         window.soapboxContent = <?php echo json_encode($content); ?>;
     </script>
+    <script src="//cdn.quilljs.com/1.0.0/quill.min.js" type="text/javascript"></script>
     <script src="js/admin/dashboard.js"></script>
 @endsection

@@ -9,6 +9,7 @@
 
         <link href="/css/app.css" rel="stylesheet">
         <link href="/css/admin.css" rel="stylesheet">
+        <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
 
         <script>
             window.Laravel = <?php echo json_encode([
