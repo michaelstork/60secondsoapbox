@@ -121,7 +121,7 @@
 				if (removePrevious) formData.append('removePrevious', true);
 
 				return this.$http.post(
-					URLS[this.env].audioUpload,
+					URLS.audioUpload,
 					formData,
 					{progress: pe => { console.log(pe); }}
 				).then(
@@ -130,7 +130,7 @@
 				);
 			},
 			deleteAudioFile: function () {
-				return this.$http.delete(URLS[this.env].audioDelete);
+				return this.$http.delete(URLS.audioDelete);
 			},
 			handleUploadSuccess: function (response) {
 				this.audio.url = response.data.url;

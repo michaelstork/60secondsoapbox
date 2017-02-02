@@ -1,11 +1,5 @@
 
-const URLS = {};
-
-URLS.cordova = {
-
-};
-
-URLS.web = {
+const URLS = {
 	authenticate: '/authenticate',
 	validateNominee: '/api/validate-nominee',
 	audioUpload: '/api/user-audio',

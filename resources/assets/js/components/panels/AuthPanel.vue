@@ -50,7 +50,7 @@
 				const [emailField, codeField] = this.form.fields;
 
 				return this.$http.post(
-					URLS[this.env].authenticate,
+					URLS.authenticate,
 					{
 						email: emailField.value,
 						password: codeField.value

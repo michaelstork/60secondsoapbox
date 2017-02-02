@@ -71,7 +71,7 @@
 					this.handleInvalidNominee(field, 'Duplicate!');
 				} else {
 					return this.$http.post(
-						URLS[this.env].validateNominee,
+						URLS.validateNominee,
 						{email: field.value}
 					).then(
 						response => {
