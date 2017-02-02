@@ -21,8 +21,6 @@
     </head>
     <body>
         @yield('content')
-        @if (!$noApp)
-            <script src="/js/app.js"></script>
-        @endif
+        <script src="/js/app.js"></script>
     </body>
 </html>

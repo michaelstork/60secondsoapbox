@@ -38,6 +38,11 @@ class SoapboxController extends Controller
 		}
 
         $user = Auth::user();
+
+        if ($user->declined) {
+            return $this->authFailed();
+        }
+
         $disk = Storage::disk('audio');
 
         $userAudio = $user->audio();
@@ -64,9 +69,6 @@ class SoapboxController extends Controller
         $user->declined = 1;
         $user->save();
 
-        return view('removed')->with([
-            'cordova' => false,
-            'noApp' => true
-        ]);
+        return view('removed')->with(['cordova' => false]);
     }
 }
