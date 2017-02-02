@@ -127,7 +127,7 @@
 			<tr>
 				<td bgcolor="#FFFFFE">
 					<button bgcolor="#00BCD4"><a style="color:#FFFFFE !important;" href="https://60secondsoapbox.io">Get Started</a></button>
-					<button bgcolor="#F44336" class="reject"><a style="color:#FFFFFE !important;" href="https://60secondsoapbox.io/no-thanks/{{ $nominee->id }}">No Thanks</a></button>
+					<button bgcolor="#F44336" class="reject"><a style="color:#FFFFFE !important;" target="_blank" href="https://60secondsoapbox.io/no-thanks/{{ $nominee->id }}">No Thanks</a></button>
 				</td>
 			</tr>
 			<tr>

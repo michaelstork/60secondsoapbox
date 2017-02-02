@@ -9,4 +9,4 @@ You were nominated by {{ $nominator->name }} ({{ $nominator->email }}).
 
 If you'd like to participate, click the button below and enter the following invitation code:
 {{ $code }}
-[BUTTON] Get Started (https://60secondsoapbox.io) [BUTTON] No Thanks (https://60secondsoapbox.io/no-thanks)
+[BUTTON] Get Started (https://60secondsoapbox.io) [BUTTON] No Thanks (https://60secondsoapbox.io/no-thanks/{{ $nominee->id }})
