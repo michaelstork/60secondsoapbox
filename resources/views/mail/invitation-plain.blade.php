@@ -5,7 +5,7 @@ You've been nominated to record an episode of 60 Second Soapbox! (https://www.al
 
 You were nominated by {{ $nominator->name }} ({{ $nominator->email }}).
 
-{{ $content }}
+{{ strip_tags($content) }}
 
 If you'd like to participate, click the button below and enter the following invitation code:
 {{ $code }}

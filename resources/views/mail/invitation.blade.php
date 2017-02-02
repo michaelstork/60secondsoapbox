@@ -119,7 +119,7 @@
 
 					<p class="sub-intro">by {{ $nominator->name }} ({{ $nominator->email }})</p>
 
-					<p>{{ $content }}</p>
+					<p>{!! $content !!}</p>
 
 					<p class="instructions">If you'd like to participate, click the button below and enter the following invitation code:<br><span class="code">{{ $code }}</span></p>
 				</td>
@@ -127,7 +127,7 @@
 			<tr>
 				<td bgcolor="#FFFFFE">
 					<button bgcolor="#00BCD4"><a style="color:#FFFFFE !important;" href="https://60secondsoapbox.io">Get Started</a></button>
-					<button bgcolor="#F44336" class="reject"><a style="color:#FFFFFE !important;" href="https://60secondsoapbox.io/no-thanks">No Thanks</a></button>
+					<button bgcolor="#F44336" class="reject"><a style="color:#FFFFFE !important;" href="https://60secondsoapbox.io/no-thanks/{{ $nominee->id }}">No Thanks</a></button>
 				</td>
 			</tr>
 			<tr>
