@@ -21,7 +21,7 @@
 					<b>{{ user.submission.title }}</b>
 				</a>
 			</span>
-			<span v-on:click="deleteUser(user)" class="delete">
+			<span v-on:click.stop="deleteUser(user)" class="delete">
 				<i class="mdi mdi-delete-circle"></i>
 				<br>
 				<b>Delete User</b>
