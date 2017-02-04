@@ -95,7 +95,7 @@ class AdminController extends Controller
             ];
             $data['parent'] = $parentData;
         }
-        
+
         // user nominees
         $children = User::where('parent_id', $request->input('id'))->get();
         foreach ($children as $child) {
@@ -106,6 +106,10 @@ class AdminController extends Controller
                 'email' => $child['email'],
                 'submission' => $submission
             ];
+        }
+
+        if (!$user->hasRole('admin')) {
+            $data['code'] = $user->code;
         }
 
         return response()->json($data);

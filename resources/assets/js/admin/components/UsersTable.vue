@@ -33,6 +33,7 @@
 						<span v-if="user.details.parent">by <b>{{ user.details.parent.name }} ({{ user.details.parent.email }})</b></span>
 					</p>
 					<template v-if="!user.submission">
+						<p v-if="user.details.code">Invitation Code: <b>{{ user.details.code }}</b></p>
 						<p>
 							<span v-if="user.details.days_since_invited !== user.details.days_since_last_invited">Last Invitation Sent <b>{{ formatCreatedAt(user.details.days_since_last_invited) }}</b></span>
 							<a v-if="!user.declined &amp;&amp; (user.details.days_since_last_invited >= 2)" v-on:click.prevent="resendInvitation(user)">
