@@ -54,7 +54,12 @@ class AdminController extends Controller
                 continue;
             }
 
-            $content->content = trim($value);
+            if ($content->type === 'html') {
+                $content->content = preg_replace('*<p><br></p>*i', '', $value);
+            } else {
+                $content->content = trim($value);
+            }
+
             $content->save();
         }
 
