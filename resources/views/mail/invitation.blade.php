@@ -95,7 +95,9 @@
 				color:#333333 !important;
 				font-size:13px !important;
 			}
-			.instructions span.code {
+			.instructions a.code {
+				text-decoration:underline;
+				color:#00BCD4;
 				font-weight:bold;
 				font-size:24px !important;
 				margin-top:12px;
@@ -121,7 +123,7 @@
 
 					<p>{!! $content !!}</p>
 
-					<p class="instructions">If you'd like to participate, click the button below and enter the following invitation code:<br><span class="code">{{ $code }}</span></p>
+					<p class="instructions">If you'd like to participate, click the button below and enter the following invitation code:<br><a href="https://60secondsoapbox.io" target="_blank" class="code">{{ $code }}</a></p>
 				</td>
 			</tr>
 			<tr>
