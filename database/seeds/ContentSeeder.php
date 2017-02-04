@@ -41,5 +41,12 @@ If you'd like to participate, enter your invitation code below!";
         $audio->content = "If your device has a microphone and supports audio capture, you can record your submission here. Alternatively, you may upload your own audio file in wav or mp3 format.";
         $audio->type = 'html';
         $audio->save();
+
+        $thanks = new Content();
+        $thanks->name = 'thank-you';
+        $thanks->title = 'Thank you Text';
+        $thanks->content = '<p>Thanks for participating!</p>';
+        $thanks->type = 'html';
+        $thanks->save();
     }
 }

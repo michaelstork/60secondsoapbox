@@ -3,7 +3,7 @@
 	<section class="nominees-panel content-panel">
 		<div class="panel-content">
 			<div class="panel-icon status-indicator-complete"></div>
-			<h3 v-if="submissionComplete">Thanks for participating!</h3>
+			<slot v-if="submissionComplete" name="thank-you-content"></slot>
 			<soapbox-form v-else :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange" v-on:formInput="onFormInput"></soapbox-form>
 		</div>
 		<nav>

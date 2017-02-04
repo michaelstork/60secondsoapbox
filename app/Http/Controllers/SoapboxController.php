@@ -17,7 +17,7 @@ class SoapboxController extends Controller
 
     public function index()
     {
-        $panelContent = Content::whereIn('name', ['auth', 'audio'])->get();
+        $panelContent = Content::whereIn('name', ['auth', 'audio', 'thank-you'])->get();
 
         return view('soapbox')->with([
             'cordova' => false,
