@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\ConcatAudioFiles::class,
-        Commands\GetAudioDuration::class
+        Commands\GetAudioDuration::class,
+        Commands\SendInvitationEmails::class
     ];
 
     /**
@@ -25,8 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command(SendInvitationEmails::class, ['--force'])->hourly();
     }
 
     /**
