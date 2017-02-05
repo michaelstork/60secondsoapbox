@@ -14,7 +14,7 @@ class SendInvitationEmails extends Command
      *
      * @var string
      */
-    protected $signature = 'sendInvitationEmail {id}';
+    protected $signature = 'SendInvitationEmails {id}';
 
     /**
      * The console command description.
