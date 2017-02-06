@@ -40,30 +40,29 @@ class SendInvitationEmails extends Command
      */
     public function handle()
     {
+        $weekAgo = strtotime('-1 week');
         $users = User::doesntHave('submission')
             ->where([
                 ['email', '<>', 'admin@60secondsoapbox.io'],
                 ['declined', '<>', 1]
-            ])->get();
+            ])
+            ->get()
+            ->filter(function ($user) use ($weekAgo) {
+                return strtotime($user->last_invited) < $weekAgo;
+            })
+            ->each(function ($user) {
+                if (is_null($user->parent_id)) {
+                    $parent = User::where('email', 'samshaikh@gmail.com')->firstOrFail();
+                } else {
+                    $parent = User::where('id', $user->parent_id)->firstOrFail();
+                }
 
-        $weekAgo = strtotime('-1 week');
-        $users = $users->filter(function ($user) use ($weekAgo) {
-            return strtotime($user->last_invited) < $weekAgo;
-        });
-        
-        $users->each(function ($user) {
-            if (is_null($user->parent_id)) {
-                $parent = User::where('email', 'samshaikh@gmail.com');
-            } else {
-                $parent = User::where('id', $user->parent_id);
-            }
+                $invitation = new Invitation($parent, $user, $user->code);
+                Mail::to($user)->send($invitation);
 
-            $invitation = new Invitation($parent, $user, $user->code);
-            Mail::to($user)->send($invitation);
-
-            $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
-            $user->save(); 
-        });
+                $user->last_invited = date('Y-m-d H:i:s', strtotime('now'));
+                $user->save(); 
+            });
 
     }
 }
