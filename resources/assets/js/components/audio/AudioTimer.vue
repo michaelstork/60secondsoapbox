@@ -18,7 +18,7 @@
 	}
 
 	export default {
-		props: ['status', 'reset', 'update'],
+		props: ['status', 'reset', 'update', 'audioEventHub'],
 		data: function () {
 			return {
 				interval: null,
@@ -68,6 +68,10 @@
 				const minutes = Math.floor(duration.as('minutes'));
 				const seconds = Math.floor(duration.as('seconds')) - (minutes * 60);
 				const progress = 1 - (duration.as('milliseconds') / AUDIO.minDuration);
+
+				if (duration.as('milliseconds') > AUDIO.maxDuration) {
+					this.audioEventHub.$emit('maxDurationReached');
+				}
 
 				this.$refs.timer.innerText = padString(minutes) + ':' + padString(seconds);
 				this.$refs.progress.style.strokeDashoffset = radialProgressDashArray * Math.max(0, progress);

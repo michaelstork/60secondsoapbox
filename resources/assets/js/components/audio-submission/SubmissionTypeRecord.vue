@@ -8,7 +8,8 @@
 					<audio-timer
 						:status="status"
 						:reset="!audio.adapter.recordingStarted"
-						:update="updateRecordedDuration">
+						:update="updateRecordedDuration"
+						:audioEventHub="audioEventHub">
 					</audio-timer>
 				</div>
 			</status-indicator>
@@ -72,6 +73,7 @@
 			subscribeAudioEvents: function () {
 				this.audioEventHub.$on('requestAudioPreview', this.onRequestAudioPreview);
 				this.audioEventHub.$on('audioReset', this.onAudioReset);
+				this.audioEventHub.$on('maxDurationReached', this.toggleRecording);
 			},
 			unsubscribeAudioEvents: function () {
 				this.audioEventHub.$off('requestAudioPreview', this.onRequestAudioPreview);
