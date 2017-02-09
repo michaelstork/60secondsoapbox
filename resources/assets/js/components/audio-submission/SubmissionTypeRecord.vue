@@ -78,6 +78,7 @@
 			unsubscribeAudioEvents: function () {
 				this.audioEventHub.$off('requestAudioPreview', this.onRequestAudioPreview);
 				this.audioEventHub.$off('audioReset', this.onAudioReset);
+				this.audioEventHub.$off('maxDurationReached', this.toggleRecording);
 			},
 			updateRecordedDuration: function (milliseconds) {
 				this.recordedDuration = milliseconds;
