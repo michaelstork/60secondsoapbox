@@ -43,7 +43,6 @@ class Invitation extends Mailable
         return $this->subject($subject->content)
             ->view('mail.invitation')
             ->text('mail.invitation-plain')
-            ->replyTo('samshaikh@gmail.com')
             ->with([
                 'nominee' => $this->nominee,
                 'nominator' => $this->nominator,
