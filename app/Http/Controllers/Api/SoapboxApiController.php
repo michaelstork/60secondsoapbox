@@ -139,10 +139,9 @@ class SoapboxApiController extends Controller
         $user->save();
 
         $submission = new Submission();
-        $submission->title = $data['nominees']['submissionTitle'];
+        $submission->title = $data['citations']['submissionTitle'];
+        $submission->citations = $data['citations']['citations'];
         $user->submission()->save($submission);
-
-        unset($data['nominees']['submissionTitle']);
 
         foreach ($data['nominees'] as $email) {
             $this->createUser($email, $user->id);
@@ -157,7 +156,7 @@ class SoapboxApiController extends Controller
            'info.title' => 'required',
            'info.institution' => 'required',
            'audio.filename' => 'required',
-           'nominees.submissionTitle' => 'required',
+           'citations.submissionTitle' => 'required',
            'nominees.nominee1' => 'bail|required|email',
            'nominees.nominee2' => 'bail|required|email',
            'nominees.nominee3' => 'bail|required|email'

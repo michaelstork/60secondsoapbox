@@ -10,17 +10,16 @@
 		justify-content:space-between;
 	}
 	.nominees-panel {
-		p,
-		.input-container:first-of-type {
+		p {
 			flex:1 0 100%;
 		}
 	}
-	.nominees-panel .input-container:not(:first-of-type) {
+	.nominees-panel .input-container {
 		margin-top:32px;
 		flex:0 0 32%;
 		max-width:32%;
 	}
-	.nominees-panel .input-container:not(:first-of-type) input {
+	.nominees-panel .input-container input {
 		font-size:0.75rem;
 		padding-right:32px;
 	}

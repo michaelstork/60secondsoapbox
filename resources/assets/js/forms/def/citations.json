@@ -1,0 +1,20 @@
+{
+	"name": "citations",
+	"preventSubmit": true,
+	"fields": [
+		{
+		    "name": "submissionTitle",
+		    "heading": "Please enter a title for your submission:",
+		    "label": "Title",
+		    "value": "",
+		    "required": true
+		},
+	    {
+	        "name": "citations",
+	        "heading": "",
+	        "label": "Citations",
+	        "value": "",
+	        "required": false
+	    }
+	]
+}

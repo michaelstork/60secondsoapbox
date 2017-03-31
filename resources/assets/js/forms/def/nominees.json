@@ -3,13 +3,6 @@
 	"preventSubmit": true,
 	"fields": [
 	    {
-	        "name": "submissionTitle",
-	        "heading": "Please enter a title for your submission:",
-	        "label": "Title",
-	        "value": "",
-	        "required": true
-	    },
-	    {
 	        "name": "nominee1",
 	        "heading": "Finally, challenge three of your peers to stand on the soapbox!",
 	        "label": "Email #1",

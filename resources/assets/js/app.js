@@ -3,6 +3,7 @@ import Resource from 'vue-resource';
 import AuthPanel from './components/panels/AuthPanel.vue';
 import InfoPanel from './components/panels/InfoPanel.vue';
 import AudioPanel from './components/panels/AudioPanel.vue';
+import CitationsPanel from './components/panels/CitationsPanel.vue';
 import NomineesPanel from './components/panels/NomineesPanel.vue';
 import {URLS} from './config/index';
 
@@ -25,6 +26,7 @@ appData.layout = {
         { name: 'auth', title: 'Login', id: 'soapbox-auth-panel'},
         { name: 'info', title: 'Your Information', id: 'soapbox-info-panel'},
         { name: 'audio', title: 'Your Audio Submission', id: 'soapbox-audio-panel'},
+        { name: 'citations', title: 'Title & Citations', id: 'soapbox-citations-panel' },
         { name: 'nominees', title: 'Almost Done!', id: 'soapbox-nominees-panel'}
     ],
     activePanelIndex: 0
@@ -103,6 +105,7 @@ new Vue({
         'soapbox-auth-panel': AuthPanel,
         'soapbox-info-panel': InfoPanel,
         'soapbox-audio-panel': AudioPanel,
+        'soapbox-citations-panel': CitationsPanel,
         'soapbox-nominees-panel': NomineesPanel
     }
 });
