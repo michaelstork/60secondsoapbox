@@ -13,6 +13,7 @@
 	        "name": "citations",
 	        "heading": "",
 	        "label": "Citations",
+	        "type": "textarea",
 	        "value": "",
 	        "required": false
 	    }
