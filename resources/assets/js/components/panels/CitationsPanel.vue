@@ -3,7 +3,7 @@
 	<section class="citations-panel content-panel">
 		<div class="panel-content">
 			<div class="panel-icon">
-				<i class="mdi mdi-account"></i>
+				<i class="mdi mdi-book-open-variant"></i>
 			</div>
 			<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange"></soapbox-form>
 		</div>
