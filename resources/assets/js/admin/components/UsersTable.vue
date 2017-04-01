@@ -20,7 +20,7 @@
 				<i v-else-if="user.title">{{ user.title }}, {{ user.institution }}</i>
 			</span>
 			<span class="citations">
-				<a v-if="user.submission" v-on:click.stop :href="'/citations/' + user.submission.id" target="_blank">View</a>
+				<a v-if="user.submission" v-on:click.stop :href="'/citations/' + user.submission.id" target="_blank">View Citations</a>
 			</span>
 			<span class="submission">
 				<a v-if="user.submission &amp;&amp; user.audio.length" v-on:click.stop :href="'/audio/' + user.audio[0].filename" target="_blank">
