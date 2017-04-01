@@ -3,6 +3,12 @@
 	margin-bottom:32px;
 }
 
+.info-panel .info-panel-photo-container {
+	display:flex;
+	justify-content:center;
+	margin:24px 0;
+}
+
 @include queryWidth(max, 648px) {
 	.info-panel {
 		padding-top:48px;

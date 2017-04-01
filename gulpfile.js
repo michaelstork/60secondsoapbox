@@ -31,10 +31,10 @@ elixir(mix => {
         mix.copy('node_modules/mdi/fonts', 'public/fonts')
         .copy('resources/assets/images', 'public/images');
     } else {
-        mix.browserSync({
-            proxy: {
-                target: 'https://soapbox.localhost'
-            }
-        });
+        // mix.browserSync({
+        //     proxy: {
+        //         target: 'https://soapbox.localhost'
+        //     }
+        // });
     }
 });

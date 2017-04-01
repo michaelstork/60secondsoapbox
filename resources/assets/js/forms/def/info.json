@@ -4,7 +4,6 @@
 	"fields": [
 	    {
 	        "name": "name",
-	        "heading": "First, we'll need your info:",
 	        "label": "Your Name",
 	        "value": "",
 	        "required": true

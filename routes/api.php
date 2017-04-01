@@ -17,3 +17,4 @@ Route::post('/user-audio', 'Api\SoapboxApiController@handleAudioUpload');
 Route::delete('/user-audio', 'Api\SoapboxApiController@deleteUserAudio');
 Route::post('/validate-nominee', 'Api\SoapboxApiController@validateNominee');
 Route::post('/submission', 'Api\SoapboxApiController@handleSubmission');
+Route::post('/user-photo', 'Api\SoapboxApiController@handlePhotoUpload');

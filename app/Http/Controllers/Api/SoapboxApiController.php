@@ -21,6 +21,28 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 class SoapboxApiController extends Controller
 {
 
+    public function handlePhotoUpload(Request $request)
+    {
+        $validator = Validator::make(
+            $request->file(),
+            [
+                'photo' => 'bail|required|mimetypes:image/jpeg,image/png'
+            ],
+            [
+                'photo.mimetypes' => 'Please upload a <span>jpg</span> or <span>png</span> file.'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(
+                ['message' => $validator->errors()->first()], 400
+            );
+        } else {
+            $file = $request->file('photo');
+        }
+
+    }
+
     public function handleAudioUpload(Request $request)
     {
         $validator = Validator::make(

@@ -19,7 +19,7 @@
 
 <script>
 	import FileUploadLink from '../../directives/fileUploadLink';
-	import StatusIndicator from '../audio/StatusIndicator.vue';
+	import StatusIndicator from '../status/StatusIndicator.vue';
 	import {AUDIO} from '../../config';
 
 	export default {

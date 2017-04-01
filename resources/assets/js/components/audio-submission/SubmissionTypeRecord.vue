@@ -30,7 +30,7 @@
 </template>
 
 <script>
-	import StatusIndicator from '../audio/StatusIndicator.vue';
+	import StatusIndicator from '../status/StatusIndicator.vue';
 	import AudioTimer from '../audio/AudioTimer.vue';
 	import { AUDIO } from '../../config';
 

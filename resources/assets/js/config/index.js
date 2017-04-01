@@ -7,7 +7,8 @@ const URLS = {
 	submission: '/api/submission',
 	userInfo: '/user-info',
 	deleteUser: '/delete-user',
-	resendInvitation: '/resend-invitation'
+	resendInvitation: '/resend-invitation',
+	photoUpload: '/api/user-photo'
 };
 
 const AUDIO = {};
