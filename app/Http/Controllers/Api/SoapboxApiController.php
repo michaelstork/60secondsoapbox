@@ -166,6 +166,7 @@ class SoapboxApiController extends Controller
         $user->name = $data['info']['name'];
         $user->title = $data['info']['title'];
         $user->institution = $data['info']['institution'];
+        $user->photo = $data['info']['photo'];
         $user->save();
 
         $submission = new Submission();
