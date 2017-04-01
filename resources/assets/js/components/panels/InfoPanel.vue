@@ -46,6 +46,9 @@
 				return this.photoUrl
 					? 'background-image:url('+ this.photoUrl +');background-size:cover;'
 					: null;
+			},
+			isValidPanel: function () {
+				return (this.form && this.form.valid && this.photoUrl);
 			}
 		},
 		watch: {
@@ -72,12 +75,21 @@
 			},
 			handleUploadSuccess: function (response) {
 				this.photoUrl = response.data.url;
+				this.photoFilename = response.data.filename;
 				return response.data;
 			},
 			handleUploadFailure: function (response) {
 				this.photoUrl = null;
+				this.photoFilename = null;
 				this.message = response.data.message;
 			},
+			savePanelData: function () {
+				console.log('saving panel '+this.panel.name);
+				const submission = JSON.parse(localStorage.getItem('soapboxSubmission')) || {};
+				submission[this.panel.name] = this.composePanelData();
+				submission[this.panel.name].photo = this.photoFilename;
+				localStorage.setItem('soapboxSubmission', JSON.stringify(submission));
+			}
 		},
 		directives: {
 			fileUploadLink: FileUploadLink
