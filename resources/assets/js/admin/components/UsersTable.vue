@@ -9,8 +9,9 @@
 		</li>
 		<li v-for="user in users" v-on:click="toggleUserDetails(user)" class="user-row" :class="{'show-details': activeUserId === user.id}">
 			<a :style="'background-image:url('+(user.photo ? ('/photos/' + user.photo) :  '/images/user.png') +')'"
-				:href="'/photos/'+ user.photo"
+				:href="user.photo ? '/photos/'+ user.photo : '/images/user.png'"
 				class="photo"
+				v-on:click.stop
 				target="_blank">
 			</a>
 			<span class="info">
