@@ -7,8 +7,8 @@
 			</div>
 			<h3 v-html="message ? message : 'First, we\'ll need a photo and some info:'"></h3>
 			<soapbox-form :form="form" :disabled="!isActivePanel" v-on:formValidityChange="onFormValidityChange">
-				<div slot="form-top" class="info-panel-photo-container">
-					<button v-file-upload-link:photo="selectFile" class="rect" tabIndex="-1">
+				<div slot="form-top" class="info-panel-photo-container" :class="{complete: photoUrl}">
+					<button v-file-upload-link:photo="selectFile" :disabled="photoUrl" class="rect" tabIndex="-1">
 						<span>Upload Photo</span>
 					</button>
 				</div>
@@ -44,7 +44,7 @@
 		computed: {
 			iconStyle: function () {
 				return this.photoUrl
-					? 'background-image:url('+ this.photoUrl +')'
+					? 'background-image:url('+ this.photoUrl +');background-size:cover;'
 					: null;
 			}
 		},

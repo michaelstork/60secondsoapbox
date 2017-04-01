@@ -39,6 +39,13 @@ class SoapboxApiController extends Controller
             );
         } else {
             $file = $request->file('photo');
+            $disk = Storage::disk('photos');
+            $filename = $file->getClientOriginalName();
+            $disk->putFileAs('/', $file, $filename);
+
+            return response()->json([
+                'url' => '/photos/' . $filename
+            ]);
         }
 
     }

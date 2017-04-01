@@ -7,6 +7,20 @@
 	display:flex;
 	justify-content:center;
 	margin:24px 0;
+
+	button {
+		transition:opacity 0.15s ease-out;
+	}
+
+	&.complete button {
+		opacity:0;
+		pointer-events:none;
+	}
+
+	&.complete ~ .input-container {
+		transition:transform 0.35s $standardCurve;
+		transform:translateY(-84px);
+	}
 }
 
 @include queryWidth(max, 648px) {

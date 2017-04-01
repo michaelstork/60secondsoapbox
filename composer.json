@@ -41,7 +41,7 @@
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
-            "mkdir -p storage/app/audio && ln -sr storage/app/audio public/audio"
+            "mkdir -p storage/app/audio && ln -sr storage/app/audio public/audio && mkdir -p storage/app/photos && ln -sr storage/app/photos public/photos"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
