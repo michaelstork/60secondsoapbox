@@ -11,7 +11,7 @@
 	box-sizing:border-box;
 	border-bottom:1px solid #EAEAEA;
 	border-top:1px solid transparent;
-	padding:6px 24px;
+	padding:6px 12px;
 	display:flex;
 	justify-content:space-between;
 	position:relative;
@@ -23,8 +23,12 @@
 
 	span {
 		line-height:1em;
-		height:1em;
+		height:1.25em;
 		font-weight:700;
+	}
+
+	& > span {
+		white-space:nowrap;
 	}
 }
 
@@ -33,14 +37,17 @@
 	font-weight:300;
 	overflow:hidden;
 	text-overflow:ellipsis;
-	white-space:nowrap;
 	display:block;
 
-	&.info {
-		flex:0 0 40%;
+	&.photo {
+		flex:0 0 68px;
 	}
-	&.created-at {
-		flex:0 0 20%;
+	&.info {
+		flex:0 0 30%;
+	}
+	&.citations {
+		flex:0 0 100px;
+		text-align:center;
 	}
 	&.submission {
 		flex:0 0 25%;
@@ -70,6 +77,15 @@
 	}
 }
 
+.user-row a.photo {
+	flex:0 0 56px;
+	height:56px;
+	border-radius:28px;
+	background-size:cover;
+	background-position:center;
+	margin-right:12px;
+}
+
 .user-row span {
 
 	&.info {
@@ -78,7 +94,7 @@
 			font-style:italic;
 		}
 	}
-	&.created-at {
+	&.citations {
 		font-size:0.65rem;
 	}
 	&.submission,
@@ -86,7 +102,7 @@
 		font-size:0.65rem;
 
 		a {
-			line-height:1.6rem;
+			line-height:1rem;
 			display:block;
 			overflow:hidden;
 			text-overflow:ellipsis;

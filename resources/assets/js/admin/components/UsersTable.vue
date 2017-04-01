@@ -1,19 +1,27 @@
 <template>
 	<ul class="users-list">
 		<li class="users-list-header">
+			<span class="photo"></span>
 			<span class="info">User Info</span>
-			<span class="created-at">Originally Nominated</span>
+			<span class="citations">Citations</span>
 			<span class="submission">Submission</span>
 			<span class="delete"></span>
 		</li>
 		<li v-for="user in users" v-on:click="toggleUserDetails(user)" class="user-row" :class="{'show-details': activeUserId === user.id}">
+			<a :style="'background-image:url('+(user.photo ? ('/photos/' + user.photo) :  '/images/user.png') +')'"
+				:href="'/photos/'+ user.photo"
+				class="photo"
+				target="_blank">
+			</a>
 			<span class="info">
 				<b>{{ formatUserInfo(user.name, user.email) }}</b>
 				<br>
 				<span class="declined" v-if="user.declined">Declined to participate</span>
 				<i v-else-if="user.title">{{ user.title }}, {{ user.institution }}</i>
 			</span>
-			<span class="created-at">{{ formatDate(user.created_at) }}</span>
+			<span class="citations">
+				<a v-if="user.submission" v-on:click.stop :href="'/citations/' + user.submission.id" target="_blank">View</a>
+			</span>
 			<span class="submission">
 				<a v-if="user.submission &amp;&amp; user.audio.length" v-on:click.stop :href="'/audio/' + user.audio[0].filename" target="_blank">
 					<i class="mdi mdi-volume-high"></i>
@@ -29,7 +37,7 @@
 			<transition name="fade">
 				<div v-if="user.details &amp;&amp; activeUserId === user.id" v-on:click.stop class="user-details">
 					<p>
-						<span>Originally Nominated <b>{{ formatCreatedAt(user.details.days_since_invited) }}</b></span>
+						<span>Originally Nominated <b>{{ formatDate(user.created_at) + ' (' + formatCreatedAt(user.details.days_since_invited) + ')' }}</b></span>
 						<span v-if="user.details.parent">by <b>{{ user.details.parent.name }} ({{ user.details.parent.email }})</b></span>
 					</p>
 					<template v-if="!user.submission">

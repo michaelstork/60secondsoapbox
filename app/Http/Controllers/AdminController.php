@@ -54,6 +54,19 @@ class AdminController extends Controller
         return view('dashboard')->with($data);
     }
 
+    public function citations(Request $request, $id)
+    {
+        $submission = Submission::where('id', $id)->first();
+        $data = [];
+
+        if ($submission) {
+            $data['citations'] = $submission->citations;
+        }
+        
+
+        return view('citations')->with($data);
+    }
+
     public function saveContent(Request $request)
     {
         foreach ($request->input() as $field => $value) {

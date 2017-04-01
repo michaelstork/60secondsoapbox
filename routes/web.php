@@ -21,6 +21,8 @@ Route::get('/{admin}', 'AdminController@index')
 	->where('admin', '(dashboard|admin)')
 	->name('dashboard');
 
+Route::get('/citations/{id}', 'AdminController@citations');
+
 Route::get('/no-thanks/{id}', 'SoapboxController@noThanks');
 
 Route::post('/user-info', 'AdminController@userInfo');

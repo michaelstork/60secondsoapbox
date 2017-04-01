@@ -19,10 +19,10 @@ elixir(mix => {
     );
 
     if (!inProduction) {
-        mix.browserSync({
-            proxy: {
-                target: 'https://soapbox.localhost/dashboard'
-            }
-        });
+        // mix.browserSync({
+        //     proxy: {
+        //         target: 'https://soapbox.localhost/dashboard'
+        //     }
+        // });
     }
 });
