@@ -44,6 +44,7 @@ class SoapboxApiController extends Controller
             $disk->putFileAs('/', $file, $filename);
 
             return response()->json([
+                'filename' => $filename,
                 'url' => '/photos/' . $filename
             ]);
         }
